@@ -136,6 +136,59 @@ proves that the finite quadratic forms are isometric.  The transparent
 Hence the new three-section target, the previous neighbor seed, and the
 period lattice have the same exact discriminant-form fingerprint.
 
+## Public neighbor-replay evidence and the remaining gap
+
+The successful public Actions replay
+[`31393796753`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/31393796753)
+records a seven-step chain from the transparent seed with primes
+
+```text
+5, 5, 2, 2, 2, 2, 2
+```
+
+and root counts `150,30,10,6,4,2,2,0`.  The corresponding norm-four counts
+are `5424,2654,2548,2576,2590,2602,2602,2622`, and the serialized chain had
+SHA-256
+`f549651c06190e97f53947475ef9ee3149ddb175b2db2a289dd7db02d60b9d4b`.
+The terminal rootless Gram matrix recovered directly from the log is
+
+```text
+[[ 4,-2, 2,-2,-1, 2,-2,-2, 1, 1, 1,-2, 1,-2,-1, 0, 1],
+ [-2, 4, 0, 0,-1, 0, 0, 1,-2,-2,-2, 0, 1, 0,-1, 1, 1],
+ [ 2, 0, 4, 0, 0, 2,-1, 0,-1,-1,-1,-1, 0,-1,-2,-1, 0],
+ [-2, 0, 0, 4, 1,-1, 1, 2, 0, 0, 0, 1,-1, 1, 0,-2,-1],
+ [-1,-1, 0, 1, 4, 0, 2, 0, 1, 1, 1, 2,-1, 0, 2,-2,-1],
+ [ 2, 0, 2,-1, 0, 4, 0, 0,-1, 1,-1,-2, 2,-1,-1, 0, 0],
+ [-2, 0,-1, 1, 2, 0, 4, 2, 0, 1, 0, 1,-1, 1, 2,-1,-2],
+ [-2, 1, 0, 2, 0, 0, 2, 4,-2, 0,-1, 0,-1, 2, 0,-1,-2],
+ [ 1,-2,-1, 0, 1,-1, 0,-2, 4, 2, 2, 0, 0,-1, 2,-1, 1],
+ [ 1,-2,-1, 0, 1, 1, 1, 0, 2, 4, 2,-1, 0, 0, 2,-1, 0],
+ [ 1,-2,-1, 0, 1,-1, 0,-1, 2, 2, 4, 0,-1,-1, 1,-1, 0],
+ [-2, 0,-1, 1, 2,-2, 1, 0, 0,-1, 0, 4,-2, 1, 1, 0, 0],
+ [ 1, 1, 0,-1,-1, 2,-1,-1, 0, 0,-1,-2, 4,-2,-1, 1, 1],
+ [-2, 0,-1, 1, 0,-1, 1, 2,-1, 0,-1, 1,-2, 4, 1, 0,-1],
+ [-1,-1,-2, 0, 2,-1, 2, 0, 2, 2, 1, 1,-1, 1, 4,-1, 0],
+ [ 0, 1,-1,-2,-2, 0,-1,-1,-1,-1,-1, 0, 1, 0,-1, 4, 1],
+ [ 1, 1, 0,-1,-1, 0,-2,-2, 1, 0, 0, 0, 1,-1, 0, 1, 4]]
+```
+
+Its canonical hash is
+`620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295`.
+The repository's exact Bareiss determinant and Fincke--Pohst routines
+independently confirm determinant 948 and zero norm-two vectors for this
+displayed terminal matrix.
+The final move is the 2-neighbor vector
+`[1,0,1,0,1,1,1,1,0,1,1,0,0,1,1,1,1]` from parent hash
+`74223a999a30ef3ea2102df4f8b32fd6f75cd1afd19bf6f8112bbcbf63ccc5d5`.
+
+This does **not** close the new bridge.  The complete Actions artifact
+`9064805239` expired with ZIP digest
+`30e5f0f73224905589865e02e5fc719f993b4828a31fb55e098511851de5a06e`;
+the six intermediate Gram matrices and move vectors are absent from Git
+history.  Until the Sage replay is rerun or those intermediates are recovered,
+the seven-step public chain cannot be treated as a locally replayed certificate
+from `N_target`.
+
 ## Quaternion datum
 
 An exact LDL diagonalization of `T` is
