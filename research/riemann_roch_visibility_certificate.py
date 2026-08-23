@@ -11,14 +11,22 @@ the leading pole terms cannot cancel, so
 If all N zeros of f are rational, the principal divisor gives one exact
 relation among the corresponding points.  Hence one function with N=30
 visible zeros can span rank at most 29; N=31 is the first compatible pole
-order for a rank-30 span.
+order for a rank-30 span, and N=32 is the first compatible pole order for a
+rank-31 span.
 
 The script certifies the exact degree/pole-order arithmetic and the
 minimal norm-form shape
 
     A(x)^2 - R(x) B(x)^2,
 
-with deg A <= 15, deg B = 14, deg R = 3, whose generic degree is 31.
+with deg A <= 15, deg B = 14, deg R = 3, whose generic degree is 31.  It also
+certifies the next target
+
+    deg A = 16, deg B <= 14, deg(A^2-RB^2) = 32.
+
+This degree-32 target is not merely sufficient: after adjoining the dependent
+point P_32=-(P_1+...+P_31), every independent 31-point configuration with
+distinct x-coordinates has such a representation by Riemann--Roch.
 It does not claim that such a norm polynomial splits over Q or that the
 remaining thirty point classes are independent.
 """
@@ -85,7 +93,7 @@ def compute_certificate() -> dict[str, object]:
     # Riemann--Roch on a genus-one curve gives ell(nO)=n for n>=1.
     dimensions: dict[str, int] = {}
     basis_orders: dict[str, list[int]] = {}
-    for n in range(1, 32):
+    for n in range(1, 33):
         orders = l_space_basis_pole_orders(n)
         if len(orders) != n:
             raise AssertionError(
@@ -96,9 +104,9 @@ def compute_certificate() -> dict[str, object]:
         dimensions[str(n)] = len(orders)
         basis_orders[str(n)] = orders
 
-    # Verify the near-square mechanism for every nontrivial degree up to 15.
+    # Verify the near-square mechanism for every nontrivial degree up to 16.
     near_square_table: list[dict[str, int]] = []
-    for degree_q in range(2, 16):
+    for degree_q in range(2, 17):
         order = pole_order(degree_q, None)
         degree_of_q2_minus_r = max(2 * degree_q, 3)
         if order != 2 * degree_q:
@@ -115,21 +123,25 @@ def compute_certificate() -> dict[str, object]:
         )
 
     if near_square_table[-1] != {
-        "degree_Q": 15,
-        "pole_order": 30,
-        "visible_zero_count_if_split_simple": 30,
-        "rank_upper_bound_from_visible_points": 29,
+        "degree_Q": 16,
+        "pole_order": 32,
+        "visible_zero_count_if_split_simple": 32,
+        "rank_upper_bound_from_visible_points": 31,
     }:
-        raise AssertionError("degree-15 near-square frontier mismatch")
+        raise AssertionError("degree-16 near-square frontier mismatch")
 
-    # Enumerate all degree patterns that have exact pole order 30 or 31.
-    patterns: dict[str, list[dict[str, Optional[int]]]] = {"30": [], "31": []}
-    for deg_a in [None, *range(0, 17)]:
+    # Enumerate all degree patterns that have exact pole order 30, 31, or 32.
+    patterns: dict[str, list[dict[str, Optional[int]]]] = {
+        "30": [],
+        "31": [],
+        "32": [],
+    }
+    for deg_a in [None, *range(0, 18)]:
         for deg_b in [None, *range(0, 16)]:
             if deg_a is None and deg_b is None:
                 continue
             order = pole_order(deg_a, deg_b)
-            if order in (30, 31):
+            if order in (30, 31, 32):
                 patterns[str(order)].append(
                     {
                         "deg_A": deg_a,
@@ -166,6 +178,22 @@ def compute_certificate() -> dict[str, object]:
             f"unexpected order-30 patterns: {patterns['30']}"
         )
 
+    # Exact pole order 32 must come from A with deg A=16; B can have degree
+    # at most 14 (or vanish).  The two norm summands then have degrees 32 and
+    # at most 31, so leading cancellation is impossible.
+    expected_32 = [
+        {
+            "deg_A": 16,
+            "deg_B": deg_b,
+            "generic_norm_degree": 32,
+        }
+        for deg_b in [None, *range(0, 15)]
+    ]
+    if patterns["32"] != expected_32:
+        raise AssertionError(
+            f"unexpected order-32 patterns: {patterns['32']}"
+        )
+
     payload: dict[str, object] = {
         "schema_version": 1,
         "theorem": {
@@ -186,7 +214,8 @@ def compute_certificate() -> dict[str, object]:
             "pole_orders": {"x": 2, "y": 3},
             "orders_for_L_30O": basis_orders["30"],
             "orders_for_L_31O": basis_orders["31"],
-            "dimensions_1_through_31": dimensions,
+            "orders_for_L_32O": basis_orders["32"],
+            "dimensions_1_through_32": dimensions,
             "representation": "f=A(x)+y*B(x)",
             "exact_pole_order": "max(2*deg(A),2*deg(B)+3)",
             "no_leading_cancellation_reason": (
@@ -196,7 +225,7 @@ def compute_certificate() -> dict[str, object]:
         "near_square_frontier": {
             "function": "f=y-Q(x)",
             "identity": "Norm(f)=Q(x)^2-R(x)",
-            "table_degrees_2_through_15": near_square_table,
+            "table_degrees_2_through_16": near_square_table,
             "degree_15_conclusion": (
                 "Thirty split simple rational zeros carry the forced relation "
                 "P1+...+P30=O, so their span has rank at most 29."
@@ -224,6 +253,38 @@ def compute_certificate() -> dict[str, object]:
                 "The norm identity and splitting conditions are only a "
                 "construction target. They do not prove that the remaining "
                 "thirty classes are independent."
+            ),
+        },
+        "minimal_single_function_rank31_target": {
+            "minimal_pole_order": 32,
+            "degree_patterns": patterns["32"],
+            "canonical_choice": {
+                "deg_A": 16,
+                "deg_B_max": 14,
+                "deg_R": 3,
+                "norm_form": "A(x)^2-R(x)*B(x)^2",
+                "generic_norm_degree": 32,
+            },
+            "sufficient_point_recovery_conditions": [
+                "R has nonzero discriminant",
+                "A^2-R*B^2 has 32 distinct rational roots r_i",
+                "B(r_i) is nonzero for every i",
+                "P_i=(r_i,-A(r_i)/B(r_i))",
+            ],
+            "forced_relation": "P1+...+P32=O",
+            "maximum_possible_span_after_forced_relation": 31,
+            "universal_reverse_construction": (
+                "Given 31 independent rational points, set "
+                "P32=-(P1+...+P31). Their degree-32 divisor has sum O, so "
+                "Riemann--Roch gives a function f=A+yB with exactly those "
+                "zeros and pole divisor 32*O. Independence makes all 32 "
+                "x-coordinates distinct."
+            ),
+            "truth_note": (
+                "The norm-32 identity is an exact equivalent representation "
+                "of the rank-31 point-construction problem, not by itself a "
+                "dimension-reducing search theorem. Exact independence of "
+                "any 31 recovered points is still required."
             ),
         },
         "order_pattern_audit": patterns,
@@ -266,10 +327,11 @@ def main() -> None:
             )
         print(f"matched {arguments.compare}")
 
-    print("L(30O) dimension: 30; L(31O) dimension: 31")
+    print("L(30O), L(31O), L(32O) dimensions: 30, 31, 32")
     print("degree-15 near-square visible span: at most 29")
     print("minimal one-function rank-30-compatible pole order: 31")
     print("canonical norm target: deg A<=15, deg B=14, deg Norm=31")
+    print("rank-31 norm target: deg A=16, deg B<=14, deg Norm=32")
     print(f"certificate sha256: {certificate['certificate_sha256']}")
 
 

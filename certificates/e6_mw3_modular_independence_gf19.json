@@ -1,0 +1,2533 @@
+{
+  "certificate_sha256": "7790275430180dadab36dc35ac2f96d8fff09ce3ad738d11b5370f11ecb940fd",
+  "claim_boundary": "This proves the displayed modular triples independent over GF(19)(t). It does not prove a characteristic-zero lift.",
+  "ell_candidates": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13
+  ],
+  "field": "GF(19)(t)",
+  "proof": "For each certified record, the diagonal specialization map has zero kernel on the three displayed classes modulo ell. A separate good fiber has order prime to ell, excluding generic ell-torsion. Infinite ell-divisibility therefore rules out every nonzero integral relation among P1, P2, P3.",
+  "records": [
+    {
+      "P2": {
+        "X2": [
+          13,
+          18,
+          4,
+          0,
+          18
+        ],
+        "Y2": [
+          0,
+          0,
+          17,
+          4,
+          10,
+          13,
+          14,
+          18
+        ],
+        "pole": 4,
+        "q0": 18
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          0,
+          6
+        ],
+        "Y3_up_to_sign": [
+          0,
+          6,
+          8,
+          4,
+          1
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 0,
+          "B_t": 8,
+          "ell_multiple_image_size": 7,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              1,
+              16
+            ],
+            [
+              17,
+              0
+            ],
+            [
+              7,
+              16
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 2
+        },
+        {
+          "A_t": 11,
+          "B_t": 17,
+          "ell_multiple_image_size": 14,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              5,
+              8
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              0,
+              6
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 5
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 12,
+        "B_t": 11,
+        "group_order": 27,
+        "t": 3
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          13,
+          18,
+          4,
+          0,
+          18
+        ],
+        "Y2": [
+          0,
+          0,
+          17,
+          4,
+          10,
+          13,
+          14,
+          18
+        ],
+        "pole": 4,
+        "q0": 18
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          5
+        ],
+        "Y3_up_to_sign": [
+          0,
+          7,
+          3,
+          12,
+          18
+        ]
+      },
+      "P3_index": 2,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 0,
+          "B_t": 8,
+          "ell_multiple_image_size": 7,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              1,
+              16
+            ],
+            [
+              17,
+              0
+            ],
+            [
+              12,
+              11
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 2
+        },
+        {
+          "A_t": 11,
+          "B_t": 17,
+          "ell_multiple_image_size": 14,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              5,
+              8
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              8,
+              16
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 5
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 12,
+        "B_t": 11,
+        "group_order": 27,
+        "t": 3
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          13,
+          18,
+          4,
+          0,
+          18
+        ],
+        "Y2": [
+          0,
+          0,
+          17,
+          4,
+          10,
+          13,
+          14,
+          18
+        ],
+        "pole": 4,
+        "q0": 18
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          14,
+          12
+        ],
+        "Y3_up_to_sign": [
+          0,
+          0,
+          7,
+          18,
+          18
+        ]
+      },
+      "P3_index": 3,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 7,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 0,
+          "B_t": 8,
+          "ell_multiple_image_size": 4,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              4,
+              0
+            ],
+            [
+              0,
+              5,
+              0
+            ],
+            [
+              0,
+              6,
+              0
+            ],
+            [
+              1,
+              0,
+              6
+            ],
+            [
+              1,
+              1,
+              6
+            ],
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              4,
+              6
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              6,
+              6
+            ],
+            [
+              2,
+              0,
+              5
+            ],
+            [
+              2,
+              1,
+              5
+            ],
+            [
+              2,
+              2,
+              5
+            ],
+            [
+              2,
+              3,
+              5
+            ],
+            [
+              2,
+              4,
+              5
+            ],
+            [
+              2,
+              5,
+              5
+            ],
+            [
+              2,
+              6,
+              5
+            ],
+            [
+              3,
+              0,
+              4
+            ],
+            [
+              3,
+              1,
+              4
+            ],
+            [
+              3,
+              2,
+              4
+            ],
+            [
+              3,
+              3,
+              4
+            ],
+            [
+              3,
+              4,
+              4
+            ],
+            [
+              3,
+              5,
+              4
+            ],
+            [
+              3,
+              6,
+              4
+            ],
+            [
+              4,
+              0,
+              3
+            ],
+            [
+              4,
+              1,
+              3
+            ],
+            [
+              4,
+              2,
+              3
+            ],
+            [
+              4,
+              3,
+              3
+            ],
+            [
+              4,
+              4,
+              3
+            ],
+            [
+              4,
+              5,
+              3
+            ],
+            [
+              4,
+              6,
+              3
+            ],
+            [
+              5,
+              0,
+              2
+            ],
+            [
+              5,
+              1,
+              2
+            ],
+            [
+              5,
+              2,
+              2
+            ],
+            [
+              5,
+              3,
+              2
+            ],
+            [
+              5,
+              4,
+              2
+            ],
+            [
+              5,
+              5,
+              2
+            ],
+            [
+              5,
+              6,
+              2
+            ],
+            [
+              6,
+              0,
+              1
+            ],
+            [
+              6,
+              1,
+              1
+            ],
+            [
+              6,
+              2,
+              1
+            ],
+            [
+              6,
+              3,
+              1
+            ],
+            [
+              6,
+              4,
+              1
+            ],
+            [
+              6,
+              5,
+              1
+            ],
+            [
+              6,
+              6,
+              1
+            ]
+          ],
+          "kernel_size_after": 49,
+          "kernel_size_before": 343,
+          "points": [
+            [
+              1,
+              16
+            ],
+            [
+              17,
+              0
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "quotient_size": 7,
+          "t": 2
+        },
+        {
+          "A_t": 11,
+          "B_t": 17,
+          "ell_multiple_image_size": 4,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              2,
+              4,
+              5
+            ],
+            [
+              3,
+              6,
+              4
+            ],
+            [
+              4,
+              1,
+              3
+            ],
+            [
+              5,
+              3,
+              2
+            ],
+            [
+              6,
+              5,
+              1
+            ]
+          ],
+          "kernel_size_after": 7,
+          "kernel_size_before": 49,
+          "points": [
+            [
+              5,
+              8
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              11,
+              14
+            ]
+          ],
+          "quotient_size": 7,
+          "t": 5
+        },
+        {
+          "A_t": 17,
+          "B_t": 5,
+          "ell_multiple_image_size": 4,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 7,
+          "points": [
+            [
+              14,
+              2
+            ],
+            [
+              5,
+              14
+            ],
+            [
+              4,
+              17
+            ]
+          ],
+          "quotient_size": 7,
+          "t": 14
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 12,
+        "B_t": 11,
+        "group_order": 27,
+        "t": 3
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          13,
+          18,
+          4,
+          0,
+          18
+        ],
+        "Y2": [
+          0,
+          0,
+          17,
+          4,
+          10,
+          13,
+          14,
+          18
+        ],
+        "pole": 4,
+        "q0": 18
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          17,
+          8
+        ],
+        "Y3_up_to_sign": [
+          0,
+          4,
+          11,
+          3,
+          1
+        ]
+      },
+      "P3_index": 4,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 0,
+          "B_t": 8,
+          "ell_multiple_image_size": 7,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              1,
+              16
+            ],
+            [
+              17,
+              0
+            ],
+            [
+              11,
+              16
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 2
+        },
+        {
+          "A_t": 11,
+          "B_t": 17,
+          "ell_multiple_image_size": 14,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              5,
+              8
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 5
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 12,
+        "B_t": 11,
+        "group_order": 27,
+        "t": 3
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          10,
+          9,
+          12,
+          7,
+          2
+        ],
+        "Y2": [
+          0,
+          5,
+          12,
+          3,
+          9,
+          5,
+          5,
+          18
+        ],
+        "pole": 10,
+        "q0": 2
+      },
+      "P2_index": 2,
+      "P3": {
+        "X3": [
+          2,
+          0,
+          6
+        ],
+        "Y3_up_to_sign": [
+          0,
+          6,
+          8,
+          4,
+          1
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 0,
+          "B_t": 8,
+          "ell_multiple_image_size": 7,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              1,
+              16
+            ],
+            [
+              18,
+              8
+            ],
+            [
+              7,
+              16
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 2
+        },
+        {
+          "A_t": 11,
+          "B_t": 17,
+          "ell_multiple_image_size": 14,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              5,
+              8
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              0,
+              6
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 5
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 12,
+        "B_t": 11,
+        "group_order": 27,
+        "t": 3
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          10,
+          9,
+          12,
+          7,
+          2
+        ],
+        "Y2": [
+          0,
+          5,
+          12,
+          3,
+          9,
+          5,
+          5,
+          18
+        ],
+        "pole": 10,
+        "q0": 2
+      },
+      "P2_index": 2,
+      "P3": {
+        "X3": [
+          2,
+          5
+        ],
+        "Y3_up_to_sign": [
+          0,
+          7,
+          3,
+          12,
+          18
+        ]
+      },
+      "P3_index": 2,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 3,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 12,
+          "B_t": 11,
+          "ell_multiple_image_size": 9,
+          "group_order": 27,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              2,
+              2
+            ],
+            [
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              2,
+              0,
+              1
+            ],
+            [
+              2,
+              1,
+              2
+            ],
+            [
+              2,
+              2,
+              0
+            ]
+          ],
+          "kernel_size_after": 9,
+          "kernel_size_before": 27,
+          "points": [
+            [
+              14,
+              15
+            ],
+            [
+              14,
+              4
+            ],
+            [
+              17,
+              6
+            ]
+          ],
+          "quotient_size": 3,
+          "t": 3
+        },
+        {
+          "A_t": 5,
+          "B_t": 16,
+          "ell_multiple_image_size": 5,
+          "group_order": 15,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              2,
+              2
+            ]
+          ],
+          "kernel_size_after": 3,
+          "kernel_size_before": 9,
+          "points": [
+            [
+              9,
+              12
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              3,
+              18
+            ]
+          ],
+          "quotient_size": 3,
+          "t": 4
+        },
+        {
+          "A_t": 14,
+          "B_t": 4,
+          "ell_multiple_image_size": 8,
+          "group_order": 24,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 3,
+          "points": [
+            [
+              5,
+              3
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "quotient_size": 3,
+          "t": 12
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 0,
+        "B_t": 8,
+        "group_order": 28,
+        "t": 2
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          10,
+          9,
+          12,
+          7,
+          2
+        ],
+        "Y2": [
+          0,
+          5,
+          12,
+          3,
+          9,
+          5,
+          5,
+          18
+        ],
+        "pole": 10,
+        "q0": 2
+      },
+      "P2_index": 2,
+      "P3": {
+        "X3": [
+          2,
+          14,
+          12
+        ],
+        "Y3_up_to_sign": [
+          0,
+          0,
+          7,
+          18,
+          18
+        ]
+      },
+      "P3_index": 3,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 3,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 12,
+          "B_t": 11,
+          "ell_multiple_image_size": 9,
+          "group_order": 27,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              2,
+              2,
+              0
+            ],
+            [
+              2,
+              2,
+              1
+            ],
+            [
+              2,
+              2,
+              2
+            ]
+          ],
+          "kernel_size_after": 9,
+          "kernel_size_before": 27,
+          "points": [
+            [
+              14,
+              15
+            ],
+            [
+              14,
+              4
+            ],
+            [
+              0,
+              12
+            ]
+          ],
+          "quotient_size": 3,
+          "t": 3
+        },
+        {
+          "A_t": 5,
+          "B_t": 16,
+          "ell_multiple_image_size": 5,
+          "group_order": 15,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              2,
+              2,
+              2
+            ]
+          ],
+          "kernel_size_after": 3,
+          "kernel_size_before": 9,
+          "points": [
+            [
+              9,
+              12
+            ],
+            [
+              9,
+              12
+            ],
+            [
+              3,
+              1
+            ]
+          ],
+          "quotient_size": 3,
+          "t": 4
+        },
+        {
+          "A_t": 14,
+          "B_t": 4,
+          "ell_multiple_image_size": 8,
+          "group_order": 24,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 3,
+          "points": [
+            [
+              5,
+              3
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              17,
+              14
+            ]
+          ],
+          "quotient_size": 3,
+          "t": 12
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 0,
+        "B_t": 8,
+        "group_order": 28,
+        "t": 2
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          10,
+          9,
+          12,
+          7,
+          2
+        ],
+        "Y2": [
+          0,
+          5,
+          12,
+          3,
+          9,
+          5,
+          5,
+          18
+        ],
+        "pole": 10,
+        "q0": 2
+      },
+      "P2_index": 2,
+      "P3": {
+        "X3": [
+          2,
+          17,
+          8
+        ],
+        "Y3_up_to_sign": [
+          0,
+          4,
+          11,
+          3,
+          1
+        ]
+      },
+      "P3_index": 4,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        3,
+        2,
+        12,
+        8
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 1,
+      "quotient_specializations": [
+        {
+          "A_t": 0,
+          "B_t": 8,
+          "ell_multiple_image_size": 7,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              1,
+              16
+            ],
+            [
+              18,
+              8
+            ],
+            [
+              11,
+              16
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 2
+        },
+        {
+          "A_t": 11,
+          "B_t": 17,
+          "ell_multiple_image_size": 14,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              5,
+              8
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 5
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 12,
+        "B_t": 11,
+        "group_order": 27,
+        "t": 3
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          12,
+          18,
+          16,
+          5,
+          16
+        ],
+        "Y2": [
+          0,
+          0,
+          1,
+          13,
+          4,
+          7,
+          14,
+          18
+        ],
+        "pole": 14,
+        "q0": 16
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          1,
+          11
+        ],
+        "Y3_up_to_sign": [
+          0,
+          6,
+          18,
+          13,
+          1
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        4,
+        6,
+        9,
+        14
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 2,
+      "quotient_specializations": [
+        {
+          "A_t": 13,
+          "B_t": 16,
+          "ell_multiple_image_size": 13,
+          "group_order": 26,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "kernel_size_after": 4,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              10,
+              14
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 2
+        },
+        {
+          "A_t": 17,
+          "B_t": 8,
+          "ell_multiple_image_size": 11,
+          "group_order": 22,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 4,
+          "points": [
+            [
+              11,
+              5
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              9,
+              4
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 3
+        },
+        {
+          "A_t": 9,
+          "B_t": 12,
+          "ell_multiple_image_size": 6,
+          "group_order": 24,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              10,
+              0
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              11,
+              13
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 4
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 17,
+        "B_t": 3,
+        "group_order": 25,
+        "t": 8
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          12,
+          18,
+          16,
+          5,
+          16
+        ],
+        "Y2": [
+          0,
+          0,
+          1,
+          13,
+          4,
+          7,
+          14,
+          18
+        ],
+        "pole": 14,
+        "q0": 16
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          4,
+          1
+        ],
+        "Y3_up_to_sign": [
+          0,
+          9,
+          17,
+          2,
+          1
+        ]
+      },
+      "P3_index": 2,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        4,
+        6,
+        9,
+        14
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 2,
+      "quotient_specializations": [
+        {
+          "A_t": 13,
+          "B_t": 16,
+          "ell_multiple_image_size": 13,
+          "group_order": 26,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "kernel_size_after": 4,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              14,
+              4
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 2
+        },
+        {
+          "A_t": 17,
+          "B_t": 8,
+          "ell_multiple_image_size": 11,
+          "group_order": 22,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 4,
+          "points": [
+            [
+              11,
+              5
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              4,
+              11
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 3
+        },
+        {
+          "A_t": 9,
+          "B_t": 12,
+          "ell_multiple_image_size": 6,
+          "group_order": 24,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              10,
+              0
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              15,
+              8
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 4
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 17,
+        "B_t": 3,
+        "group_order": 25,
+        "t": 8
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          12,
+          18,
+          16,
+          5,
+          16
+        ],
+        "Y2": [
+          0,
+          0,
+          1,
+          13,
+          4,
+          7,
+          14,
+          18
+        ],
+        "pole": 14,
+        "q0": 16
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          6,
+          6
+        ],
+        "Y3_up_to_sign": [
+          0,
+          0,
+          1,
+          17,
+          1
+        ]
+      },
+      "P3_index": 3,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        4,
+        6,
+        9,
+        14
+      ],
+      "ell": 7,
+      "independent": true,
+      "joint_index": 2,
+      "quotient_specializations": [
+        {
+          "A_t": 6,
+          "B_t": 13,
+          "ell_multiple_image_size": 3,
+          "group_order": 21,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              5
+            ],
+            [
+              0,
+              2,
+              3
+            ],
+            [
+              0,
+              3,
+              1
+            ],
+            [
+              0,
+              4,
+              6
+            ],
+            [
+              0,
+              5,
+              4
+            ],
+            [
+              0,
+              6,
+              2
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              6
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              5,
+              5
+            ],
+            [
+              1,
+              6,
+              3
+            ],
+            [
+              2,
+              0,
+              2
+            ],
+            [
+              2,
+              1,
+              0
+            ],
+            [
+              2,
+              2,
+              5
+            ],
+            [
+              2,
+              3,
+              3
+            ],
+            [
+              2,
+              4,
+              1
+            ],
+            [
+              2,
+              5,
+              6
+            ],
+            [
+              2,
+              6,
+              4
+            ],
+            [
+              3,
+              0,
+              3
+            ],
+            [
+              3,
+              1,
+              1
+            ],
+            [
+              3,
+              2,
+              6
+            ],
+            [
+              3,
+              3,
+              4
+            ],
+            [
+              3,
+              4,
+              2
+            ],
+            [
+              3,
+              5,
+              0
+            ],
+            [
+              3,
+              6,
+              5
+            ],
+            [
+              4,
+              0,
+              4
+            ],
+            [
+              4,
+              1,
+              2
+            ],
+            [
+              4,
+              2,
+              0
+            ],
+            [
+              4,
+              3,
+              5
+            ],
+            [
+              4,
+              4,
+              3
+            ],
+            [
+              4,
+              5,
+              1
+            ],
+            [
+              4,
+              6,
+              6
+            ],
+            [
+              5,
+              0,
+              5
+            ],
+            [
+              5,
+              1,
+              3
+            ],
+            [
+              5,
+              2,
+              1
+            ],
+            [
+              5,
+              3,
+              6
+            ],
+            [
+              5,
+              4,
+              4
+            ],
+            [
+              5,
+              5,
+              2
+            ],
+            [
+              5,
+              6,
+              0
+            ],
+            [
+              6,
+              0,
+              6
+            ],
+            [
+              6,
+              1,
+              4
+            ],
+            [
+              6,
+              2,
+              2
+            ],
+            [
+              6,
+              3,
+              0
+            ],
+            [
+              6,
+              4,
+              5
+            ],
+            [
+              6,
+              5,
+              3
+            ],
+            [
+              6,
+              6,
+              1
+            ]
+          ],
+          "kernel_size_after": 49,
+          "kernel_size_before": 343,
+          "points": [
+            [
+              10,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              10,
+              16
+            ]
+          ],
+          "quotient_size": 7,
+          "t": 9
+        },
+        {
+          "A_t": 17,
+          "B_t": 5,
+          "ell_multiple_image_size": 4,
+          "group_order": 28,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              6
+            ],
+            [
+              2,
+              2,
+              5
+            ],
+            [
+              3,
+              3,
+              4
+            ],
+            [
+              4,
+              4,
+              3
+            ],
+            [
+              5,
+              5,
+              2
+            ],
+            [
+              6,
+              6,
+              1
+            ]
+          ],
+          "kernel_size_after": 7,
+          "kernel_size_before": 49,
+          "points": [
+            [
+              2,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              17,
+              1
+            ]
+          ],
+          "quotient_size": 7,
+          "t": 15
+        },
+        {
+          "A_t": 5,
+          "B_t": 7,
+          "ell_multiple_image_size": 3,
+          "group_order": 21,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 7,
+          "points": [
+            [
+              5,
+              10
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              0,
+              11
+            ]
+          ],
+          "quotient_size": 7,
+          "t": 16
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 13,
+        "B_t": 16,
+        "group_order": 26,
+        "t": 2
+      }
+    },
+    {
+      "P2": {
+        "X2": [
+          12,
+          18,
+          16,
+          5,
+          16
+        ],
+        "Y2": [
+          0,
+          0,
+          1,
+          13,
+          4,
+          7,
+          14,
+          18
+        ],
+        "pole": 14,
+        "q0": 16
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          2,
+          8,
+          1
+        ],
+        "Y3_up_to_sign": [
+          0,
+          9,
+          10,
+          2,
+          1
+        ]
+      },
+      "P3_index": 4,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        4,
+        6,
+        9,
+        14
+      ],
+      "ell": 2,
+      "independent": true,
+      "joint_index": 2,
+      "quotient_specializations": [
+        {
+          "A_t": 13,
+          "B_t": 16,
+          "ell_multiple_image_size": 13,
+          "group_order": 26,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "kernel_size_after": 4,
+          "kernel_size_before": 8,
+          "points": [
+            [
+              6,
+              5
+            ],
+            [
+              6,
+              5
+            ],
+            [
+              3,
+              14
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 2
+        },
+        {
+          "A_t": 17,
+          "B_t": 8,
+          "ell_multiple_image_size": 11,
+          "group_order": 22,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "kernel_size_after": 2,
+          "kernel_size_before": 4,
+          "points": [
+            [
+              11,
+              5
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              16,
+              5
+            ]
+          ],
+          "quotient_size": 2,
+          "t": 3
+        },
+        {
+          "A_t": 9,
+          "B_t": 12,
+          "ell_multiple_image_size": 6,
+          "group_order": 24,
+          "kernel_after": [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "kernel_size_after": 1,
+          "kernel_size_before": 2,
+          "points": [
+            [
+              10,
+              0
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              12,
+              10
+            ]
+          ],
+          "quotient_size": 4,
+          "t": 4
+        }
+      ],
+      "simultaneous_kernel": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "torsion_exclusion_specialization": {
+        "A_t": 17,
+        "B_t": 3,
+        "group_order": 25,
+        "t": 8
+      }
+    }
+  ],
+  "schema": "elliptic-rank30/e6-mw3-modular-independence/v1",
+  "source_certificate": "certificates/e6_mw3_modular_slices_gf19.json",
+  "source_certificate_sha256": "c8958af7fe81f3b0b0d67443a7e52d08a3c37ad97b72479edf46c3b8ea3f0524",
+  "triples_certified_independent": 12,
+  "triples_tested": 12
+}

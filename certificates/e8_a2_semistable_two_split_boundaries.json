@@ -1,0 +1,155 @@
+{
+  "ambient_model": {
+    "D": "t*(t-1)*(t-lambda)",
+    "H": "4*a^2*d+12*a*beta*gamma-32*beta^3+D*gamma^2",
+    "discriminant": "-432*D^3*H",
+    "relation": "a*gamma-3*beta^2=d*D"
+  },
+  "arithmetic_scope": "After relabelling, the target component orbit forces splitting only at 0 and lambda. The dense chart plus these boundaries therefore covers the marked two-split target locus.",
+  "certificate_id": "e8_a2_semistable_two_split_boundary_charts",
+  "certificate_sha256": "800346fc93ce6f05353beac8e7bd83e381e8406a939ef92b3b64a64ee0496c7a",
+  "charts": [
+    {
+      "H_degree": 5,
+      "H_leading_coefficient": "S**4/lambda**2",
+      "a": "(-lambda*t + lambda + q**2*t + t**2 - t)/(3*lambda)",
+      "a2": "1/(3*lambda)",
+      "beta": "S*q*t/(3*lambda)",
+      "d": "S**2/(3*lambda**2)",
+      "gamma": "S**2*t/lambda",
+      "lambda": "lambda",
+      "name": "s0_zero",
+      "node_values": {
+        "0": [
+          "3a=1",
+          "3beta=0",
+          "gamma=0",
+          "r=1",
+          "s=0"
+        ],
+        "1": [
+          "3a=q^2/lambda",
+          "3beta=qS/lambda",
+          "gamma=S^2/lambda"
+        ],
+        "lambda": [
+          "3a=q^2",
+          "3beta=qS",
+          "gamma=S^2",
+          "r=q",
+          "s=S"
+        ]
+      },
+      "open_conditions": [
+        "lambda*(lambda-1)*q*S != 0",
+        "H is squarefree and H(0)*H(1)*H(lambda) != 0"
+      ],
+      "parameters": [
+        "lambda",
+        "q",
+        "S"
+      ],
+      "relation": "a*gamma-3*beta^2=d*t*(t-1)*(t-lambda)",
+      "remaining_kodaira_filter": "H is squarefree and coprime to D"
+    },
+    {
+      "H_degree": 5,
+      "H_leading_coefficient": "W**4/lambda**2",
+      "a": "(lambda**2 - lambda*t - lambda + q**2*t**2 - q**2*t + t)/(3*lambda*(lambda - 1))",
+      "a2": "q**2/(3*lambda*(lambda - 1))",
+      "beta": "-W*(-lambda + t)/(3*lambda)",
+      "d": "-W**2*q**2/(3*lambda**2*(lambda - 1))",
+      "gamma": "-W**2*(-lambda + t)/lambda",
+      "lambda": "lambda",
+      "name": "s_lambda_zero",
+      "node_values": {
+        "0": [
+          "3a=1",
+          "3beta=W",
+          "gamma=W^2",
+          "r=1",
+          "s=W"
+        ],
+        "1": [
+          "3a=(lambda-1)/lambda",
+          "3beta=W*(lambda-1)/lambda",
+          "gamma=W^2*(lambda-1)/lambda"
+        ],
+        "lambda": [
+          "3a=q^2",
+          "3beta=0",
+          "gamma=0",
+          "r=q",
+          "s=0"
+        ]
+      },
+      "open_conditions": [
+        "lambda*(lambda-1)*q*W != 0",
+        "H is squarefree and H(0)*H(1)*H(lambda) != 0"
+      ],
+      "parameters": [
+        "lambda",
+        "q",
+        "W"
+      ],
+      "relation": "a*gamma-3*beta^2=d*t*(t-1)*(t-lambda)",
+      "remaining_kodaira_filter": "H is squarefree and coprime to D"
+    },
+    {
+      "H_degree": 5,
+      "H_leading_coefficient": "W**4",
+      "a": "(h*q**2*t + h*t**2 - h*t - q**2*t + q**2)/(3*q**2)",
+      "a2": "h/(3*q**2)",
+      "beta": "-W*(t - 1)/3",
+      "d": "-W**2*h/(3*q**2)",
+      "gamma": "-W**2*(t - 1)",
+      "lambda": "1 - q**2",
+      "name": "node1_beta_gamma_zero",
+      "node_values": {
+        "0": [
+          "3a=1",
+          "3beta=W",
+          "gamma=W^2",
+          "r=1",
+          "s=W"
+        ],
+        "1": [
+          "3a=h",
+          "3beta=0",
+          "gamma=0"
+        ],
+        "lambda=1-q^2": [
+          "3a=q^2",
+          "3beta=q^2*W",
+          "gamma=q^2*W^2",
+          "r=q",
+          "s=qW"
+        ]
+      },
+      "open_conditions": [
+        "q*W*h*(q^2-1) != 0",
+        "H is squarefree and H(0)*H(1)*H(lambda) != 0"
+      ],
+      "parameters": [
+        "q",
+        "W",
+        "h"
+      ],
+      "relation": "a*gamma-3*beta^2=d*t*(t-1)*(t-lambda)",
+      "remaining_kodaira_filter": "H is squarefree and coprime to D"
+    }
+  ],
+  "claim_boundary": {
+    "finite_field_boundaries_searched": false,
+    "rank31_curve_found": false,
+    "target_sections_found": false
+  },
+  "coverage_argument": [
+    "If s0=0, gamma is nonzero linear and s_lambda cannot also vanish; use s0_zero.",
+    "If s0!=0 but s_lambda=0, use s_lambda_zero.",
+    "If both are nonzero but gamma(1)=0, the node relation gives beta(1)=0 and use node1_beta_gamma_zero.",
+    "Otherwise W, y, g and z are defined and the dense two-split chart applies."
+  ],
+  "exact_claim": "The three displayed three-dimensional charts exactly cover the intrinsic divisors omitted by the dense two-split chart, before imposing the residual-quintic Kodaira open conditions.",
+  "schema_version": 1
+}

@@ -1,0 +1,298 @@
+{
+  "certificate_id": "e8_a2_mixed_two_iv_one_i3",
+  "certificate_sha256": "f7d2c8f2f4ad0ffc6a29f14a41f73d4737ffb70eaad8c52974127506d1b3c8d5",
+  "claim_boundary": {
+    "complete_modular_target_triple_found": false,
+    "rank31_curve_found": false,
+    "rational_characteristic_zero_surface_found": false,
+    "scope": "This certificate validates a replacement search chart and its exact target filters.  It does not prove that the chart contains the desired characteristic-zero lattice point."
+  },
+  "exact_claim": "The displayed non-isotrivial family has fibres II*+2IV+I3+3I1 under the stated open conditions; the stated component and intersection data are equivalent to the target Mordell--Weil Gram of determinant 316/9 and NS discriminant 948.",
+  "family": {
+    "A": "-3*k**2*t**2*(t - 1)**2",
+    "B": "t**2*(t - 1)**2*(-c*lambda**3 + 3*c*lambda**2*t - 3*c*lambda*t**2 + c*t**3 + 2*k**3*t**2 - 2*k**3*t)",
+    "T": "t*(t-1)",
+    "c4": "144*k**2*t**2*(t - 1)**2",
+    "c6": "-864*t**2*(t - 1)**2*(-c*lambda**3 + 3*c*lambda**2*t - 3*c*lambda*t**2 + c*t**3 + 2*k**3*t**2 - 2*k**3*t)",
+    "discriminant": "-432*c*t**4*(-lambda + t)**3*(t - 1)**4*(-c*lambda**3 + 3*c*lambda**2*t - 3*c*lambda*t**2 + c*t**3 + 4*k**3*t**2 - 4*k**3*t)",
+    "euler_number_check": "4+4+3+3+10=24",
+    "kodaira_data": {
+      "residual": {
+        "type": "3 I1"
+      },
+      "t=0": {
+        "ord(A,B,Delta)": [
+          2,
+          2,
+          4
+        ],
+        "type": "IV"
+      },
+      "t=1": {
+        "ord(A,B,Delta)": [
+          2,
+          2,
+          4
+        ],
+        "type": "IV"
+      },
+      "t=infinity": {
+        "ord(c4,c6,Delta)": [
+          4,
+          5,
+          10
+        ],
+        "type": "II*"
+      },
+      "t=lambda": {
+        "ord(c4,Delta)": [
+          0,
+          3
+        ],
+        "type": "I3"
+      }
+    },
+    "open_conditions": [
+      "characteristic is not 2 or 3",
+      "k*c*lambda*(lambda-1) != 0",
+      "the residual cubic is squarefree"
+    ],
+    "residual_cubic": "-c*lambda**3 + c*t**3 + t**2*(-3*c*lambda + 4*k**3) + t*(3*c*lambda**2 - 4*k**3)",
+    "residual_cubic_discriminant": "-16*k**6*(27*c**2*lambda**4 - 54*c**2*lambda**3 + 27*c**2*lambda**2 - 16*c*k**3*lambda**3 + 24*c*k**3*lambda**2 + 24*c*k**3*lambda - 16*c*k**3 - 16*k**6)"
+  },
+  "modular_engine_checks": {
+    "examples": [
+      {
+        "c": 1,
+        "computed_mask": 0,
+        "expected_mask": 0,
+        "identity_residual": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "k": 1,
+        "lambda": 8,
+        "nonidentity_fibre_count": 0,
+        "prime": 13,
+        "role": "P3 diagonal profile only",
+        "shioda_height": "4",
+        "x": [
+          4,
+          12,
+          3,
+          11,
+          12
+        ],
+        "y": [
+          5,
+          3,
+          0,
+          11,
+          2,
+          11,
+          8
+        ]
+      },
+      {
+        "c": 5,
+        "computed_mask": 1,
+        "expected_mask": 1,
+        "identity_residual": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "k": 1,
+        "lambda": 6,
+        "nonidentity_fibre_count": 1,
+        "prime": 13,
+        "role": "P2 diagonal profile only",
+        "shioda_height": "10/3",
+        "x": [
+          0,
+          10,
+          7,
+          11,
+          12
+        ],
+        "y": [
+          0,
+          5,
+          8,
+          0,
+          6,
+          11,
+          8
+        ]
+      },
+      {
+        "c": 2,
+        "computed_mask": 6,
+        "expected_mask": 6,
+        "identity_residual": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "k": 1,
+        "lambda": 6,
+        "nonidentity_fibre_count": 2,
+        "prime": 13,
+        "role": "P1 diagonal profile only",
+        "shioda_height": "8/3",
+        "x": [
+          3,
+          3,
+          1,
+          3,
+          3
+        ],
+        "y": [
+          1,
+          8,
+          3,
+          9,
+          9,
+          8,
+          1
+        ]
+      }
+    ],
+    "note": "The examples certify all three diagonal profiles but occur on different GF(13) surfaces; they are not a rank-three seed."
+  },
+  "profiled_section_system": {
+    "P1": {
+      "branch": "V1(lambda)=+3*L*U1(lambda)",
+      "coordinates": [
+        "X1=z*t*U1",
+        "y1=z*t*V1"
+      ],
+      "degrees": {
+        "U1": 2,
+        "V1": 4
+      },
+      "identity": "V1^2-U1^2*(z*t*U1+3*M)-c*(t-1)^2*z=0",
+      "saturations": [
+        "U1(1)!=0",
+        "U1(lambda)!=0"
+      ]
+    },
+    "P1_cusp_parameter": "c=-rho^2/lambda with rho=V1(0)!=0",
+    "P2": {
+      "branch": "V2(lambda)=-3*L*U2(lambda)",
+      "coordinates": [
+        "X2=z*U2",
+        "y2=z*V2"
+      ],
+      "degrees": {
+        "U2": 3,
+        "V2": 5
+      },
+      "identity": "V2^2-U2^2*(z*U2+3*M)-c*t^2*(t-1)^2*z=0",
+      "saturations": [
+        "U2(0)*U2(1)*U2(lambda)!=0"
+      ]
+    },
+    "P3": {
+      "coordinates": [
+        "X3",
+        "Y3"
+      ],
+      "degrees": {
+        "X3": 4,
+        "Y3": 6
+      },
+      "identity": "Y3^2-X3^2*(X3+3*M)-c*t^2*(t-1)^2*z^3=0",
+      "saturations": [
+        "X3(0)*X3(1)*X3(lambda)!=0"
+      ]
+    },
+    "notation": [
+      "z=t-lambda",
+      "L=lambda*(lambda-1)",
+      "k=3*L",
+      "M=k*t*(t-1)"
+    ],
+    "remaining_gate": "verify the three pairwise intersections are exactly 2, including any contribution at infinity"
+  },
+  "schema_version": 1,
+  "split_i3_chart": {
+    "condition": "3*k*lambda*(lambda-1) is a nonzero square",
+    "equation": "y^2=X^2*(X+3*k*t*(t-1))+c*t^2*(t-1)^2*(t-lambda)^3",
+    "node_slopes": [
+      "+3*lambda*(lambda-1)",
+      "-3*lambda*(lambda-1)"
+    ],
+    "normalization": "k=3*lambda*(lambda-1)",
+    "shift": "X=x-k*t*(t-1)"
+  },
+  "target_gram": {
+    "component_nonidentity_counts": [
+      2,
+      1,
+      0
+    ],
+    "matrix": [
+      [
+        "8/3",
+        "-1/3",
+        "0"
+      ],
+      [
+        "-1/3",
+        "10/3",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "4"
+      ]
+    ],
+    "mordell_weil_determinant": "316/9",
+    "neron_severi_absolute_discriminant": 948,
+    "pairwise_section_intersections": [
+      2,
+      2,
+      2
+    ],
+    "root_discriminant": 27,
+    "root_lattice": "E8+A2^3",
+    "shared_nonidentity_component_rule": "P1 and P2 overlap at exactly one A2 fibre and use opposite nonzero Z/3 labels",
+    "torsion": {
+      "argument": "A torsion section would have height zero, but its height is at least 4-3*(2/3)=2 because the II* component group is trivial and the three A2 corrections are each at most 2/3.",
+      "order": 1
+    }
+  }
+}

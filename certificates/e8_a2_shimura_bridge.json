@@ -1,0 +1,183 @@
+{
+  "certificate_id": "e8_a2_target_to_x6_79_lattice_bridge",
+  "certificate_sha256": "28e4e4d7e804edd165383beb7b6df308cf63a65e5c69a544e5e8ed0cd5664fe4",
+  "claim_boundary": {
+    "P3_found": false,
+    "explicit_integral_neighbor_chain_from_target_proved": false,
+    "explicit_moduli_map_proved": false,
+    "finite_quadratic_form_bridge_proved": true,
+    "rank31_curve_found": false,
+    "rational_target_surface_found": false
+  },
+  "exact_claim": "The positive essential lattice forced by the primitive E8+A2^3 three-section target is even of rank 17 and determinant 948, has root system exactly E8+A2^3, and has the same cyclic finite quadratic form as both the transparent determinant-948 neighbor seed and the X(6,79) period lattice used by the rank-17 workflow.",
+  "finite_quadratic_form_isometries": {
+    "modulus_2det": 1896,
+    "seed_congruence": "1589*101^2 == 485 (mod 1896)",
+    "seed_generator_multiplier_to_period": 101,
+    "target_congruence": "1709*67^2 == 485 (mod 1896)",
+    "target_generator_multiplier_to_period": 67
+  },
+  "implementation": {
+    "language": "Python standard library",
+    "script": "research/certify_e8_a2_shimura_bridge.py"
+  },
+  "interpretation": {
+    "missing_bridge": "Construct an explicit stable isometry/neighbor chain and transport the published rational Shimura point to the two-split Weierstrass chart with all three sections.",
+    "proved": "The E8+A2^3 target is lattice-compatible with the exact X(6,79) period datum and with the existing neighbor seed; it is not merely a numerical determinant coincidence.",
+    "strong_inference": "The target should be an alternate elliptic fibration in the same determinant-948 K3 neighbor landscape."
+  },
+  "schema_version": 1,
+  "shimura_anchor": {
+    "N": 474,
+    "curve": "u^2=16*t^6-19*t^4+88*t^2-48",
+    "factorization": "6*79",
+    "primary_sources": [
+      "https://arxiv.org/abs/0709.2908",
+      "https://arxiv.org/abs/0802.1301"
+    ],
+    "source_claim": "Elkies identifies this rational non-CM orbit with the rank-17 elliptic K3 construction on X(6,79)/<w_474>.",
+    "verified_rational_point": [
+      "14/13",
+      "16064/2197"
+    ]
+  },
+  "target_essential_lattice": {
+    "construction": "E8+A2^3 fibre roots plus Q_i=P_i-O-2F for component orbit P1=(1,1,0), P2=(2,0,0), P3=(0,0,0)",
+    "determinant": 948,
+    "discriminant_generator": {
+      "norm": "1709/948",
+      "order": 948,
+      "scaled_norm_mod_2det": 1709,
+      "witness": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "discriminant_group": "Z/948Z",
+    "gram_construction": {
+      "adjusted_section_diagonal": [
+        4,
+        4,
+        4
+      ],
+      "nonzero_root_section_pairings": [
+        "Q1-A2(1).component1=-1",
+        "Q1-A2(2).component1=-1",
+        "Q2-A2(1).component2=-1"
+      ],
+      "root_blocks": [
+        "E8",
+        "A2",
+        "A2",
+        "A2"
+      ]
+    },
+    "matrix_sha256": "dc4108ea4612195c2ba8350b0b1b35067f92ec2d49801cd2cb597cbb61129690",
+    "mordell_weil_rank_from_root_complement": 3,
+    "rank": 17,
+    "root_count": 258,
+    "root_system": "E8+A2^3",
+    "roots_using_adjusted_section_coordinates": 0,
+    "signature": [
+      17,
+      0
+    ]
+  },
+  "transparent_neighbor_seed": {
+    "construction": "A11 direct-sum K6(det=79)",
+    "determinant": 948,
+    "discriminant_generator": {
+      "norm": "1589/948",
+      "order": 948,
+      "scaled_norm_mod_2det": 1589,
+      "witness": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "discriminant_group": "Z/948Z",
+    "matrix_sha256": "10270a49860bff642fe34bc3eb0fc213623c7dff8aca08b6df51e2832c600bff"
+  },
+  "x6_79_period_lattice": {
+    "determinant": -948,
+    "discriminant_generator": {
+      "norm": "133205/948",
+      "order": 948,
+      "scaled_norm_mod_2det": 485,
+      "witness": [
+        1,
+        1,
+        0
+      ]
+    },
+    "discriminant_group": "Z/948Z",
+    "even_clifford_quaternion": "(6,2)",
+    "gram_matrix": [
+      [
+        -316,
+        0,
+        288
+      ],
+      [
+        0,
+        474,
+        -15
+      ],
+      [
+        288,
+        -15,
+        -262
+      ]
+    ],
+    "hilbert_symbols": {
+      "2": -1,
+      "3": -1,
+      "79": 1,
+      "infinity": 1
+    },
+    "ldl_diagonal": [
+      "-316",
+      "474",
+      "1/158"
+    ],
+    "quaternion_finite_ramification": [
+      2,
+      3
+    ],
+    "remaining_squarefree_level_factor": 79,
+    "signature": [
+      2,
+      1
+    ]
+  }
+}

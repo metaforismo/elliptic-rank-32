@@ -1,0 +1,705 @@
+{
+  "certificate_sha256": "42961d76dda0fcc8e41e687728f0536309e9df6dbe9a224e08dc97ec1b29c185",
+  "claim_boundary": "This certifies the four finite component entries up to the sign ambiguity 1 versus 3. It does not yet choose IV* labels, certify mutual section intersections, or prove a characteristic-zero lift.",
+  "field_prime": 47,
+  "proof": "Identity versus nonidentity is decided by smooth versus nodal specialization. For I4, the component homomorphism sends doubling to multiplication by 2 in Z/4Z: a nodal point has class 2 iff its double is smooth, and odd class iff its double remains nodal.",
+  "records": [
+    {
+      "I2_roots": [
+        24,
+        37
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "2",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 1,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": true,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    },
+    {
+      "I2_roots": [
+        24,
+        37
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "2",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 1,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "odd",
+          "0",
+          "0"
+        ]
+      },
+      "P3_index": 2,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": true,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    },
+    {
+      "I2_roots": [
+        24,
+        37
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "2",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 1,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "odd",
+          "1",
+          "0"
+        ]
+      },
+      "P3_index": 3,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": true,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    },
+    {
+      "I2_roots": [
+        24,
+        37
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "odd",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 2,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": false,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    },
+    {
+      "I2_roots": [
+        24,
+        37
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "odd",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 2,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "odd",
+          "odd",
+          "0",
+          "0"
+        ]
+      },
+      "P3_index": 2,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": false,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    },
+    {
+      "I2_roots": [
+        24,
+        37
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "2",
+          "0",
+          "0"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "odd",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 2,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "odd",
+          "1",
+          "0"
+        ]
+      },
+      "P3_index": 3,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": false,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    }
+  ],
+  "schema": "elliptic-rank30/e6-mw3-finite-component-profile/v1",
+  "source_certificate": "certificates/e6_mw3_modular_slices_gf47.json",
+  "source_certificate_sha256": "0ef67be8b7d5752c8b2b7df4ae7541a8775c74db4871450e8b39fdc6300cfa69",
+  "target_component_order": [
+    "I4@0",
+    "I4@1",
+    "I2@lambda",
+    "I2@mu"
+  ],
+  "target_finite_profiles_up_to_sign": {
+    "P1": [
+      "0",
+      "odd",
+      "0",
+      "0"
+    ],
+    "P2": [
+      "odd",
+      "2",
+      "1",
+      "1"
+    ],
+    "P3": [
+      "odd",
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "triples_classified": 6,
+  "triples_matching_target_finite_profile": 0
+}

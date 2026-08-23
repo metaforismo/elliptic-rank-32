@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "certificate_id": "e8_a2_semistable_two_split_boundary_search_small_primes",
+  "engine": {
+    "path": "research/search_e8_a2_semistable_two_split_boundaries.c",
+    "source_sha256": "27e5972d8b578e7ef51514248e4597b7a240fc09db8ed187d8bd9dae345854c5",
+    "shared_arithmetic_engine": "research/search_e8_a2_semistable_target.c",
+    "shared_arithmetic_engine_sha256": "0b79c2a3cfa8545855f847d40b6189feb5bebb20810f14e0757c4db07515564c",
+    "compiler": "Apple clang 21.0.0 (clang-2100.1.1.101), arm64-apple-darwin25.5.0",
+    "flags": ["-std=c11", "-O3", "-Wall", "-Wextra", "-Wconversion", "-Wshadow", "-pedantic", "-Werror"]
+  },
+  "search_domain": {
+    "charts": ["s0_zero", "s_lambda_zero", "node1_beta_gamma_zero"],
+    "exact_formula_certificate": "certificates/e8_a2_semistable_two_split_boundaries.json",
+    "coverage": "the three intrinsic divisors omitted by the dense two-split chart, before the residual-quintic Kodaira open",
+    "local_branch_values": "the engine stores s0 and s_lambda explicitly, including their zero boundary values",
+    "kodaira_open": "H has degree 5, is squarefree, and is coprime to D",
+    "target_gram_numerator_over_3": [[8, -1, 0], [-1, 10, 0], [0, 0, 12]],
+    "saturation_boundary": "only simple nodal contacts and safe distinct limiting points at infinity"
+  },
+  "runs": [
+    {
+      "prime": 5,
+      "command": "/tmp/search_e8_a2_semistable_two_split_boundaries 5 0",
+      "stdout_sha256": "9772f74c20417c102808ce14d55599cf455308d7cc4ce367eaebfda7ade3488b",
+      "charts": {
+        "s0_zero": {
+          "audit_fnv1a64": "2b959f901497efbe", "raw": 48, "rational": 48, "kodaira": 22,
+          "stages": {"P1": 2, "P2": 0, "P3": 0}, "tests": {"P1": 2750, "P2": 1250, "P3": 0},
+          "sections": {"P1": 2, "P2": 0, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        },
+        "s_lambda_zero": {
+          "audit_fnv1a64": "1e02deb8e5baea1b", "raw": 48, "rational": 48, "kodaira": 22,
+          "stages": {"P1": 2, "P2": 0, "P3": 0}, "tests": {"P1": 2750, "P2": 1250, "P3": 0},
+          "sections": {"P1": 2, "P2": 0, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        },
+        "node1_beta_gamma_zero": {
+          "audit_fnv1a64": "49bcb453c9bb14cb", "raw": 64, "rational": 32, "kodaira": 16,
+          "stages": {"P1": 0, "P2": 0, "P3": 0}, "tests": {"P1": 2000, "P2": 0, "P3": 0},
+          "sections": {"P1": 0, "P2": 0, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        }
+      }
+    },
+    {
+      "prime": 7,
+      "command": "/tmp/search_e8_a2_semistable_two_split_boundaries 7 0",
+      "stdout_sha256": "d82ac13b787fd8ade0f14654df88f4d29c4eca7b65360abb74d804c3cec75591",
+      "charts": {
+        "s0_zero": {
+          "audit_fnv1a64": "d54ba9ebc17779e3", "raw": 180, "rational": 180, "kodaira": 106,
+          "stages": {"P1": 4, "P2": 0, "P3": 0}, "tests": {"P1": 36358, "P2": 9604, "P3": 0},
+          "sections": {"P1": 4, "P2": 0, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        },
+        "s_lambda_zero": {
+          "audit_fnv1a64": "de4e42f797b0bc3f", "raw": 180, "rational": 180, "kodaira": 106,
+          "stages": {"P1": 4, "P2": 0, "P3": 0}, "tests": {"P1": 36358, "P2": 9604, "P3": 0},
+          "sections": {"P1": 4, "P2": 0, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        },
+        "node1_beta_gamma_zero": {
+          "audit_fnv1a64": "1d671123e6ec7313", "raw": 216, "rational": 144, "kodaira": 84,
+          "stages": {"P1": 4, "P2": 0, "P3": 0}, "tests": {"P1": 28812, "P2": 9604, "P3": 0},
+          "sections": {"P1": 4, "P2": 0, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        }
+      }
+    },
+    {
+      "prime": 11,
+      "command": "/tmp/search_e8_a2_semistable_two_split_boundaries 11 0",
+      "stdout_sha256": "d59609de924597d470632ac9f484e1715b949acec41b6e9c04e5ccf185075820",
+      "charts": {
+        "s0_zero": {
+          "audit_fnv1a64": "c127035a612c3b40", "raw": 900, "rational": 900, "kodaira": 642,
+          "stages": {"P1": 62, "P2": 4, "P3": 0}, "tests": {"P1": 854502, "P2": 907742, "P3": 0},
+          "sections": {"P1": 64, "P2": 4, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 4, "4": 0, "5": 0, "other": 0}
+        },
+        "s_lambda_zero": {
+          "audit_fnv1a64": "4f59353d05902d37", "raw": 900, "rational": 900, "kodaira": 642,
+          "stages": {"P1": 62, "P2": 10, "P3": 0}, "tests": {"P1": 854502, "P2": 907742, "P3": 0},
+          "sections": {"P1": 64, "P2": 10, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 6, "2": 0, "3": 4, "4": 0, "5": 0, "other": 0}
+        },
+        "node1_beta_gamma_zero": {
+          "audit_fnv1a64": "08ebd9f8c86d1dd0", "raw": 1000, "rational": 800, "kodaira": 568,
+          "stages": {"P1": 36, "P2": 6, "P3": 0}, "tests": {"P1": 756008, "P2": 527076, "P3": 0},
+          "sections": {"P1": 40, "P2": 6, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 4, "1": 0, "2": 0, "3": 4, "4": 0, "5": 0, "other": 0}
+        }
+      }
+    },
+    {
+      "prime": 13,
+      "command": "/tmp/search_e8_a2_semistable_two_split_boundaries 13 0",
+      "stdout_sha256": "704339458729ea14d941e8afc17ce7b97c4f1606ebe2139a47ba52220ef6c6fa",
+      "charts": {
+        "s0_zero": {
+          "audit_fnv1a64": "aa579b3c80dd0eea", "raw": 1584, "rational": 1584, "kodaira": 1174,
+          "stages": {"P1": 72, "P2": 6, "P3": 4}, "tests": {"P1": 2579278, "P2": 2056392, "P3": 1485172},
+          "sections": {"P1": 74, "P2": 6, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 2, "2": 4, "3": 0, "4": 0, "5": 0, "other": 0}
+        },
+        "s_lambda_zero": {
+          "audit_fnv1a64": "923c1cd3761cbe0a", "raw": 1584, "rational": 1584, "kodaira": 1174,
+          "stages": {"P1": 72, "P2": 6, "P3": 0}, "tests": {"P1": 2579278, "P2": 2056392, "P3": 0},
+          "sections": {"P1": 74, "P2": 6, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 4, "1": 4, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0}
+        },
+        "node1_beta_gamma_zero": {
+          "audit_fnv1a64": "84532c3f7696f6a6", "raw": 1728, "rational": 1440, "kodaira": 1080,
+          "stages": {"P1": 68, "P2": 2, "P3": 2}, "tests": {"P1": 2372760, "P2": 1942148, "P3": 742586},
+          "sections": {"P1": 68, "P2": 2, "P3": 0}, "gcd_degrees": {"minus_one": 0, "0": 0, "1": 0, "2": 2, "3": 0, "4": 0, "5": 0, "other": 0}
+        }
+      }
+    }
+  ],
+  "representative_target_pair_seeds_gf13": [
+    {
+      "chart": "s0_zero", "parameters": {"lambda": 7, "q": 1, "S": 10},
+      "a": [9, 4, 5], "beta": [0, 11], "gamma": [0, 5],
+      "P1": {"U": [3, 9, 3], "V": [3, 12, 8, 12, 12]},
+      "P2": {"U": [7, 9, 12, 12], "V": [12, 7, 8, 4, 10, 8]}
+    },
+    {
+      "chart": "s0_zero", "parameters": {"lambda": 7, "q": 2, "S": 4},
+      "a": [9, 6, 5], "beta": [0, 1], "gamma": [0, 6],
+      "P1": {"U": [9, 2, 12], "V": [9, 0, 9, 0, 8]},
+      "P2": {"U": [8, 9, 3, 10], "V": [9, 12, 2, 8, 1, 5]}
+    },
+    {
+      "chart": "node1_beta_gamma_zero", "parameters": {"q": 5, "W": 11, "h": 8, "lambda": 2},
+      "a": [9, 5, 6], "beta": [8, 5], "gamma": [4, 9],
+      "P1": {"U": [4, 9, 12], "V": [11, 10, 6, 1, 8]},
+      "P2": {"U": [5, 6, 2, 4], "V": [10, 8, 6, 4, 11, 8]}
+    }
+  ],
+  "totals": {
+    "raw_parameter_tuples": 8432,
+    "rational_chart_tuples": 7840,
+    "kodaira_surfaces": 5636,
+    "section_tests": 20761918,
+    "retained_sections": 434,
+    "P3_tests_after_target_pairs": 2227758,
+    "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 8, "1": 12, "2": 6, "3": 12, "4": 0, "5": 0, "other": 0},
+    "complete_gram_triples": 0
+  },
+  "conclusion": "The boundary charts are nonempty and yield six target P1/P2 pairs at GF(13), but exhaustive search of 2,227,758 P3 quartics on those boundary surfaces finds no P3. This closes the three certified intrinsic boundary charts only for the listed finite fields and simple-contact saturation.",
+  "claim_boundary": {
+    "characteristic_zero_target_triple_found": false,
+    "rank31_curve_found": false,
+    "global_nonexistence_proved": false
+  }
+}

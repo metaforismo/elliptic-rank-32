@@ -1,0 +1,558 @@
+{
+  "certificate_sha256": "b33cc287899b2d60a547264eeccee48e35ea419eaa490fe5b89f3d5a2dcf2d81",
+  "claim_boundary": "Complete for the regular charts in the five listed GF(31) coordinate slices and, through the linked certificate, for the exceptional y0+y1=0 planes in those five slices plus the public slice. Other slices, primes, and K3 neighbors remain open.",
+  "conclusion": "The only joint P2/P3 candidate satisfies P1+2*P3=O; these five direct coordinate slices and their exceptional pivot planes contain no surviving MW-rank-3 seed.",
+  "degenerate_pivot_certificate": "certificates/e6_mw3_degenerate_pivots_gf31.json",
+  "degenerate_pivot_certificate_sha256": "bbb4408dbd3fb3c74261a41edfb69f366319e3fc3da9729da73d372e81fff531",
+  "degenerate_pivot_totals": {
+    "P3_candidates": 0,
+    "P3_cases": 0,
+    "coordinate_slices": 6,
+    "degenerate_core_triples_examined": 172980,
+    "geometric_P2_hits": 0,
+    "joint_P2_P3_candidates": 0,
+    "ordered_P2_cases": 0,
+    "simultaneous_core_solutions": 354,
+    "valid_two_I2_surfaces": 0
+  },
+  "field": "GF(31)",
+  "joint_candidates": [
+    {
+      "P3_candidates": [
+        {
+          "X3": [
+            1,
+            5,
+            17
+          ],
+          "Y3_up_to_sign": [
+            0,
+            0,
+            14,
+            16,
+            1
+          ]
+        }
+      ],
+      "bounded_relation_certificate_sha256": "0023564a00e2cf9c66774da68f01b8c73ed161596ead9a85068e557e21011514",
+      "coordinate_slice": {
+        "r0": 3,
+        "s0": 1,
+        "x1": 1
+      },
+      "core": [
+        1,
+        0,
+        14,
+        23
+      ],
+      "geometric_P2_hits": [
+        {
+          "X2": [
+            18,
+            14,
+            25,
+            3,
+            24
+          ],
+          "Y2": [
+            0,
+            0,
+            27,
+            5,
+            9,
+            4,
+            18,
+            30
+          ],
+          "pole": 7,
+          "q0": 24
+        }
+      ],
+      "relations": [
+        [
+          -4,
+          0,
+          -8
+        ],
+        [
+          -3,
+          0,
+          -6
+        ],
+        [
+          -2,
+          0,
+          -4
+        ],
+        [
+          -1,
+          0,
+          -2
+        ],
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          4
+        ],
+        [
+          3,
+          0,
+          6
+        ],
+        [
+          4,
+          0,
+          8
+        ]
+      ]
+    }
+  ],
+  "relation_certificate": "certificates/e6_mw3_candidate_r3_s1_x1_core_1_0_14_23_relations.json",
+  "relation_certificate_sha256": "0023564a00e2cf9c66774da68f01b8c73ed161596ead9a85068e557e21011514",
+  "schema": "elliptic-rank30/e6-mw3-coordinate-slices-gf31/v1",
+  "slice_records": [
+    {
+      "certificate_sha256": "ddf2d642de077b50c9c8535fc2f8dd2c6532059f90b22599fabcd5e76543accc",
+      "coordinate_slice": {
+        "r0": 1,
+        "s0": 1,
+        "x1": 1
+      },
+      "counts": {
+        "D2_roots_tested_by_D3": 28830,
+        "degenerate_a1_pivot_value": 4,
+        "direct_chart_exact_I4_surfaces": 1666,
+        "direct_chart_surfaces_with_at_least_one_valid_I2_root": 108,
+        "direct_chart_surfaces_with_repeated_factor_degree_at_least_1": 165,
+        "fully_split_repeated_gcd_candidates": 6,
+        "quadruples_examined": 893730,
+        "simultaneous_core_solutions": 1860,
+        "solutions_on_degenerate_a1_pivot_plane": 51,
+        "squarefree_repeated_gcd_candidates": 8,
+        "valid_surfaces_with_at_least_two_I2_roots": 2
+      },
+      "path": "certificates/e6_mw3_core_slice_r1_s1_x1_gf31.json",
+      "surfaces": [
+        {
+          "I2_roots": [
+            14,
+            21
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            26,
+            2,
+            11,
+            26
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            23,
+            30
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            30,
+            18,
+            7,
+            24
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        }
+      ]
+    },
+    {
+      "certificate_sha256": "a076277184b94d58d299bbad966c66f606b96d27dfc59f133fed4f04edd11868",
+      "coordinate_slice": {
+        "r0": 2,
+        "s0": 1,
+        "x1": 1
+      },
+      "counts": {
+        "D2_roots_tested_by_D3": 28830,
+        "degenerate_a1_pivot_value": 14,
+        "direct_chart_exact_I4_surfaces": 1634,
+        "direct_chart_surfaces_with_at_least_one_valid_I2_root": 114,
+        "direct_chart_surfaces_with_repeated_factor_degree_at_least_1": 164,
+        "fully_split_repeated_gcd_candidates": 7,
+        "quadruples_examined": 893730,
+        "simultaneous_core_solutions": 1848,
+        "solutions_on_degenerate_a1_pivot_plane": 62,
+        "squarefree_repeated_gcd_candidates": 9,
+        "valid_surfaces_with_at_least_two_I2_roots": 3
+      },
+      "path": "certificates/e6_mw3_core_slice_r2_s1_x1_gf31.json",
+      "surfaces": [
+        {
+          "I2_roots": [
+            12,
+            23
+          ],
+          "P3_candidates": [
+            {
+              "X3": [
+                1,
+                30,
+                12
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                14,
+                30,
+                30
+              ]
+            }
+          ],
+          "P3_cases": 961,
+          "core": [
+            6,
+            2,
+            22,
+            22
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            5,
+            24
+          ],
+          "P3_candidates": [
+            {
+              "X3": [
+                1,
+                3,
+                6
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                15,
+                18,
+                1
+              ]
+            },
+            {
+              "X3": [
+                1,
+                3,
+                30
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                1,
+                29,
+                1
+              ]
+            }
+          ],
+          "P3_cases": 961,
+          "core": [
+            13,
+            21,
+            1,
+            3
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            12,
+            22
+          ],
+          "P3_candidates": [
+            {
+              "X3": [
+                1,
+                28,
+                8
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                12,
+                18,
+                1
+              ]
+            }
+          ],
+          "P3_cases": 961,
+          "core": [
+            18,
+            4,
+            15,
+            6
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        }
+      ]
+    },
+    {
+      "certificate_sha256": "e4e3eaff3a8c2d5c978235f106b57e39ccd511942e98955c779571f55a57f1af",
+      "coordinate_slice": {
+        "r0": 3,
+        "s0": 1,
+        "x1": 1
+      },
+      "counts": {
+        "D2_roots_tested_by_D3": 28830,
+        "degenerate_a1_pivot_value": 23,
+        "direct_chart_exact_I4_surfaces": 1614,
+        "direct_chart_surfaces_with_at_least_one_valid_I2_root": 103,
+        "direct_chart_surfaces_with_repeated_factor_degree_at_least_1": 151,
+        "fully_split_repeated_gcd_candidates": 7,
+        "quadruples_examined": 893730,
+        "simultaneous_core_solutions": 1798,
+        "solutions_on_degenerate_a1_pivot_plane": 56,
+        "squarefree_repeated_gcd_candidates": 9,
+        "valid_surfaces_with_at_least_two_I2_roots": 3
+      },
+      "path": "certificates/e6_mw3_core_slice_r3_s1_x1_gf31.json",
+      "surfaces": [
+        {
+          "I2_roots": [
+            14,
+            24
+          ],
+          "P3_candidates": [
+            {
+              "X3": [
+                1,
+                5,
+                17
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                14,
+                16,
+                1
+              ]
+            }
+          ],
+          "P3_cases": 961,
+          "core": [
+            1,
+            0,
+            14,
+            23
+          ],
+          "geometric_P2_hits": [
+            {
+              "X2": [
+                18,
+                14,
+                25,
+                3,
+                24
+              ],
+              "Y2": [
+                0,
+                0,
+                27,
+                5,
+                9,
+                4,
+                18,
+                30
+              ],
+              "pole": 7,
+              "q0": 24
+            }
+          ],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            12,
+            24
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            20,
+            9,
+            18,
+            28
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            3,
+            21
+          ],
+          "P3_candidates": [
+            {
+              "X3": [
+                1,
+                1,
+                15
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                10,
+                22,
+                30
+              ]
+            }
+          ],
+          "P3_cases": 961,
+          "core": [
+            25,
+            2,
+            22,
+            17
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        }
+      ]
+    },
+    {
+      "certificate_sha256": "f18cb696e3a6be60826066b292d24f4db60daad20d8621e6fea8e6ce0c613158",
+      "coordinate_slice": {
+        "r0": 1,
+        "s0": 2,
+        "x1": 1
+      },
+      "counts": {
+        "D2_roots_tested_by_D3": 28830,
+        "degenerate_a1_pivot_value": 13,
+        "direct_chart_exact_I4_surfaces": 1669,
+        "direct_chart_surfaces_with_at_least_one_valid_I2_root": 112,
+        "direct_chart_surfaces_with_repeated_factor_degree_at_least_1": 169,
+        "fully_split_repeated_gcd_candidates": 9,
+        "quadruples_examined": 893730,
+        "simultaneous_core_solutions": 1863,
+        "solutions_on_degenerate_a1_pivot_plane": 58,
+        "squarefree_repeated_gcd_candidates": 12,
+        "valid_surfaces_with_at_least_two_I2_roots": 1
+      },
+      "path": "certificates/e6_mw3_core_slice_r1_s2_x1_gf31.json",
+      "surfaces": [
+        {
+          "I2_roots": [
+            12,
+            26
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            5,
+            28,
+            7,
+            3
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        }
+      ]
+    },
+    {
+      "certificate_sha256": "f8c095cafe78f1dddc42bc81d05e67191b598fc6df29d4568cbaf49a34608b66",
+      "coordinate_slice": {
+        "r0": 1,
+        "s0": 1,
+        "x1": 2
+      },
+      "counts": {
+        "D2_roots_tested_by_D3": 28830,
+        "degenerate_a1_pivot_value": 4,
+        "direct_chart_exact_I4_surfaces": 1646,
+        "direct_chart_surfaces_with_at_least_one_valid_I2_root": 114,
+        "direct_chart_surfaces_with_repeated_factor_degree_at_least_1": 163,
+        "fully_split_repeated_gcd_candidates": 6,
+        "quadruples_examined": 893730,
+        "simultaneous_core_solutions": 1855,
+        "solutions_on_degenerate_a1_pivot_plane": 64,
+        "squarefree_repeated_gcd_candidates": 7,
+        "valid_surfaces_with_at_least_two_I2_roots": 3
+      },
+      "path": "certificates/e6_mw3_core_slice_r1_s1_x2_gf31.json",
+      "surfaces": [
+        {
+          "I2_roots": [
+            12,
+            22
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            1,
+            18,
+            12,
+            17
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            5,
+            21
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            5,
+            19,
+            7,
+            20
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        },
+        {
+          "I2_roots": [
+            6,
+            17
+          ],
+          "P3_candidates": [],
+          "P3_cases": 961,
+          "core": [
+            26,
+            29,
+            25,
+            24
+          ],
+          "geometric_P2_hits": [],
+          "ordered_P2_cases": 1674
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "P3_candidates": 6,
+    "P3_quadratic_X_cases": 11532,
+    "coordinate_slices": 5,
+    "core_quadruples_examined": 4468650,
+    "geometric_P2_hits": 1,
+    "independent_rank3_seeds_after_exact_relation_filter": 0,
+    "joint_P2_P3_candidates": 1,
+    "ordered_P2_cases": 20088,
+    "signed_ordered_P2_hits": 4,
+    "simultaneous_core_solutions": 9224,
+    "unique_P2_cases_up_to_I2_label_swap": 10044,
+    "valid_two_I2_surfaces": 12
+  }
+}

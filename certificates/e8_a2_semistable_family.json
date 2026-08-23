@@ -1,0 +1,126 @@
+{
+  "certificate_id": "e8_a2_full_semistable_three_i3_chart",
+  "certificate_sha256": "9482aa25513710068b79cbe3051e4f810cd72654d6005ef40eedb35a70aa14e1",
+  "claim_boundary": {
+    "characteristic_zero_rank17_fibration_reconstructed": false,
+    "full_target_triple_found": false,
+    "rank31_curve_found": false
+  },
+  "exact_claim": "On the marked-node cover, the displayed four-dimensional chart parametrizes short Weierstrass K3 models with II* at infinity and three prescribed I3 fibres, subject to explicit open conditions.  The previous mixed chart is its beta=0 subfamily.",
+  "kodaira_open_conditions": {
+    "characteristic": "not 2 or 3",
+    "configuration": "II* + I3 + I3 + I3 + 5 I1",
+    "euler_number_check": "10+3+3+3+5=24",
+    "infinity": "gamma1 != 0 gives ord_infinity(c4,c6,Delta)=(4,5,10), hence II*",
+    "marked_fibres": [
+      "lambda not in {0,1}",
+      "a(0)*a(1)*a(lambda) != 0",
+      "Q(0)*Q(1)*Q(lambda) != 0"
+    ],
+    "residual_fibres": "Q has degree 5, is squarefree, and is coprime to D"
+  },
+  "mixed_subfamily": {
+    "ambient_position": "boundary beta=0 with gcd(a,D)!=1 at t=0,1; there the corresponding I3+I1 fibres specialize to IV",
+    "consequence": "Failure to find a target triple in the mixed chart is not a global obstruction; the full four-dimensional chart remains open.",
+    "dimension": 2,
+    "resulting_A": "-3*k**2*t**2*(t - 1)**2",
+    "resulting_B": "t**2*(t - 1)**2*(-c*lambda**3 + 3*c*lambda**2*t - 3*c*lambda*t**2 + c*t**3 + 2*k**3*t**2 - 2*k**3*t)",
+    "specialization": [
+      "beta=0",
+      "a=k*t*(t-1)",
+      "gamma=c*(t-lambda)",
+      "d=k*c"
+    ]
+  },
+  "notation": {
+    "D": "t*(t-1)*(t-lambda)",
+    "a": "a0+a1*t+a2*t^2",
+    "b": "D*beta",
+    "beta": "beta0+beta1*t",
+    "c_error": "D^2*gamma",
+    "gamma": "gamma0+gamma1*t"
+  },
+  "parameter_count": {
+    "interpretation": "This matches 20-rank(U+E8+A2^3)=4; unlike the mixed two-dimensional chart, it is not dimensionally forced to miss a general discriminant-948 Noether--Lefschetz curve.",
+    "moduli_dimension": 4,
+    "raw_variables": 9,
+    "relation_coefficient_equations": 4,
+    "variables": [
+      "a0",
+      "a1",
+      "a2",
+      "beta0",
+      "beta1",
+      "gamma0",
+      "gamma1",
+      "d",
+      "lambda"
+    ],
+    "weierstrass_homothety_dimension": 1
+  },
+  "schema_version": 1,
+  "split_cover": {
+    "condition": "3*a(0), 3*a(1), and 3*a(lambda) are nonzero squares",
+    "reason": "At a root r of D the nodal cubic is y^2=(x-a(r))^2*(x+2*a(r)); its tangent slopes are +/-sqrt(3*a(r))."
+  },
+  "target_section_chart": {
+    "P1": {
+      "coordinates": [
+        "X1=t*(t-lambda)*U1",
+        "y1=t*(t-lambda)*V1"
+      ],
+      "degrees": {
+        "U1": 2,
+        "V1": 4
+      },
+      "reduced_identity": "V1^2=-U**3*lambda*t + U**3*t**2 + 3*U**2*a0 + 3*U**2*a1*t + 3*U**2*a2*t**2 - 6*U*beta0*t + 6*U*beta0 - 6*U*beta1*t**2 + 6*U*beta1*t + gamma0*t**2 - 2*gamma0*t + gamma0 + gamma1*t**3 - 2*gamma1*t**2 + gamma1*t"
+    },
+    "P2": {
+      "coordinates": [
+        "X2=(t-lambda)*U2",
+        "y2=(t-lambda)*V2"
+      ],
+      "degrees": {
+        "U2": 3,
+        "V2": 5
+      },
+      "reduced_identity": "V2^2=-U**3*lambda + U**3*t + 3*U**2*a0 + 3*U**2*a1*t + 3*U**2*a2*t**2 - 6*U*beta0*t**2 + 6*U*beta0*t - 6*U*beta1*t**3 + 6*U*beta1*t**2 + gamma0*t**4 - 2*gamma0*t**3 + gamma0*t**2 + gamma1*t**5 - 2*gamma1*t**4 + gamma1*t**3"
+    },
+    "P3": {
+      "coordinates": [
+        "X3",
+        "Y3"
+      ],
+      "degrees": {
+        "X3": 4,
+        "Y3": 6
+      },
+      "identity": "Y3^2=X3^2*(X3+3*a)-6*D*beta*X3+D^2*gamma"
+    },
+    "profile": "P1 nonidentity at 0 and lambda; P2 nonidentity only at lambda on the opposite branch; P3 identity at all three I3 fibres",
+    "remaining_exact_filters": [
+      "chosen nonzero component labels and opposite overlap branch",
+      "all three pairwise section intersections equal 2",
+      "open-condition saturations"
+    ]
+  },
+  "three_i3_condition": {
+    "Q": "4*a^2*d+12*a*beta*gamma-32*beta^3+D*gamma^2",
+    "coefficient_equations_low_to_high": [
+      "a0*gamma0 - 3*beta0**2",
+      "a0*gamma1 + a1*gamma0 - 6*beta0*beta1 - d*lambda",
+      "a1*gamma1 + a2*gamma0 - 3*beta1**2 + d*lambda + d",
+      "a2*gamma1 - d"
+    ],
+    "discriminant_on_identity": "-432*D^3*Q",
+    "polynomial_identity": "a*gamma-3*beta^2=d*D",
+    "unreduced_error_identity": "-1728*t**2*(-lambda + t)**2*(t - 1)**2*(a0 + a1*t + a2*t**2)**2*(a0*gamma0 + a0*gamma1*t + a1*gamma0*t + a1*gamma1*t**2 + a2*gamma0*t**2 + a2*gamma1*t**3 - 3*beta0**2 - 6*beta0*beta1*t - 3*beta1**2*t**2 + d*lambda*t**2 - d*lambda*t - d*t**3 + d*t**2)"
+  },
+  "weierstrass_model": {
+    "A": "-3*(a^2+2*D*beta)",
+    "B": "2*(a^3+3*a*D*beta)+D^2*gamma",
+    "equation": "y^2=x^3+A*x+B",
+    "shifted_coordinate": "X=x-a",
+    "shifted_equation": "y^2=X^2*(X+3*a)-6*D*beta*X+D^2*gamma"
+  }
+}

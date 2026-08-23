@@ -28,8 +28,8 @@ class RiemannRochVisibilityTests(unittest.TestCase):
     def test_near_square_barrier(self) -> None:
         result = MODULE.compute_certificate()
         frontier = result["near_square_frontier"][
-            "table_degrees_2_through_15"
-        ][-1]
+            "table_degrees_2_through_16"
+        ][-2]
         self.assertEqual(frontier["degree_Q"], 15)
         self.assertEqual(frontier["pole_order"], 30)
         self.assertEqual(
@@ -56,6 +56,25 @@ class RiemannRochVisibilityTests(unittest.TestCase):
         self.assertEqual(
             result["theorem"]["conditional_assumptions"], []
         )
+
+    def test_minimal_order_32_shape_and_universality(self) -> None:
+        result = MODULE.compute_certificate()
+        target = result["minimal_single_function_rank31_target"]
+        self.assertEqual(target["minimal_pole_order"], 32)
+        self.assertEqual(
+            target["canonical_choice"],
+            {
+                "deg_A": 16,
+                "deg_B_max": 14,
+                "deg_R": 3,
+                "norm_form": "A(x)^2-R(x)*B(x)^2",
+                "generic_norm_degree": 32,
+            },
+        )
+        self.assertEqual(
+            target["maximum_possible_span_after_forced_relation"], 31
+        )
+        self.assertIn("P32=-(P1+...+P31)", target["universal_reverse_construction"])
 
 
 if __name__ == "__main__":

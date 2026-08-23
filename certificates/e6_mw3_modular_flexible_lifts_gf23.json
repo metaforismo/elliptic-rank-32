@@ -1,0 +1,173 @@
+{
+  "certificate_sha256": "a725f0af7be019032bb379a1c755cf644a53ece435b363bb26b4278ad7ad7273",
+  "claim_boundary": "The slice coordinates r0,s0,x1 may deform. Each record follows the deterministic affine correction with all free variables set to zero. Failure is not an exhaustive p-adic obstruction; success is only a finite congruence, not a characteristic-zero algebraic solution.",
+  "field_prime": 23,
+  "records": [
+    {
+      "P2_index": 1,
+      "P3_index": 2,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        3,
+        13,
+        2,
+        10
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 8,
+      "jacobian_rank_mod_p": 35,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 1,
+      "P3_index": 3,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        3,
+        13,
+        2,
+        10
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 10,
+      "jacobian_rank_mod_p": 33,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 2,
+      "P3_index": 1,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        3,
+        13,
+        2,
+        10
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 11,
+      "jacobian_rank_mod_p": 32,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 2,
+      "P3_index": 2,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        3,
+        13,
+        2,
+        10
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 9,
+      "jacobian_rank_mod_p": 34,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 2,
+      "P3_index": 3,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        3,
+        13,
+        2,
+        10
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 11,
+      "jacobian_rank_mod_p": 32,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 1,
+      "P3_index": 2,
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        7,
+        12,
+        3,
+        8
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 8,
+      "jacobian_rank_mod_p": 35,
+      "joint_index": 4,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 1,
+      "P3_index": 3,
+      "coordinate_slice": [
+        1,
+        2,
+        1
+      ],
+      "core": [
+        7,
+        12,
+        3,
+        8
+      ],
+      "equations": 47,
+      "first_failed_modulus": 12167,
+      "jacobian_nullity_mod_p": 8,
+      "jacobian_rank_mod_p": 35,
+      "joint_index": 4,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    }
+  ],
+  "schema": "elliptic-rank30/e6-mw3-modular-flexible-hensel/v1",
+  "source_independence": "/Users/francescogiannicola/Documents/ChatGPT/Matematica/elliptic-rank-30/certificates/e6_mw3_modular_independence_gf23.json",
+  "source_independence_sha256": "6da7595ae8bfb585b5ea8df65d35c38d2e0f1f9041d1b0301bd602c8744a4606",
+  "source_slices": "/Users/francescogiannicola/Documents/ChatGPT/Matematica/elliptic-rank-30/certificates/e6_mw3_modular_slices_gf23.json",
+  "source_slices_sha256": "73812509122308492663a291f9fdf47e17a82eb7535a315d22dbf00c27240892"
+}

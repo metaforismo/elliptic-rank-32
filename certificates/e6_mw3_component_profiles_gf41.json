@@ -1,0 +1,150 @@
+{
+  "certificate_sha256": "c39dabaec95870a1dc253336e48dabc63cf8ae54836e49d3656407a7b7fe297d",
+  "claim_boundary": "This certifies the four finite component entries up to the sign ambiguity 1 versus 3. It does not yet choose IV* labels, certify mutual section intersections, or prove a characteristic-zero lift.",
+  "field_prime": 41,
+  "proof": "Identity versus nonidentity is decided by smooth versus nodal specialization. For I4, the component homomorphism sends doubling to multiplication by 2 in Z/4Z: a nodal point has class 2 iff its double is smooth, and odd class iff its double remains nodal.",
+  "records": [
+    {
+      "I2_roots": [
+        5,
+        14
+      ],
+      "P1": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "0",
+            "double_reduction": null,
+            "section_reduction": "smooth"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "0",
+          "odd",
+          "0",
+          "1"
+        ]
+      },
+      "P2": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "2",
+          "1",
+          "1"
+        ]
+      },
+      "P2_index": 1,
+      "P3": {
+        "fibers": {
+          "I2_lambda": {
+            "component_class": "1",
+            "section_reduction": "node"
+          },
+          "I2_mu": {
+            "component_class": "0",
+            "section_reduction": "smooth"
+          },
+          "I4_0": {
+            "component_class": "2",
+            "double_reduction": "smooth",
+            "section_reduction": "node"
+          },
+          "I4_1": {
+            "component_class": "odd",
+            "double_reduction": "node",
+            "section_reduction": "node"
+          }
+        },
+        "finite_component_vector": [
+          "2",
+          "odd",
+          "1",
+          "0"
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        10,
+        1,
+        39,
+        19
+      ],
+      "joint_index": 1,
+      "matches": {
+        "P1": false,
+        "P2": false,
+        "P3": false
+      },
+      "matches_target_finite_profile": false
+    }
+  ],
+  "schema": "elliptic-rank30/e6-mw3-finite-component-profile/v1",
+  "source_certificate": "certificates/e6_mw3_modular_slices_gf41.json",
+  "source_certificate_sha256": "3ffa90390031cee468d9883cc01aaab5a1fb0b9fc1c11cf5b40d43a7f451e4b8",
+  "target_component_order": [
+    "I4@0",
+    "I4@1",
+    "I2@lambda",
+    "I2@mu"
+  ],
+  "target_finite_profiles_up_to_sign": {
+    "P1": [
+      "0",
+      "odd",
+      "0",
+      "0"
+    ],
+    "P2": [
+      "odd",
+      "2",
+      "1",
+      "1"
+    ],
+    "P3": [
+      "odd",
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "triples_classified": 1,
+  "triples_matching_target_finite_profile": 0
+}

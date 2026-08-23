@@ -1,0 +1,161 @@
+{
+  "schema_version": 2,
+  "certificate_id": "e8_a2_semistable_two_split_pair_first_large_primes",
+  "engine": {
+    "path": "research/search_e8_a2_semistable_two_split_pair_first.c",
+    "source_sha256": "395fa8e675b4c72ef79275c1d25749e36e4bd9641d8df8f8315f55646d65223a",
+    "shared_arithmetic_engine": "research/search_e8_a2_semistable_target.c",
+    "shared_arithmetic_engine_sha256": "0b79c2a3cfa8545855f847d40b6189feb5bebb20810f14e0757c4db07515564c",
+    "compiler": "Apple clang 21.0.0 (clang-2100.1.1.101), arm64-apple-darwin25.5.0",
+    "flags": ["-std=c11", "-O3", "-Wall", "-Wextra", "-Wconversion", "-Wshadow", "-pedantic", "-Werror"]
+  },
+  "method": {
+    "first_stage": "affine-permutation sample without replacement of (lambda,y,z,W,U1) incidences",
+    "second_stage": "all p^4 U2 polynomials for every sampled P1 hit",
+    "third_stage": "all p^5 X3 polynomials, streamed, for every P1/P2 pair with total intersection I_aff+I_inf=2; P1/P3 and P2/P3 use the same total-intersection test",
+    "seed": 20260824,
+    "scope": "only the first P1-incidence stage is sampled; downstream stages are exhaustive conditional on its hits",
+    "chart": "dense two-split II*+3I3 Kodaira-open chart with simple local contacts"
+  },
+  "validation_replays": [
+    {
+      "prime": 5,
+      "command": "/tmp/search_e8_a2_semistable_two_split_pair_first 5 24000 20260824 0",
+      "stdout_sha256": "490930ec67306b6305f82723620c6c5eb9ff6ce136699342b177ce33e5d0245d",
+      "exhaustive_first_stage": true,
+      "expected": {"P1_tests": 2000, "P1_sections": 4, "P2_tests": 2500, "eligible_pairs": 0}
+    },
+    {
+      "prime": 7,
+      "command": "/tmp/search_e8_a2_semistable_two_split_pair_first 7 370440 20260824 0",
+      "stdout_sha256": "ae0d04473282a1511e737afb0c22152da4a1f2d7ba4bc78a27d5110680989e04",
+      "exhaustive_first_stage": true,
+      "expected": {"P1_tests": 67228, "P1_sections": 32, "P2_tests": 76832, "gcd_degree_0_pairs": 4, "eligible_pairs": 0}
+    }
+  ],
+  "runs": [
+    {
+      "prime": 17,
+      "command": "/tmp/search_e8_a2_semistable_two_split_pair_first 17 20000000 20260824 0",
+      "stdout_sha256": "bcea5b88b90a2d9a34755e96b13d399b7b1a05c50b7dd6ea1f8d40836359f83d",
+      "incidence_universe": 301854720,
+      "sampled_incidences": 20000000,
+      "offset": 289228382,
+      "step": 61402409,
+      "rational_chart_incidences": 17656248,
+      "kodaira_incidences": 10751425,
+      "tests": {"P1": 10751425, "P2": 14365612, "P3": 2839714},
+      "sections": {"P1": 172, "P2": 9, "P3": 0},
+      "P1_hits": 172,
+      "P2_nonempty_incidences": 9,
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 5, "1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "other": 0},
+      "P1_P2_infinity_degree_counts": {"minus_one": 0, "0": 9, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0},
+      "P1_P2_total_degree_counts": {"minus_one": 0, "0": 5, "1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "other": 0},
+      "affine_degree_two_pairs": 2,
+      "eligible_pairs": 2,
+      "total_degree_two_with_positive_infinity": 0,
+      "complete_gram_triples": 0,
+      "audit_fnv1a64": "6327bf525f09e831"
+    },
+    {
+      "prime": 19,
+      "command": "/tmp/search_e8_a2_semistable_two_split_pair_first 19 20000000 20260824 0",
+      "stdout_sha256": "a6a879fb607ebf65bbd9c2f8213cca2978889f036045e1dcf24f3884469e32ca",
+      "incidence_universe": 680028696,
+      "sampled_incidences": 20000000,
+      "offset": 678185390,
+      "step": 464791597,
+      "rational_chart_incidences": 17901303,
+      "kodaira_incidences": 11479387,
+      "tests": {"P1": 11479387, "P2": 14986915, "P3": 2476099},
+      "sections": {"P1": 115, "P2": 5, "P3": 0},
+      "P1_hits": 115,
+      "P2_nonempty_incidences": 3,
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 1, "1": 1, "2": 1, "3": 2, "4": 0, "5": 0, "other": 0},
+      "P1_P2_infinity_degree_counts": {"minus_one": 0, "0": 5, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0},
+      "P1_P2_total_degree_counts": {"minus_one": 0, "0": 1, "1": 1, "2": 1, "3": 2, "4": 0, "5": 0, "other": 0},
+      "affine_degree_two_pairs": 1,
+      "eligible_pairs": 1,
+      "total_degree_two_with_positive_infinity": 0,
+      "complete_gram_triples": 0,
+      "audit_fnv1a64": "4970f96682a13b91"
+    },
+    {
+      "prime": 23,
+      "command": "/tmp/search_e8_a2_semistable_two_split_pair_first 23 20000000 20260824 0",
+      "stdout_sha256": "ce1b53127d35c9992f47656200c93f8c209849d727e78630d22caaf42fe4332e",
+      "incidence_universe": 2720638536,
+      "sampled_incidences": 20000000,
+      "offset": 2182283846,
+      "step": 1362324589,
+      "rational_chart_incidences": 18264505,
+      "kodaira_incidences": 12722862,
+      "tests": {"P1": 12722862, "P2": 19309029, "P3": 0},
+      "sections": {"P1": 69, "P2": 6, "P3": 0},
+      "P1_hits": 69,
+      "P2_nonempty_incidences": 6,
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 4, "1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "other": 0},
+      "P1_P2_infinity_degree_counts": {"minus_one": 0, "0": 6, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0},
+      "P1_P2_total_degree_counts": {"minus_one": 0, "0": 4, "1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "other": 0},
+      "affine_degree_two_pairs": 0,
+      "eligible_pairs": 0,
+      "total_degree_two_with_positive_infinity": 0,
+      "complete_gram_triples": 0,
+      "audit_fnv1a64": "a50a38a12963ef46"
+    }
+  ],
+  "previous_affine_degree_two_pairs": [
+    {
+      "prime": 17,
+      "parameters": {"lambda": 3, "y": 13, "z": 3, "W": 8, "g": 6, "q": 11},
+      "a": [6, 12, 8],
+      "beta": [14, 11],
+      "gamma": [13, 14],
+      "P1": {"U": [2, 10, 1], "V": [7, 0, 3, 12, 16]},
+      "P2": {"U": [16, 0, 14, 9], "V": [15, 8, 11, 7, 3, 7]},
+      "intersection": {"affine": 2, "at_infinity": 0, "total": 2}
+    },
+    {
+      "prime": 17,
+      "parameters": {"lambda": 5, "y": 11, "z": 12, "W": 16, "g": 8, "q": 2},
+      "a": [6, 11, 6],
+      "beta": [11, 2],
+      "gamma": [1, 7],
+      "P1": {"U": [3, 9, 9], "V": [15, 11, 1, 7, 10]},
+      "P2": {"U": [14, 1, 5, 2], "V": [5, 5, 8, 10, 2, 5]},
+      "intersection": {"affine": 2, "at_infinity": 0, "total": 2}
+    },
+    {
+      "prime": 19,
+      "parameters": {"lambda": 12, "y": 14, "z": 2, "W": 13, "g": 3, "q": 5},
+      "a": [13, 11, 6],
+      "beta": [17, 17],
+      "gamma": [17, 15],
+      "P1": {"U": [17, 3, 1], "V": [8, 16, 0, 8, 1]},
+      "P2": {"U": [14, 18, 1, 11], "V": [9, 2, 18, 16, 14, 1]},
+      "intersection": {"affine": 2, "at_infinity": 0, "total": 2}
+    }
+  ],
+  "totals": {
+    "sampled_incidences": 60000000,
+    "rational_chart_incidences": 53822056,
+    "kodaira_incidences": 34953674,
+    "section_tests": 88931043,
+    "P3_tests_after_eligible_pairs": 5315813,
+    "sections": {"P1": 356, "P2": 20, "P3": 0},
+    "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 10, "1": 3, "2": 3, "3": 4, "4": 0, "5": 0, "other": 0},
+    "P1_P2_infinity_degree_counts": {"minus_one": 0, "0": 20, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0},
+    "P1_P2_total_degree_counts": {"minus_one": 0, "0": 10, "1": 3, "2": 3, "3": 4, "4": 0, "5": 0, "other": 0},
+    "affine_degree_two_pairs": 3,
+    "eligible_pairs": 3,
+    "total_degree_two_with_positive_infinity": 0,
+    "complete_gram_triples": 0
+  },
+  "conclusion": "After replacing the affine-only filter by I_total=I_aff+I_inf, all 20 sampled P1/P2 pairs have I_inf=0. The three previously eligible pairs remain exact total-intersection-2 pairs (two over GF(17), one over GF(19)); no affine-1 plus infinity-1 pair occurs. Exhausting all 5,315,813 P3 quartics on the three total-eligible pairs finds no P3. GF(23) contains six P2 sections but no total-intersection-2 pair in the sampled prefix.",
+  "claim_boundary": {
+    "first_stage_exhaustive_for_large_primes": false,
+    "characteristic_zero_target_triple_found": false,
+    "rank31_curve_found": false,
+    "global_nonexistence_proved": false
+  }
+}

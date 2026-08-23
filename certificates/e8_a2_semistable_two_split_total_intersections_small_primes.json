@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "certificate_id": "e8_a2_semistable_two_split_total_intersections_small_primes",
+  "engine": {
+    "path": "research/search_e8_a2_semistable_two_split_total_intersections.c",
+    "source_sha256": "940517dfd32338aa9864dcb50981fd728db829f5140c93af6db286479b6beb0e",
+    "shared_arithmetic_engine": "research/search_e8_a2_semistable_target.c",
+    "shared_arithmetic_engine_sha256": "0b79c2a3cfa8545855f847d40b6189feb5bebb20810f14e0757c4db07515564c",
+    "compiler": "Apple clang 21.0.0 (clang-2100.1.1.101), arm64-apple-darwin25.5.0",
+    "flags": [
+      "-std=c11", "-O3", "-Wall", "-Wextra", "-Wconversion",
+      "-Wshadow", "-pedantic", "-Werror"
+    ]
+  },
+  "exact_intersection_formula": {
+    "affine": "degree of the coordinate-difference gcd, after removing the forced opposite-component factor at lambda for P1/P2",
+    "infinity": "min(ord_u(u^4*(X1-X2)(1/u)), ord_u(u^6*(Y1-Y2)(1/u)))",
+    "target": "affine_degree + infinity_degree = 2"
+  },
+  "runs": [
+    {
+      "prime": 5,
+      "command": "/tmp/e8_total_intersections 5",
+      "stdout_sha256": "1b6011e09d3415e0b7fd4f28d138c09e0ea37b6d0f6acccdb3adce380874590c",
+      "pair_strata": {"aff0_inf0": 0, "aff1_inf0": 0, "aff1_inf1": 0, "aff2_inf0": 0, "aff2_inf1": 0, "aff3_inf0": 0},
+      "eligible_total_two_pairs": 0,
+      "new_collision_pairs": 0,
+      "p3_tested_surfaces": 0,
+      "p3_tests": 0,
+      "p3_sections": 0,
+      "total_gram_triples": 0
+    },
+    {
+      "prime": 7,
+      "command": "/tmp/e8_total_intersections 7",
+      "stdout_sha256": "b16158382543a11de4cd3b897386b9ad2c3daa0995bee62b5467d8c768e72b03",
+      "pair_strata": {"aff0_inf0": 4, "aff1_inf0": 0, "aff1_inf1": 0, "aff2_inf0": 0, "aff2_inf1": 0, "aff3_inf0": 0},
+      "eligible_total_two_pairs": 0,
+      "new_collision_pairs": 0,
+      "p3_tested_surfaces": 0,
+      "p3_tests": 0,
+      "p3_sections": 0,
+      "total_gram_triples": 0
+    },
+    {
+      "prime": 11,
+      "command": "/tmp/e8_total_intersections 11",
+      "stdout_sha256": "b2485d1bb2068b07f1d1ca28c67cfee65769dcb6e2646e65abe73f382466d64f",
+      "pair_strata": {"aff0_inf0": 8, "aff1_inf0": 4, "aff1_inf1": 0, "aff2_inf0": 4, "aff2_inf1": 2, "aff3_inf0": 2},
+      "eligible_total_two_pairs": 4,
+      "new_collision_pairs": 0,
+      "p3_tested_surfaces": 4,
+      "p3_tests": 644204,
+      "p3_sections": 0,
+      "total_gram_triples": 0
+    },
+    {
+      "prime": 13,
+      "command": "/tmp/e8_total_intersections 13",
+      "stdout_sha256": "ca35b31d92f3a1c45db9eba11e6a2c7f3ae20324835483bbfa7b99693eb3b653",
+      "pair_strata": {"aff0_inf0": 16, "aff1_inf0": 14, "aff1_inf1": 6, "aff2_inf0": 10, "aff2_inf1": 0, "aff3_inf0": 12},
+      "eligible_total_two_pairs": 16,
+      "new_collision_pairs": 6,
+      "p3_tested_surfaces": 16,
+      "p3_tests": 5940688,
+      "p3_sections": 0,
+      "total_gram_triples": 0
+    }
+  ],
+  "totals": {
+    "enumerated_p1_p2_pairs": 82,
+    "eligible_total_two_pairs": 20,
+    "new_collision_pairs": 6,
+    "p3_tested_surfaces": 20,
+    "p3_tests": 6584892,
+    "p3_sections": 0,
+    "total_gram_triples": 0
+  },
+  "conclusion": "Infinity coincidence is a genuine omitted incidence stratum. Six GF(13) pairs have one affine and one infinite intersection and therefore total intersection two. Exhausting P3 on every corrected total-two surface for p=5,7,11,13 finds no P3 section.",
+  "claim_boundary": {
+    "coverage": "dense two-split surface chart over the four listed finite fields",
+    "intrinsic_surface_boundary_charts_included": false,
+    "characteristic_zero_target_triple_found": false,
+    "rank31_curve_found": false,
+    "global_nonexistence_proved": false
+  }
+}

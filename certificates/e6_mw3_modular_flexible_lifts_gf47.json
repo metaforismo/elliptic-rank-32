@@ -1,0 +1,104 @@
+{
+  "certificate_sha256": "fd2d05c1709f47ce57536cf549a85c5b89ad34e8cc50a9e5da2d8ef841a841b6",
+  "claim_boundary": "The slice coordinates r0,s0,x1 may deform. Each record follows the deterministic affine correction with all free variables set to zero. Failure is not an exhaustive p-adic obstruction; success is only a finite congruence, not a characteristic-zero algebraic solution.",
+  "field_prime": 47,
+  "records": [
+    {
+      "P2_index": 1,
+      "P3_index": 1,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "equations": 47,
+      "first_failed_modulus": 103823,
+      "jacobian_nullity_mod_p": 9,
+      "jacobian_rank_mod_p": 34,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 1,
+      "P3_index": 2,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "equations": 47,
+      "first_failed_modulus": 103823,
+      "jacobian_nullity_mod_p": 9,
+      "jacobian_rank_mod_p": 34,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 2,
+      "P3_index": 1,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "equations": 47,
+      "first_failed_modulus": 103823,
+      "jacobian_nullity_mod_p": 9,
+      "jacobian_rank_mod_p": 34,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    },
+    {
+      "P2_index": 2,
+      "P3_index": 2,
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        12,
+        6,
+        2,
+        4
+      ],
+      "equations": 47,
+      "first_failed_modulus": 103823,
+      "jacobian_nullity_mod_p": 9,
+      "jacobian_rank_mod_p": 34,
+      "joint_index": 1,
+      "lifted_digits": 2,
+      "status": "chosen_path_obstructed",
+      "variables": 43
+    }
+  ],
+  "schema": "elliptic-rank30/e6-mw3-modular-flexible-hensel/v1",
+  "source_independence": "certificates/e6_mw3_modular_independence_gf47.json",
+  "source_independence_sha256": "a3d47f9c7cd31e4d1ee65436d50caaf1a9fe78110ee88cfdad9fdcd36276b8a5",
+  "source_slices": "certificates/e6_mw3_modular_slices_gf47.json",
+  "source_slices_sha256": "0ef67be8b7d5752c8b2b7df4ae7541a8775c74db4871450e8b39fdc6300cfa69"
+}

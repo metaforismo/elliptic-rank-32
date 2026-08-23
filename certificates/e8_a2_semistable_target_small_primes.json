@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "certificate_id": "e8_a2_full_semistable_target_small_primes",
+  "engine": {
+    "path": "research/search_e8_a2_semistable_target.c",
+    "source_sha256": "0b79c2a3cfa8545855f847d40b6189feb5bebb20810f14e0757c4db07515564c",
+    "compiler": "Apple clang 21.0.0 (clang-2100.1.1.101), arm64-apple-darwin25.5.0",
+    "flags": [
+      "-std=c11",
+      "-O3",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-pedantic",
+      "-Werror"
+    ]
+  },
+  "search_domain": {
+    "family": "full split II*+3I3 rational chart with parameters (lambda,m,R,W)",
+    "homothety_gauge": "sqrt(3*a(0))=1",
+    "kodaira_open": "gamma1 nonzero; H degree 5, squarefree, and coprime to D",
+    "section_profiles": {
+      "P1": "nonidentity at 0 and lambda; positive simple lambda branch",
+      "P2": "nonidentity only at lambda; negative simple lambda branch",
+      "P3": "identity at all three I3 fibres"
+    },
+    "target_gram_numerator_over_3": [
+      [8, -1, 0],
+      [-1, 10, 0],
+      [0, 0, 12]
+    ],
+    "saturation_boundary": "deeper nodal contacts and unsafe or coincident limiting points at infinity are excluded"
+  },
+  "runs": [
+    {
+      "prime": 5,
+      "command": "/tmp/search_e8_a2_semistable_target 5 0",
+      "stdout_sha256": "3d3413a499d4cfd710ef96be58ac5280abb004259122d1704e7e5e23d6bad1d3",
+      "audit_fnv1a64": "d5fd0b643309e403",
+      "raw_parameter_tuples": 240,
+      "rational_chart_tuples": 32,
+      "kodaira_surfaces": 16,
+      "stage_surfaces": {"P1": 0, "P2": 0, "P3": 0},
+      "tests": {"P1": 2000, "P2": 0, "P3": 0},
+      "sections": {"P1": 0, "P2": 0, "P3": 0},
+      "P1_P2_intersection_two_pairs": 0,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    },
+    {
+      "prime": 7,
+      "command": "/tmp/search_e8_a2_semistable_target 7 0",
+      "stdout_sha256": "9fed017b35ad4200acde51b60ac93501a06b655994c8ebe76622053df8c41193",
+      "audit_fnv1a64": "088863d4e41a4b85",
+      "raw_parameter_tuples": 1260,
+      "rational_chart_tuples": 384,
+      "kodaira_surfaces": 208,
+      "stage_surfaces": {"P1": 16, "P2": 0, "P3": 0},
+      "tests": {"P1": 71344, "P2": 38416, "P3": 0},
+      "sections": {"P1": 16, "P2": 0, "P3": 0},
+      "P1_P2_intersection_two_pairs": 0,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    },
+    {
+      "prime": 11,
+      "command": "/tmp/search_e8_a2_semistable_target 11 0",
+      "stdout_sha256": "6d853c1ab19e4b7cbe28a655349cc3f54dd60366dc1d0e28d4f764b1f383b173",
+      "audit_fnv1a64": "c40382886c91c462",
+      "raw_parameter_tuples": 9900,
+      "rational_chart_tuples": 5120,
+      "kodaira_surfaces": 3088,
+      "stage_surfaces": {"P1": 176, "P2": 0, "P3": 0},
+      "tests": {"P1": 4110128, "P2": 2576816, "P3": 0},
+      "sections": {"P1": 176, "P2": 0, "P3": 0},
+      "P1_P2_intersection_two_pairs": 0,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    }
+  ],
+  "totals": {
+    "raw_parameter_tuples": 11400,
+    "rational_chart_tuples": 5536,
+    "kodaira_surfaces": 3312,
+    "section_tests": 6798704,
+    "retained_sections": 192,
+    "complete_gram_triples": 0
+  },
+  "conclusion": "No surface in these three finite-field searches reached the P2-nonempty stage after retaining P1. This is a bounded negative result on the displayed dense chart and simple local-branch saturation, not an obstruction over Q.",
+  "claim_boundary": {
+    "characteristic_zero_target_triple_found": false,
+    "rank31_curve_found": false,
+    "global_nonexistence_proved": false
+  }
+}

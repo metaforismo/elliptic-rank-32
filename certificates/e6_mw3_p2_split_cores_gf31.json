@@ -1,0 +1,551 @@
+{
+  "ansatz": {
+    "P2": "X2=C+q0*t*(t-1)*(t-lambda)*(t-mu), pole r",
+    "cases_per_surface": 837,
+    "fiber_configuration": "IV* + I4 + I4 + I2 + I2 + 4 I1",
+    "generic_neighbor_mw_rank_target": 3,
+    "neighbor_root_system": "E6 + A3^2 + A1^2"
+  },
+  "certificate_sha256": "15836fc58d8bb0ac904d412c060ce16f6c29fa23fd356dbeffcf2bef8514f154",
+  "claim": "Every canonical P2 case on every surface reconstructed from the seven declared GF(31) split-root E6/P1 cores was tested exactly.",
+  "claim_boundary": "A hit is only a finite-field section seed and must still be checked for Mordell-Weil dependence, lifted, rationally reconstructed, and verified in characteristic zero. No hit and no bounded negative result here is an upper bound on ranks over Q.",
+  "conditional_assumptions": [],
+  "core_records": [
+    {
+      "A_coefficients": [
+        20,
+        2,
+        12,
+        30,
+        25,
+        1
+      ],
+      "B_coefficients": [
+        8,
+        26,
+        28,
+        30,
+        7,
+        2,
+        13,
+        7,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        23
+      ],
+      "P1_Y_coefficients": [
+        3,
+        11,
+        1,
+        15,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": false,
+      "core_index": 1,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 4,
+      "parameters_a1_a2_a4_s1": [
+        2,
+        12,
+        25,
+        30
+      ],
+      "reconstruction_method": "triangular expressions specialized from Q",
+      "repeated_fiber_positions": [
+        7,
+        28
+      ],
+      "surfaces": [
+        {
+          "canonical_P3_candidates": [
+            {
+              "X3": [
+                18,
+                4,
+                8
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                7,
+                23,
+                1
+              ]
+            }
+          ],
+          "geometric_P2_hits": [],
+          "lambda": 7,
+          "mu": 28,
+          "s_lambda": 4,
+          "s_mu": 11,
+          "signed_P2_hits": [],
+          "tested_P3_quadratic_x_polynomials": 961,
+          "tested_pole_q0_pairs": 837
+        }
+      ],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        30,
+        1,
+        2,
+        7
+      ]
+    },
+    {
+      "A_coefficients": [
+        20,
+        4,
+        16,
+        7,
+        6,
+        3
+      ],
+      "B_coefficients": [
+        8,
+        21,
+        6,
+        9,
+        6,
+        9,
+        27,
+        5,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        16
+      ],
+      "P1_Y_coefficients": [
+        3,
+        19,
+        28,
+        11,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": true,
+      "core_index": 2,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 5,
+      "parameters_a1_a2_a4_s1": [
+        4,
+        16,
+        6,
+        23
+      ],
+      "reconstruction_method": "triangular expressions specialized from Q",
+      "repeated_fiber_positions": [
+        18,
+        24
+      ],
+      "surfaces": [],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        7,
+        28,
+        9,
+        6
+      ]
+    },
+    {
+      "A_coefficients": [
+        20,
+        14,
+        22,
+        16,
+        30,
+        1
+      ],
+      "B_coefficients": [
+        8,
+        27,
+        28,
+        22,
+        9,
+        26,
+        30,
+        19,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        14
+      ],
+      "P1_Y_coefficients": [
+        3,
+        28,
+        29,
+        1,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": false,
+      "core_index": 3,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 4,
+      "parameters_a1_a2_a4_s1": [
+        14,
+        22,
+        30,
+        21
+      ],
+      "reconstruction_method": "complete GF(31) triangular fallback",
+      "repeated_fiber_positions": [
+        4
+      ],
+      "surfaces": [],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        16,
+        29,
+        26,
+        9
+      ]
+    },
+    {
+      "A_coefficients": [
+        20,
+        15,
+        4,
+        20,
+        17,
+        14
+      ],
+      "B_coefficients": [
+        8,
+        9,
+        13,
+        17,
+        18,
+        0,
+        27,
+        29,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        23
+      ],
+      "P1_Y_coefficients": [
+        3,
+        1,
+        21,
+        5,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": false,
+      "core_index": 4,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 4,
+      "parameters_a1_a2_a4_s1": [
+        15,
+        4,
+        17,
+        30
+      ],
+      "reconstruction_method": "triangular expressions specialized from Q",
+      "repeated_fiber_positions": [
+        2
+      ],
+      "surfaces": [],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        20,
+        21,
+        0,
+        18
+      ]
+    },
+    {
+      "A_coefficients": [
+        20,
+        17,
+        23,
+        17,
+        4,
+        14
+      ],
+      "B_coefficients": [
+        8,
+        4,
+        10,
+        1,
+        17,
+        15,
+        9,
+        13,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        12
+      ],
+      "P1_Y_coefficients": [
+        3,
+        9,
+        5,
+        13,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": false,
+      "core_index": 5,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 4,
+      "parameters_a1_a2_a4_s1": [
+        17,
+        23,
+        4,
+        19
+      ],
+      "reconstruction_method": "triangular expressions specialized from Q",
+      "repeated_fiber_positions": [],
+      "surfaces": [],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        17,
+        5,
+        15,
+        17
+      ]
+    },
+    {
+      "A_coefficients": [
+        20,
+        21,
+        27,
+        15,
+        0,
+        24
+      ],
+      "B_coefficients": [
+        8,
+        25,
+        3,
+        24,
+        3,
+        16,
+        11,
+        6,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        28
+      ],
+      "P1_Y_coefficients": [
+        3,
+        25,
+        4,
+        29,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": false,
+      "core_index": 6,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 4,
+      "parameters_a1_a2_a4_s1": [
+        21,
+        27,
+        0,
+        4
+      ],
+      "reconstruction_method": "triangular expressions specialized from Q",
+      "repeated_fiber_positions": [
+        20
+      ],
+      "surfaces": [],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        15,
+        4,
+        16,
+        3
+      ]
+    },
+    {
+      "A_coefficients": [
+        20,
+        23,
+        11,
+        10,
+        8,
+        8
+      ],
+      "B_coefficients": [
+        8,
+        20,
+        17,
+        0,
+        19,
+        27,
+        6,
+        28,
+        1
+      ],
+      "P1_X_coefficients": [
+        11,
+        27,
+        29
+      ],
+      "P1_Y_coefficients": [
+        3,
+        2,
+        19,
+        6,
+        1
+      ],
+      "P1_identity_verified": true,
+      "boundary": false,
+      "core_index": 7,
+      "delta_multiplicity_at_0": 4,
+      "delta_multiplicity_at_1": 4,
+      "parameters_a1_a2_a4_s1": [
+        23,
+        11,
+        8,
+        5
+      ],
+      "reconstruction_method": "triangular expressions specialized from Q",
+      "repeated_fiber_positions": [
+        10,
+        23
+      ],
+      "surfaces": [
+        {
+          "canonical_P3_candidates": [
+            {
+              "X3": [
+                18,
+                15,
+                27
+              ],
+              "Y3_up_to_sign": [
+                0,
+                0,
+                13,
+                29,
+                1
+              ]
+            }
+          ],
+          "geometric_P2_hits": [
+            {
+              "X2": [
+                5,
+                21,
+                15,
+                27,
+                22
+              ],
+              "Y2_up_to_sign": [
+                0,
+                0,
+                12,
+                11,
+                22,
+                0,
+                16,
+                1
+              ],
+              "exact_P1_P2_P3_relations": [
+                {
+                  "relation": "P1+sign_P2*P2+sign_P3*P3=O",
+                  "sign_P2": 1,
+                  "sign_P3": 1
+                }
+              ],
+              "independent_rank3_seed": false,
+              "pole": 8,
+              "q0": 22,
+              "signed_square_roots": 2
+            }
+          ],
+          "lambda": 10,
+          "mu": 23,
+          "s_lambda": 16,
+          "s_mu": 14,
+          "signed_P2_hits": [
+            {
+              "X2": [
+                5,
+                21,
+                15,
+                27,
+                22
+              ],
+              "Y2": [
+                0,
+                0,
+                12,
+                11,
+                22,
+                0,
+                16,
+                1
+              ],
+              "pole": 8,
+              "q0": 22
+            },
+            {
+              "X2": [
+                5,
+                21,
+                15,
+                27,
+                22
+              ],
+              "Y2": [
+                0,
+                0,
+                19,
+                20,
+                9,
+                0,
+                15,
+                30
+              ],
+              "pole": 8,
+              "q0": 22
+            }
+          ],
+          "tested_P3_quadratic_x_polynomials": 961,
+          "tested_pole_q0_pairs": 837
+        }
+      ],
+      "triangular_coordinates_a3_y2_b5_b4": [
+        10,
+        19,
+        27,
+        19
+      ]
+    }
+  ],
+  "field": "GF(31)",
+  "implementation": {
+    "finite_field_and_polynomial_arithmetic": "independent standard-Python implementation",
+    "language": "Python plus SymPy for exact symbolic elimination",
+    "script": "research/replay_e6_mw3_p2_split_cores.py"
+  },
+  "schema_version": 1,
+  "summary": {
+    "declared_cores": 7,
+    "dependent_geometric_P2_hits": 1,
+    "geometric_canonical_P2_hits": 1,
+    "independent_rank3_seed_hits": 0,
+    "reconstructed_surfaces": 2,
+    "signed_canonical_P2_hits": 2,
+    "tested_pole_q0_pairs": 1674
+  },
+  "upstream": {
+    "commit": "e821b0c258bf635f38a1612ff8f2f769bf4ed04b",
+    "input_scope": "The seven-core list is taken from the upstream exhaustive core scan; this replay does not independently re-enumerate the 893,730 preceding core points.",
+    "repository": "royvanrijn/jacobian-research",
+    "source_script": "https://github.com/royvanrijn/jacobian-research/blob/e821b0c258bf635f38a1612ff8f2f769bf4ed04b/elkies-k3/scripts/search_e6_mw3_p2_split_cores.sage"
+  }
+}

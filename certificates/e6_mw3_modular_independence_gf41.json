@@ -1,0 +1,83 @@
+{
+  "certificate_sha256": "0c87526603c54dac554a7dac4a281e76c9e4c2c1b25e2016f5e8b688bd79e4ba",
+  "claim_boundary": "This proves the displayed modular triples independent over GF(41)(t). It does not prove a characteristic-zero lift.",
+  "ell_candidates": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13
+  ],
+  "field": "GF(41)(t)",
+  "proof": "For each certified record, the diagonal specialization map has zero kernel on the three displayed classes modulo ell. A separate good fiber has order prime to ell, excluding generic ell-torsion. Infinite ell-divisibility therefore rules out every nonzero integral relation among P1, P2, P3.",
+  "records": [
+    {
+      "P2": {
+        "X2": [
+          9,
+          20,
+          29,
+          11,
+          7
+        ],
+        "Y2": [
+          0,
+          0,
+          27,
+          11,
+          6,
+          10,
+          29,
+          40
+        ],
+        "pole": 3,
+        "q0": 7
+      },
+      "P2_index": 1,
+      "P3": {
+        "X3": [
+          1,
+          12,
+          6
+        ],
+        "Y3_up_to_sign": [
+          0,
+          0,
+          5,
+          35,
+          1
+        ]
+      },
+      "P3_index": 1,
+      "branch": "regular",
+      "coordinate_slice": [
+        1,
+        1,
+        1
+      ],
+      "core": [
+        10,
+        1,
+        39,
+        19
+      ],
+      "ell_candidates": [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13
+      ],
+      "independent": false,
+      "joint_index": 1,
+      "reason": "no tested prime produced a trivial simultaneous kernel"
+    }
+  ],
+  "schema": "elliptic-rank30/e6-mw3-modular-independence/v1",
+  "source_certificate": "certificates/e6_mw3_modular_slices_gf41.json",
+  "source_certificate_sha256": "3ffa90390031cee468d9883cc01aaab5a1fb0b9fc1c11cf5b40d43a7f451e4b8",
+  "triples_certified_independent": 0,
+  "triples_tested": 1
+}

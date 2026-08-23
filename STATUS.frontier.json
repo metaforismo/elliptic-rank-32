@@ -1,33 +1,46 @@
 {
   "active_workstreams": [
-    "enumerate and compare the remaining split-E8 trisection translation orbits against the certified common cubic cover",
-    "construct compatible low-genus packets whose specializations add more than four independent directions",
-    "reconstruct the explicit rank-17 K3 bridge and historical specialization",
-    "audit the divergent modular-packet branch without merging it wholesale"
+    "construct an explicit neighbor/moduli map from the E8+A2^3 target lattice to the X(6,79) K3 landscape and transport Elkies' rational point",
+    "compute the saturated P3 Noether-Lefschetz elimination/Fitting equation from the six exact remainder polynomials",
+    "search good primes beyond 13 with the corrected total-intersection filter and exhaustive downstream P3 checks",
+    "search new finite-field E6/MW3 charts only with immediate group-law independence checks",
+    "construct genuinely lower-dimensional structured subfamilies of the universal split norm-32 target",
+    "obtain or verify an exact specialization certificate for ICARM curve #273"
   ],
-  "authoritative_lower_bound": 29,
-  "canonical_branch": "main",
+  "authoritative_lower_bound": 30,
+  "authoritative_lower_bound_certificate": "baseline/rank30_icarm273_mod2_certificate.json",
+  "canonical_branch": "codex/rank31-research",
+  "canonical_repository": "metaforismo/elliptic-rank-31",
+  "current_record": {
+    "candidate": "ICARM curve #273",
+    "claim_status": "unconditional rank at least 30",
+    "data": "baseline/icarm_curve_273.json",
+    "verifier": "baseline/verify_rank30_icarm273.py"
+  },
   "newest_result": {
-    "certificate": "certificates/small_split_e8_tangent_fibre_exact_rank12_packet.json",
-    "claim_status": "certified",
-    "documentation": "research/small_split_e8_tangent_rank12_packet.md",
-    "independent_certificate": "certificates/small_split_e8_tangent_fibre_rank12_sage.json",
-    "limitation": "This is a structural rank-12 component and does not improve the global rank-29 record lower bound.",
-    "name": "tangent-derived split-E8 three-trisection packet of exact subgroup rank 12",
-    "split_parameter_certificate": "certificates/small_split_e8_three_trisection_tangent_split_parameter.json",
-    "statement": "On one explicit fibre of the split-E8 cubic pencil, fourteen displayed rational points generate a subgroup of exact rank 12.",
+    "certificate": "certificates/e8_a2_semistable_two_split_total_intersections_aggregate.json",
+    "claim_status": "corrected total-intersection saturation, exact full P1/P2/P3 incidence, bounded modular cascade, and determinant-948 Shimura lattice bridge",
+    "documentation": "research/rank31_program.md",
+    "limitation": "No P3, rational lift, characteristic-zero target triple, explicit neighbor/moduli map, or rank-31 curve is known. The zero-triple result is bounded to GF(5), GF(7), GF(11), GF(13), the certified dense and intrinsic boundary charts, and the Kodaira open; the larger-prime first stage is sampled.",
+    "name": "two-split E8+A2^3 incidence and X(6,79) lattice bridge",
+    "supporting_certificates": [
+      "certificates/e8_a2_semistable_two_split_pair_incidence_lifts.json",
+      "certificates/e8_a2_semistable_two_split_full_incidence.json",
+      "certificates/e8_a2_semistable_two_split_pair_first_large_primes.json",
+      "certificates/e8_a2_shimura_bridge.json"
+    ],
+    "statement": "The corrected dense and intrinsic-boundary searches contain 30 exact total-intersection-two P1/P2 pairs in 71,302,414 section tests. Exhausting 9,456,854 subsequent P3 candidates found no complete Gram triple. A sampled pair-first extension at p=17,19,23 performed 88,931,043 further section tests and exhaustively checked 5,315,813 P3 candidates after its three eligible pairs, again with zero P3. The full incidence reduces to a 61-by-62 Jacobian and six P3 remainder equations. Independently, the target essential lattice is proved to have the same cyclic discriminant form and X(6,79) Clifford fingerprint as the determinant-948 Shimura landscape.",
     "verifiers": [
-      "research/certify_tangent_split_rank12_exact.py",
-      "research/sage_verify_tangent_split_rank12.py"
+      "research/search_e8_a2_semistable_two_split_target.c",
+      "research/search_e8_a2_semistable_two_split_boundaries.c",
+      "research/search_e8_a2_semistable_two_split_total_intersections.c",
+      "research/search_e8_a2_semistable_two_split_pair_first.c",
+      "research/derive_e8_a2_semistable_two_split_full_incidence.py",
+      "research/certify_e8_a2_shimura_bridge.py"
     ]
   },
-  "record_claim": false,
-  "required_final_theorem": "An explicit elliptic curve over Q with 30 rigorously certified independent rational points, or a universal unconditional rank upper bound of 29.",
-  "stale_claim_removed": {
-    "certificate": "certificates/x0_3_isogeny_bridge.json",
-    "formalization": "EllipticRank30/X03Isogeny.lean",
-    "reason": "The referenced artifacts do not exist on main, so the former frontier entry was not evidence-backed."
-  },
-  "truth_status": "UNSOLVED: exact global rank lower bound 29; certified split-E8 packet subgroup rank 12; no rank-30 certificate",
-  "updated": "2026-08-09"
+  "rank31_record_claim": false,
+  "required_final_theorem": "An explicit elliptic curve over Q with 31 rigorously certified independent rational points.",
+  "truth_status": "UNSOLVED: exact global lower bound 30 is reproduced; no rank-31 curve or certificate has been found.",
+  "updated": "2026-08-24"
 }

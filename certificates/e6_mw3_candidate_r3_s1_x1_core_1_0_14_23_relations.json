@@ -1,0 +1,221 @@
+{
+  "A": [
+    28,
+    1,
+    0,
+    30,
+    14,
+    14
+  ],
+  "B": [
+    2,
+    30,
+    13,
+    0,
+    29,
+    14,
+    23,
+    11,
+    1
+  ],
+  "P1": {
+    "X": [
+      7,
+      1,
+      15
+    ],
+    "Y": [
+      18,
+      30,
+      11,
+      2,
+      1
+    ]
+  },
+  "P2": {
+    "X2": [
+      18,
+      14,
+      25,
+      3,
+      24
+    ],
+    "Y2": [
+      0,
+      0,
+      4,
+      26,
+      22,
+      27,
+      13,
+      1
+    ],
+    "pole": 7,
+    "q0": 24
+  },
+  "P2_cases_tested": 837,
+  "P3": {
+    "X3": [
+      1,
+      5,
+      17
+    ],
+    "Y3_up_to_sign": [
+      0,
+      0,
+      14,
+      16,
+      1
+    ]
+  },
+  "P3_quadratic_X_cases_tested": 961,
+  "certificate_sha256": "0023564a00e2cf9c66774da68f01b8c73ed161596ead9a85068e557e21011514",
+  "claim_boundary": "An exact bounded collision filter only. Full MW-rank-3 independence still requires local component verification and a positive Shioda regulator.",
+  "coefficient_box": [
+    -8,
+    8
+  ],
+  "coordinate_slice": {
+    "r0": 3,
+    "s0": 1,
+    "x1": 1
+  },
+  "core_a1_a2_a4_s1": [
+    1,
+    0,
+    14,
+    23
+  ],
+  "field": "GF(31)(t)",
+  "no_relation_in_box": false,
+  "nonzero_triples_checked": 4912,
+  "point_fingerprints": [
+    [
+      {
+        "denominator": [
+          1
+        ],
+        "numerator": [
+          7,
+          1,
+          15
+        ]
+      },
+      {
+        "denominator": [
+          1
+        ],
+        "numerator": [
+          18,
+          30,
+          11,
+          2,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "denominator": [
+          18,
+          17,
+          1
+        ],
+        "numerator": [
+          18,
+          14,
+          25,
+          3,
+          24
+        ]
+      },
+      {
+        "denominator": [
+          29,
+          23,
+          10,
+          1
+        ],
+        "numerator": [
+          0,
+          0,
+          4,
+          26,
+          22,
+          27,
+          13,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "denominator": [
+          1
+        ],
+        "numerator": [
+          1,
+          5,
+          17
+        ]
+      },
+      {
+        "denominator": [
+          1
+        ],
+        "numerator": [
+          0,
+          0,
+          14,
+          16,
+          1
+        ]
+      }
+    ]
+  ],
+  "relations": [
+    [
+      -4,
+      0,
+      -8
+    ],
+    [
+      -3,
+      0,
+      -6
+    ],
+    [
+      -2,
+      0,
+      -4
+    ],
+    [
+      -1,
+      0,
+      -2
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      0,
+      4
+    ],
+    [
+      3,
+      0,
+      6
+    ],
+    [
+      4,
+      0,
+      8
+    ]
+  ],
+  "schema": "elliptic-rank30/e6-mw3-bounded-relations-gf31/v1",
+  "source_certificate": "certificates/e6_mw3_core_slice_r3_s1_x1_gf31.json",
+  "source_certificate_sha256": "e4e3eaff3a8c2d5c978235f106b57e39ccd511942e98955c779571f55a57f1af"
+}

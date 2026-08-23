@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "certificate_id": "e8_a2_mixed_target_small_primes",
+  "search_program": "research/search_e8_a2_mixed_target.c",
+  "build": "cc -std=c11 -O3 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror",
+  "family": "y^2=X^2(X+3kT)+cT^2z^3, k=3lambda(lambda-1), -c*lambda a nonzero square",
+  "target": {
+    "component_profiles": [2, 1, 0],
+    "opposite_I3_branches_for_P1_P2": true,
+    "pairwise_intersections": [2, 2, 2],
+    "gram": [["8/3", "-1/3", "0"], ["-1/3", "10/3", "0"], ["0", "0", "4"]]
+  },
+  "runs": [
+    {
+      "prime": 5,
+      "parameter_surfaces": 6,
+      "squarefree_surfaces": 6,
+      "tests": {"P1": 750, "P2": 3750, "P3": 18750},
+      "sections": {"P1": 0, "P2": 1, "P3": 0},
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0,
+      "audit_fnv1a64": "4fd384da60e14fe5",
+      "stdout_sha256": "f1f4578e2d87aa22a8e1c02ee1496762c61d5ce6d5fd2963e7f3db189c99afb9"
+    },
+    {
+      "prime": 7,
+      "parameter_surfaces": 15,
+      "squarefree_surfaces": 14,
+      "tests": {"P1": 4802, "P2": 33614, "P3": 235298},
+      "sections": {"P1": 0, "P2": 0, "P3": 0},
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0,
+      "audit_fnv1a64": "5be43e2c82934b00",
+      "stdout_sha256": "02c075f87ab4bb04ae82be6f67bfdc152961b3e453771f81212f79aa469a1044"
+    },
+    {
+      "prime": 11,
+      "parameter_surfaces": 45,
+      "squarefree_surfaces": 42,
+      "tests": {"P1": 55902, "P2": 614922, "P3": 6764142},
+      "sections": {"P1": 3, "P2": 0, "P3": 2},
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0,
+      "audit_fnv1a64": "4460ba9036362a60",
+      "stdout_sha256": "815433688b20af4e4a9f2016847ce4e0928bd9330d5376510e07679f5c207151"
+    }
+  ],
+  "totals": {
+    "parameter_surfaces": 66,
+    "squarefree_surfaces": 62,
+    "section_tests": 7731930,
+    "retained_sections": 6,
+    "pre_candidate_surfaces": 0,
+    "complete_gram_triples": 0
+  },
+  "independent_checks": [
+    "strict compiler warnings pass",
+    "every retained section is rechecked coefficient by coefficient",
+    "representative retained identities were replayed independently in Python",
+    "reruns are byte-identical"
+  ],
+  "claim_status": "CERTIFIED bounded negative search in the split mixed chart over GF(5), GF(7), and GF(11)",
+  "claim_boundary": "This is not a characteristic-zero obstruction and says nothing negative about the full four-dimensional three-I3 chart."
+}

@@ -4,10 +4,10 @@
       "approach_id": "A1-record-k3-specialization",
       "assumptions": [
         "No conjecture is needed for a lower-bound certificate.",
-        "GRH is relevant only to the published assertion that the rank-29 curve has no thirtieth generator; that upper bound is not used here."
+        "GRH+BSD are relevant only to the reported exact-rank-30 upper bound for ICARM curve #273; that upper bound is not used by the unconditional baseline certificate."
       ],
       "blocker": "The primary fibration data and original scoring pipeline are not yet represented in a clean executable form on main.",
-      "central_mechanism": "Specialize a large generic Mordell-Weil subgroup and search for at least 13 additional independent rational points outside it.",
+      "central_mechanism": "Specialize a large generic Mordell-Weil subgroup and search for at least 14 additional independent rational points outside it.",
       "computational_cost": "High: symbolic reconstruction plus large specialization scans and deep point searches.",
       "concrete_next_test": "Recover the explicit fibration, parameter, 17 generic sections, specialization maps, and original scoring code from primary material; reproduce the rank-29 parameter and decompose its 29 certified points into 17 generic plus 12 exceptional directions. Then run prime-by-prime score ablations around that parameter.",
       "evidence_against": [
@@ -16,33 +16,35 @@
         "Searching farther without identifying structural predictors would mostly buy a linear increase in trials."
       ],
       "evidence_for": [
-        "The repository now has an unconditional exact rank-at-least-29 certificate for the published record curve.",
+        "The repository retains the historical rank-at-least-29 certificate and now independently certifies the public ICARM #273 lower bound of 30.",
         "The same K3 surface produced two consecutive records, indicating unusually productive geometry.",
         "The 2024 specialization produced 12 directions outside the generic rank-17 subgroup."
       ],
       "mathematical_family": "The rank-17 elliptic fibration on the K3 surface used for the 2006 rank-28 and 2024 rank-29 records.",
       "missing_lemma": "An interpretable arithmetic or geometric predictor for specializations carrying unusually many points outside the generic subgroup.",
-      "predicted_advantage": "This is the only construction already demonstrated to reach rank 29, so the required improvement is one additional direction on a proven search landscape.",
+      "predicted_advantage": "This construction is the only publicly documented landscape already demonstrated at rank 29; recovering it would turn rank 31 into the concrete jump target 17+14.",
       "status": "ACTIVE"
     },
     {
       "approach_id": "B1-neighbor-fibrations-on-record-k3",
       "assumptions": [],
-      "blocker": "The exact Neron-Severi lattice and automorphism action of the record model have not yet been reconstructed.",
+      "blocker": "The exact characteristic-zero rank-17 fibration and its generic sections have not yet been reconstructed; the first six GF(31) E6/MW3 tranches contain no surviving independent rank-3 seed.",
       "central_mechanism": "Use Neron-Severi lattice calculations, neighbor steps, automorphisms, and alternative pencils to raise generic rank or lower section/coefficient heights before specialization.",
       "computational_cost": "High symbolic cost, followed by medium-to-high arithmetic verification cost.",
-      "concrete_next_test": "Reconstruct the singular-fiber configuration and a Gram matrix for the Neron-Severi lattice; enumerate admissible primitive U-embeddings and 2-neighbor/3-neighbor fibrations; compute the Shioda-Tate upper bound and rationality of candidate sections for each orbit.",
+      "concrete_next_test": "Exhaust the exceptional triangular-pivot planes and selected coordinate slices at new good primes; for every joint P2/P3 hit compute exact function-field relations and a Shioda height regulator before any Hensel lift. In parallel, reconstruct the characteristic-zero neighbor map back to the rank-17 fibration.",
       "evidence_against": [
         "A high geometric rank need not descend to Q.",
         "Alternative fibrations may dramatically increase coefficient complexity or section heights.",
-        "No explicit fibration better than the rank-17 record fibration is yet verified here."
+        "No explicit fibration better than the rank-17 record fibration is yet verified here.",
+        "Across five new GF(31) coordinate slices, the only joint canonical P2/P3 candidate satisfies the exact dependency P1+2*P3=O."
       ],
       "evidence_for": [
         "A high-Picard-rank K3 generally admits many inequivalent elliptic fibrations.",
-        "The record surface already supports an unusually large Mordell-Weil lattice."
+        "The record surface already supports an unusually large Mordell-Weil lattice.",
+        "The exact coordinate-slice engine exhausted 4,468,650 core quadruples and reconstructed 12 valid two-I2 surfaces, making new finite-field charts reproducibly searchable without Sage or msolve."
       ],
       "mathematical_family": "Alternative elliptic fibrations on the record K3 surface and closely related high-Picard-rank K3 surfaces.",
-      "missing_lemma": "An explicit rational fibration whose expected total cost to rank 30 improves on the current record fibration.",
+      "missing_lemma": "An explicit rational fibration whose expected total cost to rank 31 improves on the current record fibration.",
       "predicted_advantage": "Raising the generic floor from 17 to 18 or more can be more valuable than orders of magnitude of additional scans in the original fibration.",
       "status": "SCOUTING"
     },
@@ -54,7 +56,7 @@
       "computational_cost": "Medium for squareclass/branch audits; high if complete Mordell-Weil searches on product twists are required.",
       "concrete_next_test": "For every pair of quadratic multisections in a high-rank family, compute valuation-parity vectors, enumerate all three nontrivial character twists, search the product twist for a section, and retain only packets whose composite cover has genus zero or one.",
       "evidence_against": [
-        "The displayed example certifies only three generic directions and is not itself close to rank 30.",
+        "The displayed example certifies only three generic directions and is not itself close to rank 31.",
         "A suitable packet has not yet been found inside the record rank-17 fibration."
       ],
       "evidence_for": [
@@ -69,23 +71,32 @@
     {
       "approach_id": "C2-split-e8-lattice-realization",
       "assumptions": [],
-      "blocker": "Existing branch claims have not yet passed independent mathematical review.",
+      "blocker": "The first two target lattice directions occur on a smooth two-dimensional incidence locus, but no finite-field P3, rational lift, characteristic-zero common triple, or explicit X(6,79)-to-Weierstrass neighbor map has been found.",
       "central_mechanism": "Construct a large Mordell-Weil lattice geometrically first, then choose a Q-rational realization and specialization with additional arithmetic points.",
       "computational_cost": "High symbolic and lattice cost; potentially high specialization cost.",
-      "concrete_next_test": "Independently audit the split-E8 construction files on the research branch; for the first valid model, compute singular fibers, Picard constraints, explicit sections, height pairing, and fields of definition from scratch.",
+      "concrete_next_test": "In parallel, construct the explicit neighbor/moduli map transporting Elkies' rational X(6,79) point into the two-split chart, and compute the saturated elimination/Fitting equation of the six exact P3 remainder polynomials over the certified P1/P2 locus.",
       "evidence_against": [
         "Root-lattice rank can be absorbed by reducible fibers instead of appearing in the Mordell-Weil group.",
         "Splitting over an extension rather than Q would not meet the target.",
-        "No audited explicit model in this thread currently supplies a higher Q(t)-rank than the record family."
+        "No audited explicit model in this thread currently supplies a higher Q(t)-rank than the record family.",
+        "The two-dimensional mixed II*+2IV+I3 boundary contains no complete target triple over GF(5), GF(7), or GF(11).",
+        "Across the necessary dense two-split chart and three intrinsic boundaries over GF(5), GF(7), GF(11), and GF(13), 71,302,414 section tests and 9,456,854 corrected post-pair P3 tests produced no complete target triple.",
+        "The corrected pair-first samples at GF(17), GF(19), and GF(23) performed 88,931,043 section tests and exhaustively tested 5,315,813 P3 candidates after three eligible sampled pairs, again finding no P3.",
+        "A formal 11-adic P1/P2 lift remains in a good-reduction tube whose special fibre has no P3, so it cannot supply the missing direction without crossing a degeneration."
       ],
       "evidence_for": [
         "Large root lattices are natural constituents of Neron-Severi and Mordell-Weil lattices on elliptic K3 surfaces.",
-        "The research branch contains candidate split-E8 constructions and finite-field scanners, but they are not yet trusted."
+        "The full marked II*+3I3 chart is now derived exactly and has the expected four moduli dimensions.",
+        "The target component profiles and intersection conditions recover Mordell-Weil determinant 316/9 and Neron-Severi discriminant 948 exactly.",
+        "The target rank-three lattice is primitive: the only possible order-two dual class is not even-isotropic.",
+        "The exact total-intersection audit produces 30 genuine finite-field P1/P2 target pairs, ten on the infinity-collision stratum; all corrected P3 searches still return zero.",
+        "The complete three-section incidence has 62 variables, 67 raw equations, six exact syzygies, and a reduced 61-by-62 Jacobian; P3 triangularizes to six explicit remainder equations.",
+        "The target rank-17 essential lattice has determinant 948, root system exactly E8+A2^3, and the same cyclic finite quadratic form and X(6,79) Clifford fingerprint as the known Shimura landscape."
       ],
       "mathematical_family": "Elliptic K3 surfaces with split E8-type lattice contributions, Shioda-Inose structures, or related lattice-polarized surfaces.",
-      "missing_lemma": "A Q-rational realization whose Mordell-Weil lattice retains enough split directions after accounting for reducible fibers.",
+      "missing_lemma": "A Q-rational point on the full P1/P2/P3 incidence system, followed by exact Picard-rank and Mordell-Weil saturation certificates.",
       "predicted_advantage": "E8 blocks supply many controlled lattice directions and may raise the generic floor instead of relying on a rare specialization jump.",
-      "status": "AUDIT_REQUIRED"
+      "status": "ACTIVE"
     },
     {
       "approach_id": "D1-inverse-prescribed-points",
@@ -109,12 +120,12 @@
       "status": "SCOUTING"
     },
     {
-      "approach_id": "D2-norm31-one-function-representation",
+      "approach_id": "D2-norm32-one-function-representation",
       "assumptions": [],
       "blocker": "The visibility theorem and its connection to an explicit elliptic surface still require independent audit.",
-      "central_mechanism": "Replace thirty separate point equations by one structured norm identity with at least thirty-one controlled zeros, then recover points and certify the single expected principal-divisor relation.",
+      "central_mechanism": "Replace thirty-one separate point equations by one structured norm identity with thirty-two controlled zeros, then recover points and certify the single expected principal-divisor relation.",
       "computational_cost": "Medium for small prototypes; very high for the full 31-zero system without additional structure.",
-      "concrete_next_test": "Audit and reprove the proposed Riemann-Roch visibility bound from the research branch; implement exact small-degree analogues of A(x)^2-R(x)B(x)^2=c*product(x-r_i), measure the relation rank, and determine whether the construction scales without forcing extra dependencies.",
+      "concrete_next_test": "Impose additional symmetry or packet incidence on the exact degree-32 target A(x)^2-R(x)B(x)^2=c*product(x-r_i); reject any subfamily that does not reduce dimension or that forces more than the one principal-divisor relation.",
       "evidence_against": [
         "A principal divisor automatically creates at least one relation among visible point classes.",
         "Solving the norm identity at the required degree may be as difficult as the original rank problem.",
@@ -122,17 +133,17 @@
       ],
       "evidence_for": [
         "Norm equations offer a single global algebraic object whose zeros can encode many candidate points.",
-        "The branch contains a proposed 31-zero formulation and certificate, but it has not yet been independently accepted."
+        "The degree-31 reverse construction has been reconstructed exactly on ICARM curve #273, validating the representation machinery."
       ],
       "mathematical_family": "Norm-form and divisor constructions that encode many rational zeros of one function on a double cover.",
-      "missing_lemma": "A rationally parameterized or efficiently solvable norm family whose visible divisor classes retain rank at least 30 after all forced relations.",
+      "missing_lemma": "A rationally parameterized or efficiently solvable norm family whose 32 visible divisor classes retain rank 31 after the forced principal-divisor relation.",
       "predicted_advantage": "The representation trades a large collection of square conditions for a structured polynomial identity that can be attacked with interpolation, lattice reduction, modular lifting, and coding-style sparsity constraints.",
       "status": "AUDIT_REQUIRED"
     },
     {
       "approach_id": "E1-diophantine-structured-families",
       "assumptions": [],
-      "blocker": "No audited family from this class currently has competitive expected cost to rank 30.",
+      "blocker": "No audited family from this class currently has competitive expected cost to rank 31.",
       "central_mechanism": "Use an arithmetic identity that produces several rational points simultaneously and then combine independent identities or base changes without collapsing their Mordell-Weil directions.",
       "computational_cost": "Medium for literature reconstruction and exact verification; high for broad specialization scans.",
       "concrete_next_test": "Collect the strongest verified Q(t)-families from Diophantine tuples and related identities, canonicalize them, recompute their generic sections and height matrices, and rank them by the remaining specialization jump and coefficient growth.",
@@ -204,21 +215,21 @@
       "evidence_against": [
         "Most abstract lattices or modular signatures need not be geometrically realizable by rational sections.",
         "Local compatibility does not imply a global elliptic surface.",
-        "No realization theorem currently turns a designed rank-30 signature into a Q-rational curve."
+        "No realization theorem currently turns a designed rank-31 signature into a Q-rational curve."
       ],
       "evidence_for": [
-        "The rank-29 baseline is certified by a full-rank binary local-image matrix, showing that modular independence signatures are compact and exact.",
+        "The rank-30 ICARM #273 baseline is certified by a full-rank binary local-image matrix, showing that modular independence signatures are compact and exact.",
         "Neron-Severi and Mordell-Weil groups are lattices constrained by explicit intersection theory."
       ],
       "mathematical_family": "Lattice realization, coding theory, modular images, and optimization-driven construction of Mordell-Weil generators.",
       "missing_lemma": "A practical realization theorem or construction map from designed lattice/modular data to an explicit elliptic surface over Q.",
-      "predicted_advantage": "Rank 30 becomes a realization problem for a designed object rather than a tail event in a one-parameter specialization distribution.",
+      "predicted_advantage": "Rank 31 becomes a realization problem for a designed object rather than a tail event in a one-parameter specialization distribution.",
       "status": "SCOUTING"
     },
     {
       "approach_id": "N1-universal-upper-bound",
       "assumptions": [],
-      "blocker": "No credible mechanism currently distinguishes 29 as a universal ceiling.",
+      "blocker": "No credible mechanism currently distinguishes 30 as a universal ceiling.",
       "central_mechanism": "Prove rank E(Q) <= 29 uniformly without restrictions on conductor, height, torsion, or family.",
       "computational_cost": "Not meaningfully estimable; primarily theoretical.",
       "concrete_next_test": "None allocated beyond monitoring for a genuinely new universal mechanism; family-specific or conditional bounds are explicitly rejected as resolutions.",
@@ -229,7 +240,7 @@
       ],
       "evidence_for": [],
       "mathematical_family": "Global theorems applying to every elliptic curve over Q.",
-      "missing_lemma": "A universal mechanism strong enough to bound all Mordell-Weil ranks over Q by 29.",
+      "missing_lemma": "A universal mechanism strong enough to bound all Mordell-Weil ranks over Q by 30.",
       "predicted_advantage": "Would solve the challenge negatively if achieved.",
       "status": "DEPRIORITIZED"
     },
@@ -256,16 +267,16 @@
       "status": "PROVED_MODULE"
     }
   ],
-  "objective": "Produce an unconditional certificate that an explicit elliptic curve over Q has rank at least 30.",
+  "objective": "Produce an unconditional certificate that an explicit elliptic curve over Q has rank at least 31.",
   "registry_version": 1,
   "status_definitions": {
     "ACTIVE": "There is a concrete executable next experiment and no known fatal obstruction.",
     "AUDIT_REQUIRED": "A branch or note contains a claim that must be independently rederived before use.",
     "BLOCKED": "The route currently terminates in a missing lemma or object comparable in difficulty to the original target.",
     "DEPRIORITIZED": "Retained for completeness but not allocated substantial resources under the constructive-first policy.",
-    "PROVED_MODULE": "A reusable theorem or construction is proved exactly, but it does not by itself solve rank 30.",
+    "PROVED_MODULE": "A reusable theorem or construction is proved exactly, but it does not by itself solve rank 31.",
     "SCOUTING": "The representation is materially distinct but has not yet produced a verified construction.",
     "VERIFIED_BASELINE": "The stated result is reproduced by an exact executable certificate."
   },
-  "updated_at": "2026-08-09"
+  "updated_at": "2026-08-24"
 }

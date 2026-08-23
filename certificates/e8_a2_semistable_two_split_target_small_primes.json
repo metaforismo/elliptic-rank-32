@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "certificate_id": "e8_a2_semistable_two_split_target_small_primes",
+  "engine": {
+    "path": "research/search_e8_a2_semistable_two_split_target.c",
+    "source_sha256": "6a873161d4e3d8a7bb7a11849fbcb77152a73c6a3d2cd0e5c1d3ff325aefe0f8",
+    "shared_arithmetic_engine": "research/search_e8_a2_semistable_target.c",
+    "shared_arithmetic_engine_sha256": "0b79c2a3cfa8545855f847d40b6189feb5bebb20810f14e0757c4db07515564c",
+    "compiler": "Apple clang 21.0.0 (clang-2100.1.1.101), arm64-apple-darwin25.5.0",
+    "flags": [
+      "-std=c11",
+      "-O3",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-pedantic",
+      "-Werror"
+    ]
+  },
+  "search_domain": {
+    "family": "dense four-parameter two-split II*+3I3 chart (lambda,y,z,W)",
+    "split_fibres": ["0", "lambda"],
+    "unspecified_split_fibre": "1",
+    "reason": "the target nonidentity profiles force splitting only at 0 and lambda",
+    "kodaira_open": "gamma1 nonzero; H degree 5, squarefree, and coprime to D",
+    "target_gram_numerator_over_3": [
+      [8, -1, 0],
+      [-1, 10, 0],
+      [0, 0, 12]
+    ],
+    "saturation_boundary": "deeper nodal contacts and unsafe or coincident limiting points at infinity are excluded"
+  },
+  "runs": [
+    {
+      "prime": 5,
+      "command": "/tmp/search_e8_a2_semistable_two_split_target 5 0",
+      "stdout_sha256": "d39ecd814575365d933b9074acace9f971b37d617c5ccc241f68754c8207e9f5",
+      "audit_fnv1a64": "f33dcd44b8124e62",
+      "raw_parameter_tuples": 192,
+      "rational_chart_tuples": 120,
+      "kodaira_surfaces": 16,
+      "stage_surfaces": {"P1": 4, "P2": 0, "P3": 0},
+      "tests": {"P1": 2000, "P2": 2500, "P3": 0},
+      "sections": {"P1": 4, "P2": 0, "P3": 0},
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0},
+      "P1_P2_intersection_two_pairs": 0,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    },
+    {
+      "prime": 7,
+      "command": "/tmp/search_e8_a2_semistable_two_split_target 7 0",
+      "stdout_sha256": "a41cf2dea9e3b9289c2833158f87dc7a2871cc460bd1a0ceb20c89e6ba85c3a0",
+      "audit_fnv1a64": "3a98204772ae1844",
+      "raw_parameter_tuples": 1080,
+      "rational_chart_tuples": 780,
+      "kodaira_surfaces": 196,
+      "stage_surfaces": {"P1": 28, "P2": 2, "P3": 0},
+      "tests": {"P1": 67228, "P2": 67228, "P3": 0},
+      "sections": {"P1": 32, "P2": 2, "P3": 0},
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 4, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "other": 0},
+      "P1_P2_intersection_two_pairs": 0,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    },
+    {
+      "prime": 11,
+      "command": "/tmp/search_e8_a2_semistable_two_split_target 11 0",
+      "stdout_sha256": "3584d48b1ff50f08cd2ddaf3682f28482683d70051645ebf83614649b1373149",
+      "audit_fnv1a64": "9a83b710c7871783",
+      "raw_parameter_tuples": 9000,
+      "rational_chart_tuples": 7380,
+      "kodaira_surfaces": 3288,
+      "stage_surfaces": {"P1": 276, "P2": 16, "P3": 6},
+      "tests": {"P1": 4376328, "P2": 4040916, "P3": 966306},
+      "sections": {"P1": 300, "P2": 16, "P3": 0},
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 8, "1": 4, "2": 6, "3": 2, "4": 0, "5": 0, "other": 0},
+      "P1_P2_intersection_two_pairs": 6,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    },
+    {
+      "prime": 13,
+      "command": "/tmp/search_e8_a2_semistable_two_split_target 13 0",
+      "stdout_sha256": "b4339e8527fbe4b88995cb21c6311995d269ac75a7df93fba8512f2f80da4ecf",
+      "audit_fnv1a64": "b0f196a98010340b",
+      "raw_parameter_tuples": 19008,
+      "rational_chart_tuples": 16104,
+      "kodaira_surfaces": 8244,
+      "stage_surfaces": {"P1": 672, "P2": 50, "P3": 10},
+      "tests": {"P1": 18112068, "P2": 19192992, "P3": 3712930},
+      "sections": {"P1": 720, "P2": 50, "P3": 0},
+      "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 16, "1": 20, "2": 10, "3": 12, "4": 0, "5": 0, "other": 0},
+      "P1_P2_intersection_two_pairs": 10,
+      "pre_candidate_surfaces": 0,
+      "complete_gram_triples": 0
+    }
+  ],
+  "representative_pair_seeds": {
+    "deduplication": "one representative for each identical (lambda,a,beta,gamma,P1.U,P2.U) surface/section pair; the omitted chart partner changes y,q and both section signs",
+    "seeds": [
+      {
+        "prime": 11,
+        "parameters": {"lambda": 3, "y": 4, "z": 10, "W": 10, "g": 6, "q": 7},
+        "a": [4, 7, 8],
+        "beta": [7, 8],
+        "gamma": [1, 5],
+        "P1": {"U": [6, 0, 9], "V": [5, 7, 1, 9, 5]},
+        "P2": {"U": [6, 3, 3, 9], "V": [9, 5, 6, 0, 5, 6]}
+      },
+      {
+        "prime": 11,
+        "parameters": {"lambda": 9, "y": 4, "z": 8, "W": 9, "g": 10, "q": 5},
+        "a": [4, 5, 10],
+        "beta": [3, 10],
+        "gamma": [4, 3],
+        "P1": {"U": [8, 7, 3], "V": [6, 1, 8, 4, 7]},
+        "P2": {"U": [2, 4, 5, 3], "V": [3, 3, 10, 2, 8, 7]}
+      },
+      {
+        "prime": 11,
+        "parameters": {"lambda": 10, "y": 4, "z": 10, "W": 5, "g": 8, "q": 9},
+        "a": [4, 6, 7],
+        "beta": [9, 4],
+        "gamma": [3, 10],
+        "P1": {"U": [10, 4, 9], "V": [4, 9, 3, 4, 5]},
+        "P2": {"U": [4, 10, 6, 1], "V": [6, 6, 0, 9, 4, 1]}
+      },
+      {
+        "prime": 13,
+        "parameters": {"lambda": 4, "y": 2, "z": 6, "W": 11, "g": 5, "q": 4},
+        "a": [9, 4, 5],
+        "beta": [8, 1],
+        "gamma": [4, 3],
+        "P1": {"U": [11, 1, 9], "V": [4, 1, 1, 9, 1]},
+        "P2": {"U": [6, 11, 2, 9], "V": [2, 2, 5, 6, 6, 12]}
+      },
+      {
+        "prime": 13,
+        "parameters": {"lambda": 4, "y": 5, "z": 9, "W": 1, "g": 7, "q": 4},
+        "a": [9, 0, 6],
+        "beta": [9, 7],
+        "gamma": [1, 6],
+        "P1": {"U": [5, 3, 3], "V": [7, 0, 9, 6, 1]},
+        "P2": {"U": [9, 9, 8, 3], "V": [5, 0, 1, 2, 11, 12]}
+      },
+      {
+        "prime": 13,
+        "parameters": {"lambda": 5, "y": 6, "z": 2, "W": 10, "g": 8, "q": 1},
+        "a": [9, 9, 6],
+        "beta": [12, 12],
+        "gamma": [9, 11],
+        "P1": {"U": [9, 11, 10], "V": [6, 7, 9, 1, 8]},
+        "P2": {"U": [3, 4, 7, 1], "V": [11, 1, 4, 9, 5, 12]}
+      },
+      {
+        "prime": 13,
+        "parameters": {"lambda": 8, "y": 6, "z": 3, "W": 11, "g": 7, "q": 5},
+        "a": [9, 2, 8],
+        "beta": [8, 3],
+        "gamma": [4, 11],
+        "P1": {"U": [1, 6, 9], "V": [1, 12, 7, 10, 1]},
+        "P2": {"U": [10, 4, 12, 4], "V": [2, 12, 12, 11, 4, 8]}
+      },
+      {
+        "prime": 13,
+        "parameters": {"lambda": 10, "y": 5, "z": 2, "W": 10, "g": 6, "q": 10},
+        "a": [9, 8, 2],
+        "beta": [12, 12],
+        "gamma": [9, 6],
+        "P1": {"U": [12, 8, 9], "V": [9, 2, 2, 5, 1]},
+        "P2": {"U": [8, 9, 1, 10], "V": [1, 11, 6, 11, 5, 5]}
+      }
+    ]
+  },
+  "totals": {
+    "raw_parameter_tuples": 29280,
+    "rational_chart_tuples": 24384,
+    "kodaira_surfaces": 11744,
+    "section_tests": 50540496,
+    "P3_tests_after_eligible_pairs": 4679236,
+    "retained_sections": 1124,
+    "P1_P2_gcd_degree_counts": {"minus_one": 0, "0": 28, "1": 24, "2": 16, "3": 14, "4": 0, "5": 0, "other": 0},
+    "P1_P2_intersection_two_pairs": 16,
+    "complete_gram_triples": 0
+  },
+  "conclusion": "Removing the unnecessary split condition at t=1 materially enlarges the cascade: GF(11) and GF(13) contain 16 total P1/P2 pairs with resolved intersection two. Exhausting 4,679,236 P3 quartics on those surfaces finds no P3. This is a bounded negative result on the displayed dense chart and simple-contact saturation, not an obstruction over Q.",
+  "claim_boundary": {
+    "characteristic_zero_target_triple_found": false,
+    "rank31_curve_found": false,
+    "global_nonexistence_proved": false
+  }
+}

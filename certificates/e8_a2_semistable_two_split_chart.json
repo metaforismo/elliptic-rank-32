@@ -1,0 +1,100 @@
+{
+  "auxiliary_ratios": {
+    "g=gamma(1)/gamma(0)": "(lambda + y**2 - 1)/lambda",
+    "interpolation_equations": [
+      "y^2=(1-lambda)+lambda*g",
+      "q*y=(1-lambda)+lambda*z"
+    ],
+    "q=r_lambda/r0": "(lambda*z - lambda + 1)/y",
+    "y=s_lambda/s0": "y",
+    "z=3*beta(1)/W": "z"
+  },
+  "birational_coverage": {
+    "dimension": 4,
+    "inverse_on_dense_open": [
+      "use the homothety to set r0=1",
+      "W=3*beta(0)",
+      "g=gamma(1)/W^2",
+      "z=3*beta(1)/W",
+      "y=s_lambda/W",
+      "q=r_lambda"
+    ],
+    "relation_at_1": "a(1)=3*beta(1)^2/gamma(1)",
+    "target_does_not_force_split_at": [
+      "1"
+    ],
+    "target_forces_split_at": [
+      "0",
+      "lambda"
+    ]
+  },
+  "certificate_id": "e8_a2_semistable_two_split_rational_chart",
+  "certificate_sha256": "f4bdf3bafcc4cb377a6829ef21c6093de7baa916e7a7888f3fdeb318fd553b98",
+  "claim_boundary": {
+    "characteristic_zero_lift_found": false,
+    "rank31_curve_found": false,
+    "target_sections_found": false
+  },
+  "comparison_with_all_split_chart": "The earlier all-split chart is recovered when g=x^2 and z=R*x. Requiring that square condition is unnecessary for the target.",
+  "coverage_boundary": "The chart is dense but excludes divisors where the chosen node coordinates W, gamma(1), or s_lambda vanish, plus the usual Kodaira collision loci. Separate boundary charts are required before any global nonexistence conclusion.",
+  "exact_claim": "The formulas give a rational four-parameter dense chart of the marked semistable family in which precisely the two I3 fibres forced to split by the target component profiles are split.",
+  "gauge_and_node_values": {
+    "at_0": [
+      "3a=1",
+      "3beta=W",
+      "gamma=W^2"
+    ],
+    "at_1": [
+      "3a=z^2/g",
+      "3beta=zW",
+      "gamma=gW^2"
+    ],
+    "at_lambda": [
+      "3a=q^2",
+      "3beta=qyW",
+      "gamma=y^2W^2"
+    ],
+    "homothety_gauge": "r0=sqrt(3*a(0))=1",
+    "third_fibre_split_iff": "g is a nonzero square"
+  },
+  "node_coprimality_factors": {
+    "H(0)_nonzero_iff": "3*d+W^3 != 0",
+    "H(1)_nonzero_iff": "3*z*d+g^2*W^3 != 0",
+    "H(lambda)_nonzero_iff": "3*q*d+y^3*W^3 != 0"
+  },
+  "open_conditions": [
+    "characteristic is not 2 or 3",
+    "lambda*(lambda-1) != 0",
+    "W*y*z*q*g != 0",
+    "y^2 != 1 (equivalently gamma1 != 0)",
+    "3*d+W^3 != 0",
+    "3*z*d+g^2*W^3 != 0",
+    "3*q*d+y^3*W^3 != 0",
+    "H is squarefree"
+  ],
+  "parameters": [
+    "lambda",
+    "y",
+    "z",
+    "W"
+  ],
+  "polynomials": {
+    "D": "t*(t-1)*(t-lambda)",
+    "H": "4*a^2*d+12*a*beta*gamma-32*beta^3+D*gamma^2",
+    "H_degree": 5,
+    "a": "1/3+(z^2/(3g)-1/3-a2)*t+a2*t^2",
+    "a2": "(-lambda*z + lambda + y**2 - 1)**2/(3*lambda*y**2*(lambda + y**2 - 1))",
+    "beta": "W*(1+(z-1)*t)/3",
+    "d": "W**2*(y - 1)*(y + 1)*(-lambda*z + lambda + y**2 - 1)**2/(3*lambda**2*y**2*(lambda + y**2 - 1))",
+    "gamma": "W^2*(1+(g-1)*t)",
+    "gamma1": "W**2*(y - 1)*(y + 1)/lambda",
+    "relation": "a*gamma-3*beta^2=d*D"
+  },
+  "schema_version": 1,
+  "weierstrass_model": {
+    "A": "-3*(a^2+2*D*beta)",
+    "B": "2*(a^3+3*a*D*beta)+D^2*gamma",
+    "discriminant": "-432*D^3*H",
+    "shifted_equation": "Y^2=X^2*(X+3*a)-6*D*beta*X+D^2*gamma"
+  }
+}

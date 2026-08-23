@@ -190,13 +190,14 @@ terms \(x^j y\) with \(2j+3\le N\). Its pole orders are
 \]
 
 The executable certificate checks this basis dimension for every
-\(1\le N\le31\), enumerates every degree pattern of exact pole order 30 and
-31, and confirms:
+\(1\le N\le32\), enumerates every degree pattern of exact pole order 30, 31,
+and 32, and confirms:
 
 - order 30: \(\deg A=15\), \(\deg B\le13\);
 - order 31: \(\deg B=14\), \(\deg A\le15\);
 - degree-15 near-square: visible span at most 29;
 - minimal one-function rank-30-compatible order: 31.
+- minimal one-function rank-31-compatible order: 32.
 
 Run
 
@@ -223,3 +224,91 @@ is instead:
 This is a sharply defined auxiliary variety and a legitimate inverse-
 construction thread. Its difficulty must still be measured against the
 record-K3 specialization route.
+
+## The rank-31 target and an exact equivalence
+
+To leave room for 31 independent classes, a single function must have at
+least 32 rational zeros.  Exact pole order 32 forces
+
+\[
+\deg A=16,\qquad \deg B\le14,
+\]
+
+and therefore
+
+\[
+\boxed{
+A(x)^2-R(x)B(x)^2
+=c\prod_{i=1}^{32}(x-r_i).
+}
+\]
+
+If the roots are distinct and \(B(r_i)\ne0\), the recovered points satisfy
+the unavoidable relation
+
+\[
+P_1+\cdots+P_{32}=O,
+\]
+
+so their span can have rank at most 31.  Certifying any 31 of them as
+independent would prove rank at least 31.
+
+There is also a converse that is important for judging the search space.
+Suppose \(P_1,\ldots,P_{31}\) are independent rational points and put
+
+\[
+P_{32}=-(P_1+\cdots+P_{31}).
+\]
+
+Then the 32 points are nonzero and have distinct \(x\)-coordinates: any
+collision would give a nontrivial integral relation among the first 31.
+Their sum is zero, so
+
+\[
+P_1+\cdots+P_{32}-32(O)
+\]
+
+is principal.  Its defining function belongs to \(L(32O)\), has exact pole
+order 32, and hence has precisely the degree pattern above.  Thus the split
+norm-32 formulation is an exact representation of the rank-31 construction
+problem—not, by itself, a reduction of its dimension.  It becomes a useful
+search method only after imposing additional structure (symmetry, a
+low-dimensional family, local conditions, or overlapping point packets).
+
+## Exact reverse experiment on ICARM curve #273
+
+The script `research/icarm273_rr_reverse_certificate.py` applies the converse
+construction to the new rank-30 record curve.  Starting from its 30 published
+independent points, it computes
+
+\[
+P_{31}=-(P_1+\cdots+P_{30})
+\]
+
+with the exact group law.  The 31 resulting points have distinct
+\(x\)-coordinates and sum to \(O\).  On the model
+
+\[
+Y=2y+x,\qquad
+Y^2=4x^3+x^2+4a_4x+4a_6,
+\]
+
+exact rational linear algebra reconstructs the unique kernel vector for the
+evaluation basis
+
+\[
+1,x,\ldots,x^{15},Y,Yx,\ldots,Yx^{14}.
+\]
+
+The evaluation matrix has rank 30 and nullity one.  The recovered function
+has \(\deg A=15\), \(\deg B=14\), and exact coefficient comparison verifies
+
+\[
+A^2-(4x^3+x^2+4a_4x+4a_6)B^2
+=c\prod_{i=1}^{31}(x-x(P_i)).
+\]
+
+This is a successful falsifiable test of the reverse-construction machinery,
+not a new independent point.  The committed certificate stores the completed
+point, degree/rank data, and cryptographic digests of the large exact
+coefficient vectors.
