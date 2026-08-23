@@ -17,6 +17,16 @@ SPEC.loader.exec_module(VERIFIER)
 
 
 class Rank17ArtifactVerifierTests(unittest.TestCase):
+    def test_public_chain_pins_lll_reduced_seed_and_target(self) -> None:
+        self.assertEqual(
+            VERIFIER.EXPECTED_SEED_HASH,
+            "d29e4bb24bcb1db376f142708ceb841f02c7eba4b27a7a04d141b0f06b8d40d1",
+        )
+        self.assertEqual(
+            VERIFIER.EXPECTED_TARGET_HASH,
+            "620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295",
+        )
+
     def test_bareiss_and_matrix_hash_are_exact(self) -> None:
         matrix = [[4, -2, 0], [-2, 4, -2], [0, -2, 4]]
         self.assertEqual(VERIFIER.determinant_bareiss(matrix), 32)
