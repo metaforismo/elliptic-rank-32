@@ -1,6 +1,7 @@
 {
   "active_workstreams": [
-    "construct an explicit neighbor/moduli map from the E8+A2^3 target lattice to the X(6,79) K3 landscape and transport Elkies' rational point",
+    "execute the matrix-preserving Sage replay and bounded E8+A2^3-to-endpoint neighbor search",
+    "construct a marked 2/3-neighbor K3 path with Riemann-Roch pencils and birational maps, then transport Elkies' rational point",
     "compute the saturated P3 Noether-Lefschetz elimination/Fitting equation from the six exact remainder polynomials",
     "search good primes beyond 13 with the corrected total-intersection filter and exhaustive downstream P3 checks",
     "search new finite-field E6/MW3 charts only with immediate group-law independence checks",
@@ -21,7 +22,7 @@
     "certificate": "certificates/e8_a2_semistable_two_split_total_intersections_aggregate.json",
     "claim_status": "corrected total-intersection saturation, exact full P1/P2/P3 incidence, bounded modular cascade, and determinant-948 Shimura lattice bridge",
     "documentation": "research/rank31_program.md",
-    "limitation": "No P3, rational lift, characteristic-zero target triple, explicit neighbor/moduli map, or rank-31 curve is known. The zero-triple result is bounded to GF(5), GF(7), GF(11), GF(13), the certified dense and intrinsic boundary charts, and the Kodaira open; the larger-prime first stage is sampled.",
+    "limitation": "No P3, rational lift, characteristic-zero target triple, explicit geometric neighbor/moduli map, or rank-31 curve is known. The zero-triple result is bounded to GF(5), GF(7), GF(11), GF(13), the certified dense and intrinsic boundary charts, and the Kodaira open; the larger-prime first stage is sampled. The prepared Kneser matrix replays are necessary lattice evidence but do not supply a marked Neron-Severi transport or Weierstrass maps.",
     "name": "two-split E8+A2^3 incidence and X(6,79) lattice bridge",
     "supporting_certificates": [
       "certificates/e8_a2_semistable_two_split_pair_incidence_lifts.json",

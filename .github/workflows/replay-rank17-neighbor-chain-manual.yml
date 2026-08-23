@@ -1,0 +1,178 @@
+name: replay-rank17-neighbor-chain-manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      research_note:
+        description: "Optional note recorded in provenance (not a mathematical claim)"
+        required: false
+        type: string
+  push:
+    branches: [codex/rank31-research]
+    paths:
+      - ".github/workflows/probe-rank29-height-lattice.yml"
+      - ".github/workflows/replay-rank17-neighbor-chain-manual.yml"
+      - "research/replay_rank17_neighbor_chain.py"
+      - "research/replay_rank17_neighbor_chain_with_maps.py"
+      - "research/classify_rank17_neighbor_chain.py"
+      - "research/verify_rank17_neighbor_chain_artifact.py"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: replay-rank17-neighbor-chain-manual-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      image: sagemath/sagemath:10.9@sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
+    env:
+      EVIDENCE_ROOT: /tmp/rank17-neighbor-chain
+      SAGE_CONTAINER_IMAGE: sagemath/sagemath:10.9@sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
+      DISPATCH_RESEARCH_NOTE: ${{ inputs.research_note }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Prepare a fresh evidence directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${GITHUB_EVENT_NAME}" in
+            workflow_dispatch|push) ;;
+            *) exit 2 ;;
+          esac
+          rm -rf "${EVIDENCE_ROOT}"
+          mkdir -p "${EVIDENCE_ROOT}"
+
+      - name: Replay and serialize the deterministic exact neighbor chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          sage -python research/replay_rank17_neighbor_chain.py \
+            --output "${EVIDENCE_ROOT}"
+
+      - name: Classify every root system exactly in Sage 10.9
+        shell: bash
+        run: |
+          set -euo pipefail
+          sage -python research/classify_rank17_neighbor_chain.py \
+            "${EVIDENCE_ROOT}/exact-neighbor-chain.json" \
+            --output "${EVIDENCE_ROOT}/ade-classification.json" \
+            | tee "${EVIDENCE_ROOT}/classification.log"
+
+      - name: Replay and serialize every exact parent-to-child basis map
+        shell: bash
+        run: |
+          set -euo pipefail
+          map_root=/tmp/rank17-neighbor-maps
+          rm -rf "${map_root}"
+          sage -python research/replay_rank17_neighbor_chain_with_maps.py \
+            --output "${map_root}"
+          cp "${map_root}/exact-neighbor-maps.json" \
+            "${EVIDENCE_ROOT}/exact-neighbor-maps.json"
+          cp "${map_root}/map-summary.json" \
+            "${EVIDENCE_ROOT}/map-summary.json"
+          cp "${map_root}/map-replayed-discovery.py" \
+            "${EVIDENCE_ROOT}/map-replayed-discovery.py"
+          cp "${map_root}/map-replay.log" \
+            "${EVIDENCE_ROOT}/map-replay.log"
+
+      - name: Record source, runtime, and claim-gate provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp research/verify_rank17_neighbor_chain_artifact.py \
+            "${EVIDENCE_ROOT}/artifact-verifier.py"
+          cp research/replay_rank17_neighbor_chain_with_maps.py \
+            "${EVIDENCE_ROOT}/map-replay-harness.py"
+          cp .github/workflows/replay-rank17-neighbor-chain-manual.yml \
+            "${EVIDENCE_ROOT}/manual-workflow.yml"
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          evidence = Path(os.environ["EVIDENCE_ROOT"])
+          sources = [
+              ".github/workflows/probe-rank29-height-lattice.yml",
+              ".github/workflows/replay-rank17-neighbor-chain-manual.yml",
+              "research/replay_rank17_neighbor_chain.py",
+              "research/replay_rank17_neighbor_chain_with_maps.py",
+              "research/classify_rank17_neighbor_chain.py",
+              "research/verify_rank17_neighbor_chain_artifact.py",
+          ]
+          source_sha256 = {
+              source: hashlib.sha256(Path(source).read_bytes()).hexdigest()
+              for source in sources
+          }
+          sage_version = subprocess.run(
+              ["sage", "--version"],
+              check=True,
+              text=True,
+              stdout=subprocess.PIPE,
+          ).stdout.strip()
+          payload = {
+              "schema_version": 1,
+              "artifact_kind": "rank17-exact-neighbor-chain-sage-10.9",
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "commit_sha": os.environ["GITHUB_SHA"],
+              "ref": os.environ["GITHUB_REF"],
+              "event_name": os.environ["GITHUB_EVENT_NAME"],
+              "run_id": os.environ["GITHUB_RUN_ID"],
+              "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+              "workflow_ref": os.environ["GITHUB_WORKFLOW_REF"],
+              "container_image": os.environ["SAGE_CONTAINER_IMAGE"],
+              "sage_version": sage_version,
+              "source_sha256": source_sha256,
+              "research_note": os.environ.get("DISPATCH_RESEARCH_NOTE", ""),
+              "claim_gates": {
+                  "exact_ade_classification_replayed": True,
+                  "exact_lattice_neighbor_chain_replayed": True,
+                  "exact_rational_parent_child_basis_maps_replayed": True,
+                  "explicit_integral_chain_from_e8_a2_target": False,
+                  "explicit_k3_neighbor_map": False,
+                  "geometric_neron_severi_marking": False,
+                  "rank31_curve_over_q": False,
+                  "rational_p3_section": False,
+              },
+              "offline_verifier_scope": (
+                  "Pins the public chain bytes; checks all Gram determinants, "
+                  "parent links, p-divisible vectors, exact T^t G_parent T "
+                  "basis identities, Sage records, provenance, and a closed "
+                  "file manifest using only the Python standard library. It "
+                  "does not independently repeat Sage short-vector enumeration "
+                  "or construct a geometric Neron-Severi/K3 marking."
+              ),
+          }
+          (evidence / "provenance.json").write_text(
+              json.dumps(payload, indent=2, sort_keys=True) + "\n"
+          )
+          PY
+
+      - name: Finalize and independently consume the closed artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "${EVIDENCE_ROOT}/artifact-verifier.py" \
+            "${EVIDENCE_ROOT}" --write-manifest
+          python3 "${EVIDENCE_ROOT}/artifact-verifier.py" \
+            "${EVIDENCE_ROOT}"
+
+      - name: Upload durable exact-chain evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rank17-exact-neighbor-chain-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/rank17-neighbor-chain
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 90

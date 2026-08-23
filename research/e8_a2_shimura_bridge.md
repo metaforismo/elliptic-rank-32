@@ -217,3 +217,10 @@ rational Shimura point through that chain into the two-split Weierstrass
 coordinates.  Success would produce the missing characteristic-zero `P3`
 section on the geometric rank-17 K3 source.  A later specialization search and
 31-point independence certificate would still be required for the record.
+
+The executable branch now distinguishes the two stages.  The manual replay
+retains every exact Kneser basis matrix, while the bounded bridge search starts
+from `N_target` and promotes only an integral lattice isometry.  Neither stage
+is yet a geometric K3 switch.  The additional marked Neron--Severi,
+Riemann--Roch, section, and birational-map data required for that promotion are
+listed in `research/kneser_to_weierstrass_transport_requirements.md`.

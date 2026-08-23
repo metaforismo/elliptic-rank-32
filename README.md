@@ -214,6 +214,24 @@ invariants recover quaternion discriminant 6 and level 79.  This strongly
 identifies the correct K3 landscape, but an explicit neighbor/moduli map and
 transported rational Weierstrass model are still missing.
 
+The branch now contains two Sage 10.9 integration workflows for the next
+exact step.  The first replays the public seven-edge neighbor chain while
+retaining every rational basis matrix `T=B*U` and checking
+`T^t G_parent T=G_child`; the second performs a bounded deterministic search
+from the `E8+A2^3` target toward the transparent and rootless endpoint
+lattices, promoting a meeting only after an exact integral isometry check.
+These workflows create lattice evidence, not a rank-31 claim.
+
+A primary-source audit also sharpens the missing geometric layer.  A Kneser
+`p`-neighbor between positive lattices is not automatically an elliptic
+neighbor step on one K3 surface.  The latter additionally requires a marked
+Neron--Severi lattice, effective old and new fiber divisors, a two-dimensional
+Riemann--Roch pencil, a section witness, and mutually inverse birational maps.
+The available Elkies--Kumar algorithms make this explicit for geometric
+2- and 3-neighbors; the two leading prime-5 moves in the public lattice chain
+remain routing heuristics until separately geometrized.  See
+`research/kneser_to_weierstrass_transport_requirements.md`.
+
 Exact counts, proofs, and claim boundaries are in
 `research/rank31_program.md`,
 `research/e8_a2_semistable_two_split_full_incidence.md`, and

@@ -428,13 +428,56 @@ concrete construction problem.  See
 `research/e8_a2_shimura_bridge.md`, [Elkies 2007](https://arxiv.org/abs/0709.2908),
 and [Elkies 2008](https://arxiv.org/abs/0802.1301).
 
+### Matrix-preserving replay and the geometric boundary
+
+The branch now has two exact Sage 10.9 computations ready for integration.
+`research/replay_rank17_neighbor_chain_with_maps.py` repeats the frozen public
+chain and retains, for every edge, Sage's rational neighbor basis `B`, the
+integral LLL basis change `U`, and
+
+\[
+T=B U,\qquad T^{\mathsf T}G_{\rm parent}T=G_{\rm child}.
+\]
+
+Its standard-library consumer independently verifies all seven rational Gram
+identities, determinants, hashes, provenance, and a closed artifact manifest.
+`research/search_e8_a2_target_neighbor_bridge.py` separately searches from
+the target lattice, optionally bidirectionally from the two known endpoints,
+and promotes a meeting only through an exact integral isometry.  A negative
+run excludes only its serialized finite beam/window.
+
+These computations close a reproducibility gap in the positive-lattice
+search, but not the K3 geometry.  The primary-source audit in
+`research/kneser_to_weierstrass_transport_requirements.md` separates two
+different notions:
+
+- a Kneser `p`-neighbor between positive-definite lattices; and
+- an elliptic `r`-neighbor between two fibrations on one marked K3 surface.
+
+For the second, the Gram transition is only necessary data.  One also needs a
+fixed marked `NS(X)`, primitive effective nef fiber classes, the old and new
+zero sections and fiber components, the horizontal/vertical decomposition of
+the new fiber divisor, the two-dimensional space
+`H^0(X,O_X(F'))`, a new parameter, a section or rational point, and forward
+and inverse birational maps.  The published algorithms explicitly implement
+geometric 2- and 3-neighbors.  No comparable complete elliptic-K3 5-neighbor
+routine was found in the audited primary sources, so the initial `5,5` edges
+of the public Kneser chain cannot yet be treated as geometric transformations.
+
+The preferred next geometric search is therefore for a marked 2-/3-neighbor
+path.  Alternatively, a degree-five genus-one/Jacobian layer and all missing
+K3 pencil, section, torsor, and map checks would have to be developed and
+certified.  Reconstructing the single `X(6,79)` K3 specialized at Elkies'
+rational point is sufficient for the first fixed rank-17 transport; a full
+universal moduli map is needed only for systematic deformation.
+
 ## Route ranking after the experiment
 
-1. **Build the explicit `X(6,79)` neighbor/moduli map.**  Connect the certified
-   `E8+A2^3` essential lattice to the frozen determinant-948 chain and
-   transport Elkies' rational Shimura point into the two-split chart.  This
-   replaces blind parameter search by a specified rational input, but a
-   transported three-section model must still be checked directly.
+1. **Close the matrix chain, then build a marked 2-/3-neighbor K3 path.**
+   Execute the matrix-preserving replays, connect `E8+A2^3` to the frozen
+   determinant-948 endpoints, reconstruct the specialized `X(6,79)` seed K3,
+   and compute the actual Riemann--Roch pencils and birational maps.  A
+   lattice meeting alone is not the moduli map and not a transported section.
 2. **Compute the `P3` Noether--Lefschetz divisor over the `P1/P2` surface.**
    Use the six exact remainder equations, saturate their boundaries, and
    compute a Fitting/elimination equation or a square-sieve at new good

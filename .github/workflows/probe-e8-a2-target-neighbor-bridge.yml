@@ -1,0 +1,149 @@
+name: probe-e8-a2-target-neighbor-bridge
+
+on:
+  push:
+    branches:
+      - codex/rank31-research
+    paths:
+      - "research/search_e8_a2_target_neighbor_bridge.py"
+      - "research/certify_e8_a2_shimura_bridge.py"
+      - "tests/test_e8_a2_target_neighbor_bridge.py"
+      - ".github/workflows/probe-e8-a2-target-neighbor-bridge.yml"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Search only from E8+A2^3 or bidirectionally from both endpoints
+        required: true
+        type: choice
+        default: bidirectional
+        options:
+          - bidirectional
+          - forward
+      rounds:
+        description: Exact bounded beam rounds
+        required: true
+        default: "6"
+      beam_size:
+        description: States retained per active side and round
+        required: true
+        default: "5"
+      primes:
+        description: Comma-separated p-neighbor primes
+        required: true
+        default: "2,5"
+      line_offset:
+        description: Lines skipped in each deterministic Sage projective ordering
+        required: true
+        default: "0"
+      lines_per_prime:
+        description: Projective isotropic lines constructed per state and prime
+        required: true
+        default: "32"
+      max_successful_moves:
+        description: Hard bound on serialized successful neighbor constructions
+        required: true
+        default: "10000"
+      max_isometry_checks:
+        description: Hard bound on exact PARI qfisom comparisons
+        required: true
+        default: "250"
+
+permissions:
+  contents: read
+
+jobs:
+  exact-neighbor-search:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    container:
+      image: sagemath/sagemath:10.9@sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Resolve bounded defaults for push and manual inputs
+        shell: bash
+        env:
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_ROUNDS: ${{ inputs.rounds }}
+          INPUT_BEAM_SIZE: ${{ inputs.beam_size }}
+          INPUT_PRIMES: ${{ inputs.primes }}
+          INPUT_LINE_OFFSET: ${{ inputs.line_offset }}
+          INPUT_LINES_PER_PRIME: ${{ inputs.lines_per_prime }}
+          INPUT_MAX_SUCCESSFUL_MOVES: ${{ inputs.max_successful_moves }}
+          INPUT_MAX_ISOMETRY_CHECKS: ${{ inputs.max_isometry_checks }}
+        run: |
+          set -euo pipefail
+          {
+            echo "MODE=${INPUT_MODE:-bidirectional}"
+            echo "ROUNDS=${INPUT_ROUNDS:-6}"
+            echo "BEAM_SIZE=${INPUT_BEAM_SIZE:-5}"
+            echo "PRIMES=${INPUT_PRIMES:-2,5}"
+            echo "LINE_OFFSET=${INPUT_LINE_OFFSET:-0}"
+            echo "LINES_PER_PRIME=${INPUT_LINES_PER_PRIME:-32}"
+            echo "MAX_SUCCESSFUL_MOVES=${INPUT_MAX_SUCCESSFUL_MOVES:-10000}"
+            echo "MAX_ISOMETRY_CHECKS=${INPUT_MAX_ISOMETRY_CHECKS:-250}"
+          } >> "$GITHUB_ENV"
+
+      - name: Search and preserve exact rational p-neighbor embeddings
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/e8-a2-target-neighbor-bridge
+          sage -python research/search_e8_a2_target_neighbor_bridge.py \
+            --output /tmp/e8-a2-target-neighbor-bridge \
+            --mode "$MODE" \
+            --rounds "$ROUNDS" \
+            --beam-size "$BEAM_SIZE" \
+            --primes "$PRIMES" \
+            --line-offset "$LINE_OFFSET" \
+            --lines-per-prime "$LINES_PER_PRIME" \
+            --max-successful-moves "$MAX_SUCCESSFUL_MOVES" \
+            --max-isometry-checks "$MAX_ISOMETRY_CHECKS" \
+            | tee /tmp/e8-a2-target-neighbor-bridge/run.log
+
+      - name: Enforce evidence and claim boundaries
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          out = Path('/tmp/e8-a2-target-neighbor-bridge')
+          record = json.loads((out / 'result.json').read_text())
+          assert record['status'] in {'bridge_found', 'bounded_search_completed'}, record
+          assert record['claim_boundary']['rank31_curve_found'] is False
+          assert record['claim_boundary']['rational_P3_found'] is False
+          assert (out / 'states.jsonl').is_file()
+          assert (out / 'moves.jsonl').is_file()
+          if record['status'] == 'bridge_found':
+              bridge = json.loads((out / 'exact-bridge.json').read_text())
+              assert bridge['all_parent_child_gram_identities_verified'] is True
+              assert bridge['all_neighbor_intersection_indices_verified'] is True
+          print(record['status'], record['truth_status'])
+          PY
+
+      - name: Hash the complete bounded-search evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          find /tmp/e8-a2-target-neighbor-bridge -maxdepth 1 -type f \
+            ! -name SHA256SUMS -print0 \
+            | sort -z \
+            | xargs -0 sha256sum \
+            > /tmp/e8-a2-target-neighbor-bridge/SHA256SUMS
+          cd /tmp/e8-a2-target-neighbor-bridge
+          sha256sum -c SHA256SUMS
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: e8-a2-target-exact-neighbor-bridge
+          path: /tmp/e8-a2-target-neighbor-bridge
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
