@@ -131,12 +131,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          find /tmp/e8-a2-target-neighbor-bridge -maxdepth 1 -type f \
+          cd /tmp/e8-a2-target-neighbor-bridge
+          manifest=/tmp/e8-a2-target-neighbor-bridge.SHA256SUMS
+          find . -maxdepth 1 -type f \
             ! -name SHA256SUMS -print0 \
             | sort -z \
             | xargs -0 sha256sum \
-            > /tmp/e8-a2-target-neighbor-bridge/SHA256SUMS
-          cd /tmp/e8-a2-target-neighbor-bridge
+            > "$manifest"
+          mv "$manifest" SHA256SUMS
           sha256sum -c SHA256SUMS
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -146,4 +148,4 @@ jobs:
           path: /tmp/e8-a2-target-neighbor-bridge
           if-no-files-found: error
           compression-level: 0
-          retention-days: 14
+          retention-days: 90

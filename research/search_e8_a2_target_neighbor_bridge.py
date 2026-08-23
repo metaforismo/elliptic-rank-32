@@ -339,48 +339,57 @@ def state_fingerprint(state: dict[str, Any]) -> tuple[int, int]:
     return checks["root_count_exact_theta"], checks["norm4_count_exact_theta"]
 
 
+def fingerprint_distance(
+    left: tuple[int, int], right: tuple[int, int]
+) -> tuple[int, int, int]:
+    root_gap = abs(left[0] - right[0])
+    norm4_gap = abs(left[1] - right[1])
+    return root_gap + norm4_gap, root_gap, norm4_gap
+
+
 def distance_key(state: dict[str, Any], profiles: Iterable[tuple[int, int]]) -> tuple[Any, ...]:
     roots, norm4 = state_fingerprint(state)
-    distances = sorted((abs(roots - goal_roots), abs(norm4 - goal_norm4)) for goal_roots, goal_norm4 in profiles)
+    distances = sorted(
+        fingerprint_distance((roots, norm4), profile) for profile in profiles
+    )
     return (distances[0], roots, norm4, state["gram_sha256"])
 
 
 def select_next_beam(candidates: list[dict[str, Any]], size: int, profiles: list[tuple[int, int]]) -> list[dict[str, Any]]:
     if not candidates or size <= 0:
         return []
+    if not profiles:
+        raise ValueError("at least one opposing fingerprint is required")
     selected: list[dict[str, Any]] = []
     used: set[str] = set()
 
-    # Preserve one exact queue per opposing endpoint profile.
-    for profile in profiles:
-        ordered = sorted(
-            candidates,
-            key=lambda state: (
-                abs(state_fingerprint(state)[0] - profile[0]),
-                abs(state_fingerprint(state)[1] - profile[1]),
-                state["gram_sha256"],
-            ),
-        )
-        for state in ordered:
-            if state["uid"] not in used:
-                selected.append(state)
-                used.add(state["uid"])
-                break
-            
-    # Then exploit the combined score while retaining deterministic diversity.
+    # Exploit the closest dynamically discovered opposing fingerprints.
     ordered = sorted(candidates, key=lambda state: distance_key(state, profiles))
-    if ordered:
-        for numerator, denominator in ((1, 4), (1, 2), (3, 4)):
-            state = ordered[min(len(ordered) - 1, len(ordered) * numerator // denominator)]
-            if state["uid"] not in used and len(selected) < size:
+    exploit_count = max(1, size - 2)
+    for state in ordered[:exploit_count]:
+        selected.append(state)
+        used.add(state["uid"])
+
+    # Retain two deterministic diversity points from the rest of the exact
+    # ordering so that one noisy theta direction cannot collapse the beam.
+    remainder = [state for state in ordered if state["uid"] not in used]
+    for numerator, denominator in ((1, 3), (2, 3)):
+        if len(selected) >= size:
+            break
+        if remainder:
+            state = remainder[
+                min(len(remainder) - 1, len(remainder) * numerator // denominator)
+            ]
+            if state["uid"] not in used:
                 selected.append(state)
                 used.add(state["uid"])
     for state in ordered:
         if len(selected) >= size:
             break
-        if state["uid"] not in used:
-            selected.append(state)
-            used.add(state["uid"])
+        if state["uid"] in used:
+            continue
+        selected.append(state)
+        used.add(state["uid"])
     return selected[:size]
 
 
@@ -556,8 +565,6 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
     endpoint_sides = ("transparent", "rootless")
     beams: dict[str, list[dict[str, Any]]] = {side: [all_states[next(uid for uid in all_states if uid.startswith(side + ":"))]] for side in sides}
     expanded: dict[str, set[str]] = {side: set() for side in sides}
-    profile_by_side = {state["side"]: state_fingerprint(state) for state in initial_states}
-
     counters = {
         "attempted_lines": 0,
         "successful_moves": 0,
@@ -690,10 +697,13 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                 if bridge is not None or counters["move_budget_exhausted"]:
                     break
 
-            opposing_profiles = (
-                [profile_by_side["transparent"], profile_by_side["rootless"]]
-                if side == "origin"
-                else [profile_by_side["origin"]]
+            opposing_sides = endpoint_sides if side == "origin" else ("origin",)
+            opposing_profiles = sorted(
+                {
+                    profile
+                    for opposing_side in opposing_sides
+                    for profile in indexes[opposing_side]
+                }
             )
             beams[side] = select_next_beam(candidates, args.beam_size, opposing_profiles)
             side_stats["next_beam"] = [
@@ -752,6 +762,10 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
             "max_successful_moves": args.max_successful_moves,
             "max_isometry_checks": args.max_isometry_checks,
             "enumeration_order": "Sage 10.9 find_primitive_p_divisible_vector__next",
+            "beam_selection": (
+                "three closest states to every dynamically discovered opposing "
+                "theta fingerprint plus two deterministic diversity states"
+            ),
         },
         "initial_states": [state_public_record(state) for state in initial_states],
         "target_genus": str(target_genus),

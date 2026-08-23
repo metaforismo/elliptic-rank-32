@@ -48,6 +48,29 @@ class TargetNeighborBridgeTests(unittest.TestCase):
         with self.assertRaises(Exception):
             self.module.parse_primes("5,5")
 
+    def test_beam_targets_dynamically_close_opposing_profiles(self) -> None:
+        def state(uid: str, roots: int, norm4: int):
+            return {
+                "uid": uid,
+                "gram_sha256": uid.rjust(64, "0"),
+                "checks": {
+                    "root_count_exact_theta": roots,
+                    "norm4_count_exact_theta": norm4,
+                },
+            }
+
+        close = state("1", 54, 2726)
+        same_roots_but_far = state("2", 58, 3100)
+        far = state("3", 84, 3376)
+        selected = self.module.select_next_beam(
+            [far, same_roots_but_far, close], 2, [(58, 2734)]
+        )
+        self.assertEqual(selected[0]["uid"], close["uid"])
+        self.assertEqual(
+            self.module.fingerprint_distance((54, 2726), (58, 2734)),
+            (12, 4, 8),
+        )
+
     def test_script_preserves_exact_neighbor_and_isometry_matrices(self) -> None:
         source = SCRIPT.read_text()
         ast.parse(source)
@@ -61,6 +84,7 @@ class TargetNeighborBridgeTests(unittest.TestCase):
             '"parent_to_child_rational_transform"',
             '"exact-bridge.json"',
             '"bounded_search_completed"',
+            "for opposing_side in opposing_sides",
         ]
         for fragment in required_fragments:
             self.assertIn(fragment, source)
@@ -82,6 +106,8 @@ class TargetNeighborBridgeTests(unittest.TestCase):
         )
         self.assertNotIn("actions/upload-artifact@v4", source)
         self.assertIn("SHA256SUMS", source)
+        self.assertIn("cd /tmp/e8-a2-target-neighbor-bridge", source)
+        self.assertIn("retention-days: 90", source)
 
     def test_script_digest_is_not_accidentally_empty(self) -> None:
         digest = hashlib.sha256(SCRIPT.read_bytes()).hexdigest()
