@@ -1,16 +1,18 @@
-# Rank 31 research programme after ICARM curve #273
+# Rank-31 research archive and rank-32 continuation
 
 ## Claim boundary
 
-The current record curve #273 has 30 explicitly certified independent
-rational points.  That lower bound is unconditional.  The separate statement
-that its rank is exactly 30 uses GRH+BSD and is not part of the lower-bound
-certificate.
+ICARM curve #302, submitted on 2026-08-23 and credited to Claude, Levent
+Alpöge, and Ava Howell, has 31 explicitly certified independent rational
+points.  That lower bound is unconditional.  The separate statement that its
+rank is exactly 31 uses GRH+BSD and is not part of the lower-bound certificate.
 
-Consequently, the primary rank-31 question is not “find one more point on
-curve #273.”  A point there would collide with a strong conditional upper
-bound.  The productive target is a **new curve** with 31 independently
-certified points.
+Thus the original objective of this document has been achieved externally,
+not by the K3 search below.  The new constructive target is a **new curve with
+32 independently certified points**.  The bounded calculations and lattice
+reconstructions remain valid evidence, but every occurrence of `31=17+14`
+below should be read as the historical milestone; the continuation requires
+`32=17+15`.
 
 ## Three representations of the problem
 
@@ -30,10 +32,16 @@ from, the same programme.  If it does, the likely accounting is
 30=17+13.
 \]
 
-The next target is therefore
+The former target was
 
 \[
 \boxed{31=17+14}.
+\]
+
+After curve #302, the next target is
+
+\[
+\boxed{32=17+15}.
 \]
 
 This route has the best empirical precedent, but it cannot be searched
@@ -42,30 +50,32 @@ specialization parameter are known.
 
 ### 2. Minimal Riemann--Roch norm
 
-On a short Weierstrass curve \(y^2=R(x)\), a single function with 32 rational
+On a short Weierstrass curve \(y^2=R(x)\), a single function with 33 rational
 zeros has the form
 
 \[
-f=A(x)+yB(x),\qquad \deg A=16,\quad\deg B\le14,
+f=A(x)+yB(x),\qquad \deg A\le16,\quad\deg B\le15,
 \]
 
 and its norm is
 
 \[
 A(x)^2-R(x)B(x)^2
-=c\prod_{i=1}^{32}(x-r_i).
+=c\prod_{i=1}^{33}(x-r_i).
 \]
 
-The points satisfy one forced relation, so their span has rank at most 31.
-Conversely, any 31 independent points can be completed by the negative of
-their sum to obtain exactly such a degree-32 representation.  This is an exact
+The points satisfy one forced relation, so their span has rank at most 32.
+Conversely, any 32 independent points can be completed by the negative of
+their sum to obtain exactly such a degree-33 representation.  This is an exact
 equivalence, not by itself a lower-dimensional search.  It becomes useful
 only after adding structure such as symmetry, a low-dimensional coefficient
 family, or overlapping point packets.
 
-The reverse experiment on curve #273 reconstructs and verifies the analogous
-degree-31 norm from its 30 generators.  This validates the machinery but does
-not produce an additional independent point.
+The existing reverse experiment on curve #273 reconstructs and verifies the
+analogous degree-31 norm from its 30 generators.  A rank-32 continuation would
+first reconstruct the degree-32 norm of curve #302 from its 31 generators,
+then search only structured degree-33 packets; this validates machinery but
+does not by itself produce another independent point.
 
 ### 3. Neighbor-fibration reconstruction
 
@@ -388,7 +398,7 @@ four-dimensional surface chart.  The global saturated Macaulay
 resultant/Fitting equation has not yet been expanded.  This is the concrete
 symbolic bottleneck, rather than an unspecified search for a third section.
 
-### Exact bridge to Elkies' `X(6,79)` landscape
+### Exact discriminant-form and Clifford identification with `X(6,79)`
 
 The positive essential lattice forced by the `E8+A2^3` three-section target is
 even of rank 17 and determinant 948.  Exact short-vector enumeration gives
@@ -414,9 +424,10 @@ multiplier 101.  Finally, the even Clifford algebra of `T` has quaternion
 discriminant 6 and the remaining level factor is 79, reproducing the
 `X(6,79)` Shimura datum.
 
-This is a genuine lattice bridge, not only equality of determinants.  It is
-still not an explicit stable isometry, neighbor chain, moduli map, or
-Weierstrass model.  Elkies' published Shimura curve
+This is an exact arithmetic identification of the discriminant-form and
+Clifford landscape, stronger than determinant equality.  It is not an
+integral isometry, neighbor chain from the target, moduli map, or Weierstrass
+model.  Elkies' published Shimura curve
 
 \[
 u^2=16t^6-19t^4+88t^2-48
@@ -428,23 +439,52 @@ concrete construction problem.  See
 `research/e8_a2_shimura_bridge.md`, [Elkies 2007](https://arxiv.org/abs/0709.2908),
 and [Elkies 2008](https://arxiv.org/abs/0802.1301).
 
-### Matrix-preserving replay and the geometric boundary
+### Matrix-preserving replay and bounded target search
 
-The branch now has two exact Sage 10.9 computations ready for integration.
-`research/replay_rank17_neighbor_chain_with_maps.py` repeats the frozen public
-chain and retains, for every edge, Sage's rational neighbor basis `B`, the
-integral LLL basis change `U`, and
+Actions run
+[`32673843229`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32673843229)
+completed the exact Sage 10.9 replay of the frozen public chain.
+`research/replay_rank17_neighbor_chain_with_maps.py` retained, for every edge,
+Sage's rational neighbor basis `B`, the integral LLL basis change `U`, and
 
 \[
 T=B U,\qquad T^{\mathsf T}G_{\rm parent}T=G_{\rm child}.
 \]
 
-Its standard-library consumer independently verifies all seven rational Gram
-identities, determinants, hashes, provenance, and a closed artifact manifest.
-`research/search_e8_a2_target_neighbor_bridge.py` separately searches from
-the target lattice, optionally bidirectionally from the two known endpoints,
-and promotes a meeting only through an exact integral isometry.  A negative
-run excludes only its serialized finite beam/window.
+The standard-library verifier checked all seven rational Gram identities,
+parent links, determinants, hashes, provenance, the closed artifact manifest,
+and the composed basis identity.  The replay reproduces the public prime
+sequence `5,5,2,2,2,2,2`, chain SHA-256
+`f549651c06190e97f53947475ef9ee3149ddb175b2db2a289dd7db02d60b9d4b`,
+and terminal hash
+`620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295`.
+
+The audited bidirectional search
+[`32674002260`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32674002260)
+used six rounds, beam size five, primes `2,5`, offset zero, and 32 projective
+lines per state and prime.  It attempted 4,992 lines, serialized 4,990 exact
+moves and 4,969 Gram presentations, and found no common cross-side theta
+fingerprint or exact isometry meeting.  Thus no `qfisom` call was required.
+The closest recorded theta profiles were `(54,2726)` versus `(58,2734)` for
+origin--transparent and `(42,2798)` versus `(10,2798)` for
+origin--rootless; these distances are search heuristics, not isometry evidence.
+
+Two `p=2` constructions raised the exact Sage error
+`either y is not primitive or self is not even, maximal at 2`.  Since
+`2 | 948`, the result does not exclude a complete 2-neighbor window or graph:
+it excludes only the 4,990 successfully constructed moves in the recorded
+finite beams.  The historical beam also ranked origin candidates against the
+union of endpoint profiles, allowing the transparent direction to consume the
+available slots.  A post-hoc audit found no other recorded construction
+error, but the old broad exception handler is not accepted for future
+bounded-negative evidence.
+
+The replacement engine is fail-closed on unexpected construction errors and
+on an exhausted `qfisom` budget, verifies an end-to-end lattice transport if a
+meeting is found, and uses endpoint-balanced beams.  Its next controlled run
+will repeat the same offset-zero window with beam size eight and
+`max_isometry_checks=500`; only afterwards should a disjoint offset-32 window
+be attempted.
 
 These computations close a reproducibility gap in the positive-lattice
 search, but not the K3 geometry.  The primary-source audit in
@@ -473,11 +513,12 @@ universal moduli map is needed only for systematic deformation.
 
 ## Route ranking after the experiment
 
-1. **Close the matrix chain, then build a marked 2-/3-neighbor K3 path.**
-   Execute the matrix-preserving replays, connect `E8+A2^3` to the frozen
-   determinant-948 endpoints, reconstruct the specialized `X(6,79)` seed K3,
-   and compute the actual Riemann--Roch pencils and birational maps.  A
-   lattice meeting alone is not the moduli map and not a transported section.
+1. **Use the completed matrix replay, close the target-to-endpoint lattice
+   gap, then build a marked 2-/3-neighbor K3 path.**  First run the fail-closed
+   endpoint-balanced bounded search and require an exact integral meeting.
+   Then reconstruct the specialized `X(6,79)` seed K3 and compute the actual
+   Riemann--Roch pencils and birational maps.  A positive-lattice meeting alone
+   is not a moduli map and not a transported section.
 2. **Compute the `P3` Noether--Lefschetz divisor over the `P1/P2` surface.**
    Use the six exact remainder equations, saturate their boundaries, and
    compute a Fitting/elimination equation or a square-sieve at new good
@@ -489,22 +530,23 @@ universal moduli map is needed only for systematic deformation.
    the neighbor construction remains the shortest route to an explicit
    rank-17 model.  Move to new coordinate slices and good primes, and
    enforce group-law independence before Hensel lifting.
-4. **Obtain the discoverers' specialization certificate.**  An explicit
-   family parameter for curve #273 would immediately turn the problem into a
-   reproducible \(17+14\) specialization search.
-5. **Use structured norm-32 subfamilies.**  Search only after a symmetry or
+4. **Obtain the discoverers' construction provenance for curve #302.**  An
+   explicit family parameter would first determine whether #302 actually
+   realizes the \(17+14\) K3 accounting.  If it does, it would make that
+   construction reproducible and expose the nearest \(17+15\) directions.
+5. **Use structured norm-33 subfamilies.**  Search only after a symmetry or
    packet design reduces dimension and after local finite-quotient conditions
    are integrated into candidate generation.
 6. **Do not prioritize direct point search on #273.**  It is useful for
    auditing descent and the conditional upper-bound boundary, not as the main
    path to a new record.
 
-## Certification gate for a genuine record
+## Certification gate for the next record
 
-A candidate is not rank 31 until all of the following are exact:
+A candidate is not rank 32 until all of the following are exact:
 
 1. a nonsingular curve over \(\mathbf Q\);
-2. 31 explicit rational points satisfying its equation;
+2. 32 explicit rational points satisfying its equation;
 3. an exact independence certificate, preferably via a product of finite
    quotients \(E(\mathbf F_p)/\ell E(\mathbf F_p)\);
 4. a clear separation between the unconditional lower bound and every

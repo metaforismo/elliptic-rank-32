@@ -30,11 +30,13 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
+import os
 import sys
 import traceback
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Iterable, Iterator
+from typing import Any, Callable, Iterable, Iterator, Mapping
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -68,6 +70,16 @@ except ModuleNotFoundError:  # pragma: no cover - exercised outside Sage.
 
 SCHEMA_VERSION = 1
 EXPECTED_SAGE_PREFIX = "SageMath version 10.9"
+EXPECTED_P2_CONSTRUCTION_ERROR = (
+    "either y is not primitive or self is not even, maximal at 2"
+)
+P2_ENUMERATION_BOUNDARY = (
+    "The determinant is 948, so 2 divides the determinant.  Sage's projective-line "
+    "construction can reject the expected non-maximal/even 2-neighbor case; therefore "
+    "the recorded p=2 window is not a complete enumeration of all 2-neighbors.  Any "
+    "projective line with this classified boundary failure is recorded as attempted but "
+    "is not excluded by the bounded negative result."
+)
 TARGET_FORMULA_HASH = "dc4108ea4612195c2ba8350b0b1b35067f92ec2d49801cd2cb597cbb61129690"
 TRANSPARENT_SEED_FORMULA_HASH = "10270a49860bff642fe34bc3eb0fc213623c7dff8aca08b6df51e2832c600bff"
 FROZEN_ROOTLESS_HASH = "620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295"
@@ -111,7 +123,9 @@ def parse_primes(raw: str) -> tuple[int, ...]:
     if not values:
         raise argparse.ArgumentTypeError("at least one prime is required")
     for value in values:
-        if value < 2 or any(value % divisor == 0 for divisor in range(2, int(value**0.5) + 1)):
+        if value < 2 or any(
+            value % divisor == 0 for divisor in range(2, math.isqrt(value) + 1)
+        ):
             raise argparse.ArgumentTypeError(f"not a prime: {value}")
     if len(set(values)) != len(values):
         raise argparse.ArgumentTypeError("neighbor primes must be distinct")
@@ -146,6 +160,90 @@ def append_jsonl(path: Path, payload: dict[str, Any]) -> None:
     with path.open("a", encoding="utf-8") as handle:
         handle.write(canonical_json_bytes(payload).decode())
         handle.write("\n")
+
+
+class OutputDirectoryError(RuntimeError):
+    """Raised before a search when its evidence directory is not fresh."""
+
+
+def ensure_fresh_output_directory(output: Path) -> None:
+    """Create ``output`` or accept it only when it is an empty directory.
+
+    Refusing a non-empty directory is a mathematical evidence boundary: an old
+    ``exact-bridge.json`` must never be mistaken for the result of a new run.
+    """
+
+    if output.exists():
+        if not output.is_dir():
+            raise OutputDirectoryError(f"output exists and is not a directory: {output}")
+        if next(output.iterdir(), None) is not None:
+            raise OutputDirectoryError(f"output directory must be empty: {output}")
+        return
+    output.mkdir(parents=True)
+
+
+def classify_expected_neighbor_construction_error(
+    prime: int, exc: ValueError
+) -> dict[str, Any] | None:
+    """Classify the sole Sage construction failure that is safe to continue past."""
+
+    if prime != 2 or str(exc) != EXPECTED_P2_CONSTRUCTION_ERROR:
+        return None
+    return {
+        "error_category": "expected_sage_p2_nonmaximal_even_boundary",
+        "error_type": type(exc).__name__,
+        "error_message": str(exc),
+        "prime_neighbor_enumeration_complete": False,
+        "enumeration_boundary": P2_ENUMERATION_BOUNDARY,
+    }
+
+
+def call_neighbor_builder_fail_closed(
+    prime: int,
+    builder: Callable[[], tuple[dict[str, Any], dict[str, Any]]],
+) -> tuple[
+    tuple[dict[str, Any], dict[str, Any]] | None,
+    dict[str, Any] | None,
+]:
+    """Invoke one neighbor constructor, suppressing only the exact p=2 boundary."""
+
+    try:
+        return builder(), None
+    except ValueError as exc:
+        classification = classify_expected_neighbor_construction_error(prime, exc)
+        if classification is None:
+            raise
+        return None, classification
+
+
+def runtime_provenance(environ: Mapping[str, str] | None = None) -> dict[str, Any]:
+    """Return non-secret GitHub Actions and pinned-container provenance."""
+
+    env = os.environ if environ is None else environ
+    names = (
+        "GITHUB_ACTIONS",
+        "GITHUB_SERVER_URL",
+        "GITHUB_REPOSITORY",
+        "GITHUB_RUN_ID",
+        "GITHUB_RUN_ATTEMPT",
+        "GITHUB_SHA",
+        "GITHUB_REF",
+        "GITHUB_REF_NAME",
+        "GITHUB_WORKFLOW",
+        "GITHUB_WORKFLOW_REF",
+        "GITHUB_JOB",
+        "RUNNER_OS",
+        "RUNNER_ARCH",
+        "SEARCH_CONTAINER_IMAGE",
+        "SEARCH_CONTAINER_DIGEST",
+    )
+    provenance = {name.lower(): env[name] for name in names if env.get(name)}
+    server = env.get("GITHUB_SERVER_URL")
+    repository = env.get("GITHUB_REPOSITORY")
+    run_id = env.get("GITHUB_RUN_ID")
+    if server and repository and run_id:
+        provenance["github_run_url"] = f"{server}/{repository}/actions/runs/{run_id}"
+    return provenance
 
 
 def exact_theta_counts(gram: Any) -> tuple[int, int]:
@@ -355,20 +453,84 @@ def distance_key(state: dict[str, Any], profiles: Iterable[tuple[int, int]]) -> 
     return (distances[0], roots, norm4, state["gram_sha256"])
 
 
-def select_next_beam(candidates: list[dict[str, Any]], size: int, profiles: list[tuple[int, int]]) -> list[dict[str, Any]]:
+def exploitation_quotas(size: int, group_names: list[str]) -> dict[str, int]:
+    """Split the non-diversity beam slots deterministically across endpoints."""
+
+    if not group_names:
+        raise ValueError("at least one opposing fingerprint group is required")
+    exploitation_slots = max(1, size - 2)
+    quotient, remainder = divmod(exploitation_slots, len(group_names))
+    return {
+        name: quotient + (1 if index < remainder else 0)
+        for index, name in enumerate(group_names)
+    }
+
+
+def select_next_beam(
+    candidates: list[dict[str, Any]],
+    size: int,
+    profile_groups: Mapping[str, Iterable[tuple[int, int]]],
+) -> list[dict[str, Any]]:
     if not candidates or size <= 0:
         return []
-    if not profiles:
-        raise ValueError("at least one opposing fingerprint is required")
+    groups: list[tuple[str, tuple[tuple[int, int], ...]]] = []
+    for name, profiles in profile_groups.items():
+        frozen_profiles = tuple(profiles)
+        if frozen_profiles:
+            groups.append((name, frozen_profiles))
+    if not groups:
+        raise ValueError("at least one opposing fingerprint group is required")
     selected: list[dict[str, Any]] = []
     used: set[str] = set()
+    used_fingerprints: set[tuple[int, int]] = set()
 
-    # Exploit the closest dynamically discovered opposing fingerprints.
-    ordered = sorted(candidates, key=lambda state: distance_key(state, profiles))
-    exploit_count = max(1, size - 2)
-    for state in ordered[:exploit_count]:
-        selected.append(state)
-        used.add(state["uid"])
+    # Divide exploitation among named endpoints.  In particular, an origin
+    # beam cannot be monopolized by whichever of transparent/rootless happens
+    # to have the globally closest theta profile.
+    group_names = [name for name, _profiles in groups]
+    quotas = exploitation_quotas(size, group_names)
+    exploit_target = min(len(candidates), max(1, size - 2))
+    for name, profiles in groups:
+        group_order = sorted(
+            candidates, key=lambda state: distance_key(state, profiles)
+        )
+        taken = 0
+        # Prefer distinct theta fingerprints globally across the exploitation
+        # beam; only then use further states sharing an already selected one.
+        for distinct_only in (True, False):
+            for state in group_order:
+                if taken >= quotas[name]:
+                    break
+                fingerprint = state_fingerprint(state)
+                if state["uid"] in used:
+                    continue
+                if distinct_only and fingerprint in used_fingerprints:
+                    continue
+                selected.append(state)
+                used.add(state["uid"])
+                used_fingerprints.add(fingerprint)
+                taken += 1
+            if taken >= quotas[name]:
+                break
+
+    all_profiles = [profile for _name, profiles in groups for profile in profiles]
+    ordered = sorted(candidates, key=lambda state: distance_key(state, all_profiles))
+    # Endpoint quotas can collide on the same state.  Transfer any unfilled
+    # exploitation slots to the best unused state in the joint exact ordering.
+    for distinct_only in (True, False):
+        for state in ordered:
+            if len(selected) >= exploit_target:
+                break
+            fingerprint = state_fingerprint(state)
+            if state["uid"] in used:
+                continue
+            if distinct_only and fingerprint in used_fingerprints:
+                continue
+            selected.append(state)
+            used.add(state["uid"])
+            used_fingerprints.add(fingerprint)
+        if len(selected) >= exploit_target:
+            break
 
     # Retain two deterministic diversity points from the rest of the exact
     # ordering so that one noisy theta direction cannot collapse the beam.
@@ -427,11 +589,78 @@ def path_to(state: dict[str, Any], states: dict[str, dict[str, Any]]) -> list[di
     return path
 
 
+def rational_identity_matrix(rank: int) -> Any:
+    return Matrix(
+        QQ,
+        [[1 if row == column else 0 for column in range(rank)] for row in range(rank)],
+    )
+
+
+def compose_forward_moves(moves: list[dict[str, Any]], rank: int) -> Any:
+    """Compose child-to-parent coordinate embeddings from initial to meeting."""
+
+    composite = rational_identity_matrix(rank)
+    for move in moves:
+        transition = Matrix(QQ, move["parent_to_child_rational_transform"])
+        composite = composite * transition
+    return composite
+
+
 def bridge_record(origin_state: dict[str, Any], endpoint_state: dict[str, Any], isometry: dict[str, Any], states: dict[str, dict[str, Any]], endpoint_name: str) -> dict[str, Any]:
     origin_path = path_to(origin_state, states)
     endpoint_path = path_to(endpoint_state, states)
     origin_moves = [state["move"] for state in origin_path[1:]]
     endpoint_moves = [state["move"] for state in endpoint_path[1:]]
+    rank = origin_path[0]["gram_object"].nrows()
+    origin_composite = compose_forward_moves(origin_moves, rank)
+    endpoint_composite = compose_forward_moves(endpoint_moves, rank)
+    meeting_transform = Matrix(QQ, isometry["integral_unimodular_transform"])
+    end_to_end = origin_composite * meeting_transform * endpoint_composite.inverse()
+
+    origin_initial_gram = origin_path[0]["gram_object"]
+    endpoint_initial_gram = endpoint_path[0]["gram_object"]
+    if (
+        origin_composite.transpose() * origin_initial_gram * origin_composite
+        != origin_state["gram_object"]
+    ):
+        raise AssertionError("origin composite transform fails its Gram identity")
+    if (
+        endpoint_composite.transpose() * endpoint_initial_gram * endpoint_composite
+        != endpoint_state["gram_object"]
+    ):
+        raise AssertionError("endpoint composite transform fails its Gram identity")
+    if end_to_end.transpose() * origin_initial_gram * end_to_end != endpoint_initial_gram:
+        raise AssertionError("end-to-end bridge transform fails initial Gram identity")
+    end_to_end_determinant = end_to_end.det()
+    if abs(end_to_end_determinant) != 1:
+        raise AssertionError(
+            ("end-to-end bridge transform has non-unit determinant", end_to_end_determinant)
+        )
+
+    end_to_end_matrix = serial_rational_matrix(end_to_end)
+    transport_core = {
+        "matrix_convention": (
+            "Every edge T satisfies T^t G_parent T = G_child.  C_origin and "
+            "C_endpoint are the ordered products of their forward-path edge matrices.  "
+            "The meeting matrix Q satisfies Q^t G_origin_meeting Q = "
+            "G_endpoint_meeting.  Hence M = C_origin Q C_endpoint^-1 maps endpoint "
+            "initial coordinates into origin initial coordinates and satisfies "
+            "M^t G_origin_initial M = G_endpoint_initial."
+        ),
+        "origin_forward_composite_C_origin": serial_rational_matrix(origin_composite),
+        "endpoint_forward_composite_C_endpoint": serial_rational_matrix(endpoint_composite),
+        "endpoint_initial_to_origin_initial_transform_M": end_to_end_matrix,
+        "endpoint_initial_to_origin_initial_transform_M_sha256": payload_sha256(
+            end_to_end_matrix
+        ),
+        "M_determinant": rational_string(end_to_end_determinant),
+        "M_determinant_is_plus_or_minus_one": True,
+        "M_transpose_G_origin_initial_M_equals_G_endpoint_initial": True,
+    }
+    end_to_end_transport = {
+        **transport_core,
+        "transport_sha256": payload_sha256(transport_core),
+    }
     payload = {
         "schema_version": SCHEMA_VERSION,
         "status": "exact_neighbor_bridge_found",
@@ -449,12 +678,46 @@ def bridge_record(origin_state: dict[str, Any], endpoint_state: dict[str, Any], 
         "all_parent_child_gram_identities_verified": True,
         "all_neighbor_intersection_indices_verified": True,
         "endpoint_identification_verified_by_initial_source": True,
+        "end_to_end_transport": end_to_end_transport,
         "claim_boundary": (
             "This is an exact integral-lattice p-neighbor bridge.  It is not yet an "
-            "explicit K3 fibration switch, moduli map, rational P3 section, or rank-31 curve."
+            "explicit K3 fibration switch, moduli map, rational P3 section, or elliptic "
+            "rank-record curve."
         ),
     }
     return {**payload, "bridge_sha256": payload_sha256(payload)}
+
+
+def new_isometry_stats() -> dict[str, Any]:
+    return {
+        "pairs_seen": 0,
+        "qfisom_checked": 0,
+        "identical_hash_matches": 0,
+        "skipped_due_to_budget": 0,
+        "budget_exhausted": False,
+    }
+
+
+def identical_gram_isometry(
+    left: dict[str, Any], right: dict[str, Any]
+) -> dict[str, Any]:
+    """Promote byte-identical serialized Gram matrices outside the qfisom budget."""
+
+    if left["gram_sha256"] != right["gram_sha256"]:
+        raise AssertionError("identical-Gram promotion called with different hashes")
+    if left["gram_object"] != right["gram_object"]:
+        raise AssertionError("equal Gram hashes encode different matrices")
+    rank = int(left["gram_object"].nrows())
+    identity = [[1 if row == column else 0 for column in range(rank)] for row in range(rank)]
+    return {
+        "from_uid": left["uid"],
+        "to_uid": right["uid"],
+        "integral_unimodular_transform": identity,
+        "determinant": 1,
+        "gram_identity_verified": True,
+        "fingerprint": list(state_fingerprint(left)),
+        "promotion_method": "identical_serialized_gram_sha256_and_matrix",
+    }
 
 
 def find_meeting(
@@ -462,7 +725,7 @@ def find_meeting(
     indexes: dict[str, dict[tuple[int, int], list[dict[str, Any]]]],
     endpoint_sides: tuple[str, ...],
     isometry_log: Path,
-    counter: dict[str, int],
+    stats: dict[str, Any],
     limit: int,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], str] | None:
     if state["side"] == "origin":
@@ -475,25 +738,78 @@ def find_meeting(
         return None
 
     fingerprint = state_fingerprint(state)
+    pairs: list[tuple[dict[str, Any], dict[str, Any]]] = []
     for other_side in comparisons:
         for other in indexes[other_side].get(fingerprint, []):
-            if counter["count"] >= limit:
-                return None
             left, right = (state, other) if left_is_state else (other, state)
-            counter["count"] += 1
-            isometry = exact_isometry(left, right)
-            check_record = {
-                "check_index": counter["count"],
-                "origin_uid": left["uid"],
-                "endpoint_uid": right["uid"],
-                "endpoint_side": right["side"],
-                "fingerprint": list(fingerprint),
-                "isometric": isometry is not None,
-                "isometry": isometry,
-            }
-            append_jsonl(isometry_log, check_record)
-            if isometry is not None:
-                return left, right, isometry, right["side"]
+            pairs.append((left, right))
+
+    # Serialized Gram equality is a complete identity-isometry certificate and does not
+    # consume the much more expensive qfisom budget.  Inspect these pairs first
+    # even when a preceding qfisom window has been exhausted.
+    identical_pairs = [
+        (left, right)
+        for left, right in pairs
+        if left["gram_sha256"] == right["gram_sha256"]
+    ]
+    for left, right in identical_pairs:
+        stats["pairs_seen"] += 1
+        stats["identical_hash_matches"] += 1
+        isometry = identical_gram_isometry(left, right)
+        check_record = {
+            "pair_index": stats["pairs_seen"],
+            "qfisom_check_index": None,
+            "check_index": None,
+            "origin_uid": left["uid"],
+            "endpoint_uid": right["uid"],
+            "endpoint_side": right["side"],
+            "fingerprint": list(fingerprint),
+            "comparison_method": "identical_serialized_gram",
+            "isometric": True,
+            "isometry": isometry,
+        }
+        append_jsonl(isometry_log, check_record)
+        return left, right, isometry, right["side"]
+
+    for left, right in pairs:
+        stats["pairs_seen"] += 1
+        if stats["qfisom_checked"] >= limit:
+            stats["skipped_due_to_budget"] += 1
+            stats["budget_exhausted"] = True
+            append_jsonl(
+                isometry_log,
+                {
+                    "pair_index": stats["pairs_seen"],
+                    "qfisom_check_index": None,
+                    "check_index": None,
+                    "origin_uid": left["uid"],
+                    "endpoint_uid": right["uid"],
+                    "endpoint_side": right["side"],
+                    "fingerprint": list(fingerprint),
+                    "comparison_method": "qfisom_skipped_budget_exhausted",
+                    "isometric": None,
+                    "isometry": None,
+                },
+            )
+            return None
+        stats["qfisom_checked"] += 1
+        isometry = exact_isometry(left, right)
+        check_record = {
+            "pair_index": stats["pairs_seen"],
+            "qfisom_check_index": stats["qfisom_checked"],
+            # Compatibility with schema_version 1 artifacts.
+            "check_index": stats["qfisom_checked"],
+            "origin_uid": left["uid"],
+            "endpoint_uid": right["uid"],
+            "endpoint_side": right["side"],
+            "fingerprint": list(fingerprint),
+            "comparison_method": "pari_qfisom",
+            "isometric": isometry is not None,
+            "isometry": isometry,
+        }
+        append_jsonl(isometry_log, check_record)
+        if isometry is not None:
+            return left, right, isometry, right["side"]
     return None
 
 
@@ -508,14 +824,14 @@ def validate_configuration(args: argparse.Namespace) -> None:
         raise ValueError("line offset must be nonnegative")
     if args.max_successful_moves < 1:
         raise ValueError("max successful moves must be positive")
-    if args.max_isometry_checks < 1:
-        raise ValueError("max isometry checks must be positive")
+    if args.max_isometry_checks < 0:
+        raise ValueError("max isometry checks must be nonnegative")
 
 
 def run_search(args: argparse.Namespace) -> dict[str, Any]:
     validate_configuration(args)
     output = args.output.resolve()
-    output.mkdir(parents=True, exist_ok=True)
+    ensure_fresh_output_directory(output)
     for filename in ("states.jsonl", "moves.jsonl", "attempts.jsonl", "rounds.jsonl", "isometry-checks.jsonl"):
         (output / filename).write_text("", encoding="utf-8")
 
@@ -572,8 +888,9 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
         "duplicate_child_grams": 0,
         "unique_states_discovered": len(initial_states),
         "move_budget_exhausted": False,
+        "expected_p2_construction_boundary_failures": 0,
     }
-    isometry_counter = {"count": 0}
+    isometry_stats = new_isometry_stats()
     bridge = None
     rounds_completed = 0
 
@@ -582,6 +899,7 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
         "rounds_completed": 0,
         "counters": counters,
         "isometry_checks": 0,
+        "isometry_comparisons": dict(isometry_stats),
         "current_beams": {
             side: [state_public_record(state) for state in beam]
             for side, beam in beams.items()
@@ -629,16 +947,31 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                             "projective_line_ordinal_one_based": ordinal,
                             "projective_isotropic_vector": [int(entry) for entry in vector],
                         }
-                        try:
-                            child, move = build_neighbor(parent, prime, ordinal, vector, target_genus)
-                        except Exception as exc:
+                        built, classification = call_neighbor_builder_fail_closed(
+                            prime,
+                            lambda: build_neighbor(
+                                parent, prime, ordinal, vector, target_genus
+                            )
+                        )
+                        if classification is not None:
                             counters["failed_moves"] += 1
+                            counters["expected_p2_construction_boundary_failures"] += 1
                             side_stats["failed_moves"] += 1
                             append_jsonl(
                                 output / "attempts.jsonl",
-                                {**attempt_base, "status": "construction_error", "error": repr(exc)},
+                                {
+                                    **attempt_base,
+                                    # Preserve the schema-version-1 status while
+                                    # making the expected exception explicit.
+                                    "status": "construction_error",
+                                    "construction_error_expected_and_bounded": True,
+                                    **classification,
+                                },
                             )
                             continue
+                        if built is None:
+                            raise AssertionError("neighbor builder returned no result or classification")
+                        child, move = built
                         counters["successful_moves"] += 1
                         side_stats["successful_moves"] += 1
                         duplicate = child["gram_sha256"] in seen_by_side[side]
@@ -676,7 +1009,7 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                             indexes,
                             endpoint_sides,
                             output / "isometry-checks.jsonl",
-                            isometry_counter,
+                            isometry_stats,
                             args.max_isometry_checks,
                         )
                         if meeting is not None:
@@ -692,20 +1025,29 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                                 json.dumps(bridge, indent=2, sort_keys=True) + "\n", encoding="utf-8"
                             )
                             break
-                    if bridge is not None or counters["move_budget_exhausted"]:
+                        if isometry_stats["budget_exhausted"]:
+                            break
+                    if (
+                        bridge is not None
+                        or counters["move_budget_exhausted"]
+                        or isometry_stats["budget_exhausted"]
+                    ):
                         break
-                if bridge is not None or counters["move_budget_exhausted"]:
+                if (
+                    bridge is not None
+                    or counters["move_budget_exhausted"]
+                    or isometry_stats["budget_exhausted"]
+                ):
                     break
 
             opposing_sides = endpoint_sides if side == "origin" else ("origin",)
-            opposing_profiles = sorted(
-                {
-                    profile
-                    for opposing_side in opposing_sides
-                    for profile in indexes[opposing_side]
-                }
+            opposing_profile_groups = {
+                opposing_side: sorted(indexes[opposing_side])
+                for opposing_side in opposing_sides
+            }
+            beams[side] = select_next_beam(
+                candidates, args.beam_size, opposing_profile_groups
             )
-            beams[side] = select_next_beam(candidates, args.beam_size, opposing_profiles)
             side_stats["next_beam"] = [
                 {
                     "uid": state["uid"],
@@ -715,19 +1057,33 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                 for state in beams[side]
             ]
             round_record["sides"][side] = side_stats
-            if bridge is not None or counters["move_budget_exhausted"]:
+            if (
+                bridge is not None
+                or counters["move_budget_exhausted"]
+                or isometry_stats["budget_exhausted"]
+            ):
                 break
 
         rounds_completed = round_index
         round_record["cumulative"] = dict(counters)
-        round_record["isometry_checks"] = isometry_counter["count"]
+        round_record["isometry_checks"] = isometry_stats["qfisom_checked"]
+        round_record["isometry_comparisons"] = dict(isometry_stats)
         round_record["bridge_found"] = bridge is not None
         append_jsonl(output / "rounds.jsonl", round_record)
         checkpoint = {
-            "status": "bridge_found" if bridge is not None else "searching",
+            "status": (
+                "bridge_found"
+                if bridge is not None
+                else (
+                    "inconclusive_isometry_budget_exhausted"
+                    if isometry_stats["budget_exhausted"]
+                    else "searching"
+                )
+            ),
             "rounds_completed": rounds_completed,
             "counters": counters,
-            "isometry_checks": isometry_counter["count"],
+            "isometry_checks": isometry_stats["qfisom_checked"],
+            "isometry_comparisons": dict(isometry_stats),
             "current_beams": {
                 side: [state_public_record(state) for state in beam]
                 for side, beam in beams.items()
@@ -737,20 +1093,49 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
             json.dumps(checkpoint, indent=2, sort_keys=True) + "\n", encoding="utf-8"
         )
         print(json.dumps(round_record, sort_keys=True), flush=True)
-        if bridge is not None or counters["move_budget_exhausted"] or all(not beams[side] for side in sides):
+        if (
+            bridge is not None
+            or counters["move_budget_exhausted"]
+            or isometry_stats["budget_exhausted"]
+            or all(not beams[side] for side in sides)
+        ):
             break
+
+    if bridge is not None:
+        status = "bridge_found"
+        termination_reason = "exact_bridge_found"
+    elif isometry_stats["budget_exhausted"]:
+        status = "inconclusive_isometry_budget_exhausted"
+        termination_reason = "first_required_qfisom_pair_exceeded_budget"
+    elif counters["move_budget_exhausted"]:
+        status = "bounded_search_completed"
+        termination_reason = "successful_move_budget_exhausted"
+    elif all(not beams[side] for side in sides):
+        status = "bounded_search_completed"
+        termination_reason = "all_active_beams_empty"
+    else:
+        status = "bounded_search_completed"
+        termination_reason = "requested_rounds_completed"
 
     result: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
-        "status": "bridge_found" if bridge is not None else "bounded_search_completed",
+        "status": status,
+        "termination_reason": termination_reason,
+        "artifact_importable": not isometry_stats["budget_exhausted"],
         "truth_status": (
             "An exact p-neighbor bridge with every rational parent-to-child basis transform and an "
             "integral meeting isometry was independently verified."
             if bridge is not None
-            else "Finite negative result only: no exact bridge was found among the recorded deterministic "
-            "projective-line windows, beams, rounds, successful moves, and isometry checks."
+            else (
+                "Inconclusive: at least one equal-fingerprint lattice pair was not tested because "
+                "the qfisom budget was exhausted; this artifact is not an importable bounded-negative result."
+                if isometry_stats["budget_exhausted"]
+                else "Finite negative result only: no exact bridge was found among the recorded deterministic "
+                "projective-line windows, beams, rounds, successful moves, and isometry checks."
+            )
         ),
         "sage_version": sage_version,
+        "runtime_provenance": runtime_provenance(),
         "configuration": {
             "mode": args.mode,
             "rounds_requested": args.rounds,
@@ -762,15 +1147,44 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
             "max_successful_moves": args.max_successful_moves,
             "max_isometry_checks": args.max_isometry_checks,
             "enumeration_order": "Sage 10.9 find_primitive_p_divisible_vector__next",
+            "side_expansion_order": list(sides),
+            "sequential_order_semantics": (
+                "Rounds increase first; within each round, sides are expanded sequentially in "
+                "side_expansion_order, then parents in current-beam order, primes in the supplied "
+                "order, and projective lines in Sage's one-based ordering.  Each new state enters "
+                "the index immediately, so a later side in the same round can see earlier-side states."
+            ),
             "beam_selection": (
-                "three closest states to every dynamically discovered opposing "
-                "theta fingerprint plus two deterministic diversity states"
+                "Split max(1, beam_size - 2) exploitation slots deterministically and as "
+                "evenly as possible among named opposing endpoints in side_expansion_order; "
+                "within each quota retain states closest to that endpoint's dynamically "
+                "discovered theta profiles without duplicate states, preferring distinct theta "
+                "fingerprints before additional states with an already selected fingerprint.  "
+                "Transfer quota collisions to the joint closest ordering with the same "
+                "distinct-fingerprint preference, then retain up to two deterministic diversity "
+                "positions and fill any remaining slots in that same exact ordering.  Thus at "
+                "beam_size 8, origin receives 3 transparent-directed plus 3 rootless-directed "
+                "exploitation slots plus 2 diversity slots; each endpoint receives 6 "
+                "origin-directed exploitation slots plus 2 diversity slots."
+            ),
+            "prime_enumeration_boundaries": (
+                [
+                    {
+                        "prime": 2,
+                        "complete": False,
+                        "reason": P2_ENUMERATION_BOUNDARY,
+                    }
+                ]
+                if 2 in args.primes
+                else []
             ),
         },
         "initial_states": [state_public_record(state) for state in initial_states],
         "target_genus": str(target_genus),
         "counters": counters,
-        "isometry_checks": isometry_counter["count"],
+        # Compatibility field: this remains the number of actual qfisom calls.
+        "isometry_checks": isometry_stats["qfisom_checked"],
+        "isometry_comparisons": dict(isometry_stats),
         "bridge": bridge,
         "claim_boundary": {
             "exact_lattice_bridge_found": bridge is not None,
@@ -779,8 +1193,25 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
             "explicit_moduli_map_completed": False,
             "rational_P3_found": False,
             "rank31_curve_found": False,
+            "rank32_curve_found": False,
+            "p2_neighbor_enumeration_complete": False if 2 in args.primes else None,
+            "p2_neighbor_enumeration_boundary": (
+                P2_ENUMERATION_BOUNDARY if 2 in args.primes else None
+            ),
+            "bounded_negative_result_importable": not isometry_stats["budget_exhausted"],
             "negative_result_scope": (
-                "Only the serialized finite window was excluded; the p-neighbor graph and rank-31 problem remain open."
+                "No bounded-negative conclusion is importable because a required equal-fingerprint "
+                "pair was skipped when the qfisom budget ended."
+                if isometry_stats["budget_exhausted"]
+                else (
+                    "Only successfully constructed neighbors in the serialized finite window "
+                    "were excluded.  Classified p=2 boundary-failure lines were attempted but "
+                    "are not excluded; the p-neighbor graph remains open, and this artifact "
+                    "does not settle any elliptic-rank record problem."
+                    if 2 in args.primes
+                    else "Only the serialized finite window was excluded; the p-neighbor graph "
+                    "remains open, and this artifact does not settle any elliptic-rank record problem."
+                )
             ),
         },
         "source_files": {
@@ -815,12 +1246,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--mode", choices=("forward", "bidirectional"), default="bidirectional")
     parser.add_argument("--rounds", type=int, default=6)
-    parser.add_argument("--beam-size", type=int, default=5)
+    parser.add_argument("--beam-size", type=int, default=8)
     parser.add_argument("--primes", type=parse_primes, default=parse_primes("2,5"))
     parser.add_argument("--line-offset", type=int, default=0)
     parser.add_argument("--lines-per-prime", dest="lines_per_prime", type=int, default=32)
     parser.add_argument("--max-successful-moves", type=int, default=10000)
-    parser.add_argument("--max-isometry-checks", type=int, default=250)
+    parser.add_argument("--max-isometry-checks", type=int, default=500)
     return parser
 
 
@@ -829,21 +1260,51 @@ def main() -> None:
     args = parser.parse_args()
     if not SAGE_AVAILABLE:
         parser.error("this exact computation requires `sage -python` (SageMath 10.9)")
-    args.output.mkdir(parents=True, exist_ok=True)
+    args.output = args.output.resolve()
     try:
         result = run_search(args)
+    except OutputDirectoryError as exc:
+        # Never overwrite a prior result or stale exact-bridge artifact merely
+        # to record that the new invocation refused the directory.
+        print(
+            json.dumps(
+                {
+                    "schema_version": SCHEMA_VERSION,
+                    "status": "error",
+                    "termination_reason": "output_directory_not_fresh",
+                    "error": repr(exc),
+                    "runtime_provenance": runtime_provenance(),
+                    "claim_boundary": {
+                        "mathematical_search_conclusion_available": False,
+                        "rank31_curve_found": False,
+                        "rank32_curve_found": False,
+                    },
+                },
+                indent=2,
+                sort_keys=True,
+            ),
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from exc
     except Exception as exc:
         result = {
             "schema_version": SCHEMA_VERSION,
             "status": "error",
+            "termination_reason": "unhandled_search_error",
             "error": repr(exc),
             "traceback": traceback.format_exc(),
-            "claim_boundary": "No mathematical search conclusion may be drawn from an error run.",
+            "runtime_provenance": runtime_provenance(),
+            "claim_boundary": {
+                "mathematical_search_conclusion_available": False,
+                "rank31_curve_found": False,
+                "rank32_curve_found": False,
+                "statement": "No mathematical search conclusion may be drawn from an error run.",
+            },
         }
     result_path = args.output / "result.json"
     result_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)
-    if result["status"] == "error":
+    if result["status"] in {"error", "inconclusive_isometry_budget_exhausted"}:
         raise SystemExit(1)
 
 

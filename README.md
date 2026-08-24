@@ -1,29 +1,56 @@
-# Elliptic rank 31: certificate-first research pipeline
+# Elliptic-rank frontier: rank 31 certified, rank 32 open
 
 Canonical repository: [`metaforismo/elliptic-rank-31`](https://github.com/metaforismo/elliptic-rank-31).
-The name is the open target, not a claim that rank 31 has already been found.
+The repository name records the milestone it was created to pursue; the next
+open record target is now rank 32.
 
-This repository studies the open constructive target
+This repository now studies the open constructive target
 
 \[
-\operatorname{rank} E(\mathbb Q) \ge 31
+\operatorname{rank} E(\mathbb Q) \ge 32
 \]
 
 by optimizing for a final proof certificate, not for a large analytic-rank score.
 
 ## Current truth status
 
-**rank-30 baseline certified; rank 31 unsolved**
+**rank-31 baseline certified; rank 32 unsolved**
 
-ICARM curve #273, submitted publicly by `ranksunbounded` on 2026-08-20,
-supplies the first public curve with 30 explicitly certified independent
-rational points. This repository now independently replays that unconditional
-lower bound with exact rational and finite-group arithmetic. It has not found
-a curve with 31 certified independent rational points.
+ICARM curve #302, submitted by Ava Howell on 2026-08-23 and credited to
+Claude, Levent Alpöge, and Ava Howell, supplies 31 explicitly certified
+independent rational points.  This repository independently replays that
+unconditional lower bound with exact rational and finite-group arithmetic.
+The separate statement that its rank is exactly 31 uses GRH+BSD.  This project
+did not discover #302 and has not found a curve with 32 certified independent
+rational points.
 
-## Baseline result
+## Rank-31 record baseline
 
 For
+
+```text
+y^2 + x*y + y = x^3 + x^2 + A*x + B
+A = -1284727764113567728281797636015784768866707681415849262157224232063
+B = 560368321454261339256859338901915312332769858684945406858043869199456710681989058863306170127006181
+```
+
+the files under `baseline/` verify all 31 public points exactly, prove trivial
+rational torsion, and give a full-rank binary image matrix in a
+product of finite quotients \(E(\mathbf F_p)/2E(\mathbf F_p)\). Therefore,
+unconditionally,
+
+\[
+\operatorname{rank} E(\mathbb Q)\ge31.
+\]
+
+The reported exact-rank-31 statement uses GRH+BSD and is kept separate from
+this certificate.
+
+## Historical rank-30 baseline
+
+ICARM curve #273, submitted publicly by `ranksunbounded` on 2026-08-20, was
+the first public curve with 30 explicitly certified independent rational
+points.  The repository retains its independent exact certificate for
 
 ```text
 y^2 + x*y = x^3 + A*x + B
@@ -31,17 +58,8 @@ A = -201769035260418549083594900060734240952308696994802735114305555
 B = 1151107939141058565733479426024323225135665982951300586808823640527729578307228357301072889377
 ```
 
-the files under `baseline/` verify all 30 public points exactly, prove trivial
-rational torsion, and give a full-rank 30-by-30 binary image matrix in a
-product of finite quotients \(E(\mathbf F_p)/2E(\mathbf F_p)\). Therefore,
-unconditionally,
-
-\[
-\operatorname{rank} E(\mathbb Q)\ge30.
-\]
-
-The reported exact-rank statement uses GRH+BSD and is kept separate from this
-certificate.
+The 30-point lower bound is unconditional; the separate exact-rank-30
+statement uses GRH+BSD.
 
 ## Historical rank-29 baseline
 
@@ -77,7 +95,7 @@ unconditional exact-rank statement.
 
 ```text
 curve.json, points.json    historical exact rank-29 inputs
-baseline/                  exact rank-29 and ICARM #273 rank-30 verifiers
+baseline/                  exact rank-29, rank-30, and rank-31 verifiers
 certificates/              compact machine-readable proof summaries
 research/                  construction theorems and bounded experiments
 tests/                     exact regression and certificate tests
@@ -89,6 +107,7 @@ verify_exact.py            dependency-free historical verifier
 ```bash
 python3 verify_exact.py
 python3 baseline/verify_rank30_icarm273.py
+python3 baseline/verify_rank31_icarm302.py
 python3 -m unittest discover -s tests -v
 ```
 
@@ -116,10 +135,12 @@ branch code, compute all twist Mordell-Weil lattices, same-character rank
 multiplicities, product twists, successive minima, and global-solubility data.
 Only then sieve specializations.
 
-## Current rank-31 frontier
+## Current rank-32 frontier
 
-The leading route is to recover the hidden rank-17 K3 family and search for a
-specialization with 14 exceptional directions, i.e. \(31=17+14\). The exact
+The leading inherited route is to recover the hidden rank-17 K3 family and
+search for a specialization with 15 exceptional directions, i.e.
+\(32=17+15\).  The calculations below were begun for the earlier
+\(31=17+14\) target and remain reusable construction evidence.  The exact
 GF(31) E6/MW3 replay in
 `research/replay_e6_mw3_p2_split_cores.py` exhausts one published seven-core
 tranche: its only geometric P2 hit satisfies
@@ -139,7 +160,8 @@ P_1+2P_3=O.
 
 Thus these five nondegenerate slices contain no MW-rank-3 seed. This is a new
 bounded negative result, not a global obstruction. See
-`research/rank31_program.md` and
+`research/rank32_program.md`, the historical
+`research/rank31_program.md`, and
 `certificates/e6_mw3_coordinate_slices_gf31_summary.json` for exact claim
 boundaries.
 
@@ -198,7 +220,8 @@ exhaustive at these larger primes.
 All eight retained dense-chart representatives are smooth points of a
 two-dimensional `P1/P2` incidence locus.  One has been lifted formally through
 `11^8`, but only over `Z_11`: no rational lift, `P3`, characteristic-zero target
-triple, or rank-31 curve has been obtained.
+triple or characteristic-zero curve has been obtained from this K3 route; in
+particular it has not produced a rank-32 candidate.
 
 The complete three-section system is now explicit: 62 variables, 67 raw
 equations, six exact local syzygies, and a reduced `61 x 62` Jacobian.  On the
@@ -206,21 +229,43 @@ infinity open, the `P3` equation triangularizes to six numerator equations of
 degrees `21,19,17,15,14,12`.  Their saturated elimination is the concrete
 Noether--Lefschetz divisor still to compute.
 
-There is also a new exact lattice bridge to Elkies' `X(6,79)` construction.
-The positive `E8+A2^3` target lattice has rank 17, determinant 948, exactly 258
-roots, and the same cyclic finite quadratic form as both the published period
-lattice and the transparent determinant-948 neighbor seed.  Its Clifford
-invariants recover quaternion discriminant 6 and level 79.  This strongly
-identifies the correct K3 landscape, but an explicit neighbor/moduli map and
-transported rational Weierstrass model are still missing.
+There is also an exact discriminant-form and Clifford identification with
+Elkies' `X(6,79)` landscape.  The positive `E8+A2^3` target lattice has rank
+17, determinant 948, exactly 258 roots, and the same cyclic finite quadratic
+form as both the published period lattice and the transparent determinant-948
+neighbor seed.  Its Clifford invariants recover quaternion discriminant 6 and
+level 79.  This strongly identifies the correct K3 landscape, but an integral
+target-to-endpoint bridge, explicit neighbor/moduli map, and transported
+rational Weierstrass model are still missing.
 
-The branch now contains two Sage 10.9 integration workflows for the next
-exact step.  The first replays the public seven-edge neighbor chain while
-retaining every rational basis matrix `T=B*U` and checking
-`T^t G_parent T=G_child`; the second performs a bounded deterministic search
-from the `E8+A2^3` target toward the transparent and rootless endpoint
-lattices, promoting a meeting only after an exact integral isometry check.
-These workflows create lattice evidence, not a rank-31 claim.
+Two Sage 10.9 Actions computations have now completed.  Run
+[`32673843229`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32673843229)
+exactly replayed the public seven-edge Kneser chain with primes
+`5,5,2,2,2,2,2`, retained every rational basis transition, verified all
+identities `T^t G_parent T=G_child`, and verified the composed basis identity.
+It reproduces chain SHA-256
+`f549651c06190e97f53947475ef9ee3149ddb175b2db2a289dd7db02d60b9d4b`
+and terminal Gram hash
+`620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295`.
+
+The audited bounded search
+[`32674002260`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32674002260)
+attempted 4,992 deterministic projective lines and serialized 4,990 exact
+neighbor moves, 24 repeated child Grams, and 4,969 Gram presentations.  It
+found no common cross-side theta fingerprint, required no `qfisom` comparison,
+and found no exact target-to-endpoint bridge.  Two enumerated `p=2` vectors
+were rejected at Sage's non-maximal/even boundary; because `2 | 948`, this is
+not a complete enumeration of the 2-neighbor graph.  The negative scope is
+therefore the 4,990 successfully constructed moves in the recorded beams, not
+all 2-neighbors.  The historical engine was audited post hoc and is
+superseded for future bounded-negative runs by fail-closed error and
+isometry-budget handling.
+
+The next controlled experiment repeats the offset-zero window with an
+endpoint-balanced beam of size eight: three origin states directed toward the
+transparent endpoint, three toward the rootless endpoint, and two diversity
+states.  These computations are exact positive-lattice evidence; they do not
+provide a marked K3 fibration switch, rational `P3`, or rank-32 curve.
 
 A primary-source audit also sharpens the missing geometric layer.  A Kneser
 `p`-neighbor between positive lattices is not automatically an elliptic
@@ -233,15 +278,17 @@ remain routing heuristics until separately geometrized.  See
 `research/kneser_to_weierstrass_transport_requirements.md`.
 
 Exact counts, proofs, and claim boundaries are in
-`research/rank31_program.md`,
+`research/rank32_program.md`, `research/rank31_program.md`,
 `research/e8_a2_semistable_two_split_full_incidence.md`, and
-`research/e8_a2_shimura_bridge.md`.
+`research/e8_a2_shimura_bridge.md`.  Compact run audits are in
+`certificates/rank17_exact_neighbor_chain_run_32673843229.json` and
+`certificates/e8_a2_target_neighbor_bridge_run_32674002260.json`.
 
 ## Certificate policy
 
-A future rank-31 promotion requires a specified Weierstrass equation, 31 full
+A future rank-32 promotion requires a specified Weierstrass equation, 32 full
 rational points, exact substitutions, torsion, a canonical-height matrix,
 positive determinant, an independent exact independence certificate, saturation,
 software versions, provenance, hashes, and verification in a second system.
 
-See `STATUS.frontier.json` and `research/rank31_program.md`.
+See `STATUS.frontier.json` and `research/rank32_program.md`.

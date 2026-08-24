@@ -1,0 +1,1000 @@
+{
+  "binary_matrix": {
+    "column_count": 34,
+    "orientation": "31 point rows by 34 local-quotient coordinates",
+    "pivot_columns_zero_based": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      30,
+      32
+    ],
+    "rank": 31,
+    "row_count": 31,
+    "rows": [
+      "1001011110110111101101000010010110",
+      "1101100001111000100000100100111011",
+      "0001110001101010000100001000011010",
+      "0111011101000101010111100000100101",
+      "1100000111000101010111110110011011",
+      "0000010101000110101111000011111001",
+      "0100100110110111011110010111100001",
+      "0001011011101110011010101111110011",
+      "1011011000100110010001110011100010",
+      "1110000011001101011010011101101100",
+      "1010001000011010001110011011011110",
+      "1000101101100111100110010110010100",
+      "1001111001101001010100110000111000",
+      "0100001111101110110001111100011100",
+      "1011101010010101011011010100010101",
+      "1000001011110101010010000111110000",
+      "0001010101010000111010011000001110",
+      "1000010001011001010000001011000101",
+      "1000101010100001110000010000100010",
+      "0101101110100001111101101101001100",
+      "1100110000100101011111111111110011",
+      "1111001011000111010101000110110100",
+      "0111100101110110011000000000111011",
+      "0011111011011100010111100110111001",
+      "0000000011111011101101111011111100",
+      "1100100100111010101001001010010011",
+      "0100010100100110110111011110110001",
+      "1001011110000100010001101100010100",
+      "1001000011010000110111100101010101",
+      "1011110011100001011011101110001011",
+      "0001100011011100111000110111000111"
+    ]
+  },
+  "candidate_id": "icarm_curve_302_rank31_2026",
+  "certificate_sha256": "570c8d2abf4355b0a3481bc209267755c13dd170dc21b17e6750339d7c4e8936",
+  "claim": "The 31 listed rational points are Z-linearly independent; rank E(Q) >= 31.",
+  "conditional_assumptions": [],
+  "conditional_exact_rank_note": "The separate reported assertion rank E(Q)=31 uses GRH+BSD and is not part of this unconditional lower-bound certificate.",
+  "curve": {
+    "a_invariants": [
+      "1",
+      "1",
+      "1",
+      "-1284727764113567728281797636015784768866707681415849262157224232063",
+      "560368321454261339256859338901915312332769858684945406858043869199456710681989058863306170127006181"
+    ],
+    "invariants": {
+      "b2": "5",
+      "b4": "-2569455528227135456563595272031569537733415362831698524314448464125",
+      "b6": "2241473285817045357027437355607661249331079434739781627432175476797826842727956235453224680508024725",
+      "b8": "-1650525427884246923248964506545175486416734280205799438708136552799558766412088820384704706807451802688944839947839868366792217973000",
+      "c4": "61666932677451250957526286528757668905601968707960764583546763139025",
+      "c6": "-484158229736481797117926468811255292357508238788175012972498868670847390044003856563630907590456883225",
+      "discriminant": "56986667162894850943626331069759320443067423220527305082244725946223212417010574363800489149279120357391198820328667683955054948591887684940751932057558936585975074155693048247805850350226862080000"
+    },
+    "reported_conductor": "9058040138868690262858791849730511364320517732812998655982537144987090191789878126630171056773171491466723174687496041392810438595512770829603147288102844437462050",
+    "short_model": {
+      "A": "-1665007182291183775853209736276457060451253155114940643755762604753675",
+      "B": "26144544405770017044368029315807785787305444894561450700514938908225759062376208254436069009884671694150",
+      "equation": "Y^2 = X^3 + A*X + B",
+      "formula": {
+        "A": "-27*c4",
+        "B": "-54*c6",
+        "X": "36*x+3*b2",
+        "Y": "108*(2*y+a1*x+a3)"
+      },
+      "map": {
+        "X": "36*x+3*(5)",
+        "Y": "108*(2*y+(1)*x+(1))"
+      }
+    }
+  },
+  "implementation": {
+    "language": "Python standard library",
+    "script": "baseline/verify_rank31_icarm302.py",
+    "script_sha256": "0ade5a9900fca2cfadafb9d136b18f4f2b10d541522cf45633babe751ab9c22d",
+    "shared_exact_group_arithmetic": "baseline/verify_rank29_mod2.py",
+    "shared_exact_group_arithmetic_sha256": "9de1395f0d84e505989e2458ee172babe3f689d7eca0fd313ab48c1543fbedc6"
+  },
+  "independence_argument": "Any integral relation reduces in every quotient E(F_p)/2E(F_p). The binary matrix has row rank 31, so every coefficient is even. Halving the coefficients gives a point killed by 2; trivial rational torsion makes it O. Infinite descent forces every coefficient to be zero.",
+  "input_payload_sha256": "c6bda13bd4909b368f18a475825d87669537724c9b9b8ed325b2efcb867f02b9",
+  "local_prime_search": {
+    "bad_reduction_skipped": 12,
+    "last_prime_considered": 701,
+    "maximum_prime": 5000,
+    "nonintegral_point_reduction_skipped": 4,
+    "order": "primes p >= 5 in increasing order",
+    "primes_considered": 124,
+    "quotient_dimension_not_two_skipped": 91,
+    "selection": "good reduction, every listed point affine-integral at p, and dim_F2 E(F_p)/2E(F_p) = 2",
+    "termination": "first selected-prime prefix with binary row rank 31"
+  },
+  "local_quotients": [
+    {
+      "group_order": 120,
+      "matrix_rank_after_prime": 2,
+      "point_vectors": [
+        "10",
+        "11",
+        "00",
+        "01",
+        "11",
+        "00",
+        "01",
+        "00",
+        "10",
+        "11",
+        "10",
+        "10",
+        "10",
+        "01",
+        "10",
+        "10",
+        "00",
+        "10",
+        "10",
+        "01",
+        "11",
+        "11",
+        "01",
+        "00",
+        "00",
+        "11",
+        "01",
+        "10",
+        "10",
+        "10",
+        "00"
+      ],
+      "prime": 113,
+      "quotient_basis_representatives": [
+        [
+          0,
+          38
+        ],
+        [
+          8,
+          22
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 268,
+      "matrix_rank_after_prime": 4,
+      "point_vectors": [
+        "01",
+        "01",
+        "01",
+        "11",
+        "00",
+        "00",
+        "00",
+        "01",
+        "11",
+        "10",
+        "10",
+        "00",
+        "01",
+        "00",
+        "11",
+        "00",
+        "01",
+        "00",
+        "00",
+        "01",
+        "00",
+        "11",
+        "11",
+        "11",
+        "00",
+        "00",
+        "00",
+        "01",
+        "01",
+        "11",
+        "01"
+      ],
+      "prime": 241,
+      "quotient_basis_representatives": [
+        [
+          0,
+          100
+        ],
+        [
+          5,
+          0
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 292,
+      "matrix_rank_after_prime": 6,
+      "point_vectors": [
+        "01",
+        "10",
+        "11",
+        "01",
+        "00",
+        "01",
+        "10",
+        "01",
+        "01",
+        "00",
+        "00",
+        "10",
+        "11",
+        "00",
+        "10",
+        "00",
+        "01",
+        "01",
+        "10",
+        "10",
+        "11",
+        "00",
+        "10",
+        "11",
+        "00",
+        "10",
+        "01",
+        "01",
+        "00",
+        "11",
+        "10"
+      ],
+      "prime": 263,
+      "quotient_basis_representatives": [
+        [
+          0,
+          11
+        ],
+        [
+          1,
+          39
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 292,
+      "matrix_rank_after_prime": 8,
+      "point_vectors": [
+        "11",
+        "00",
+        "00",
+        "11",
+        "01",
+        "01",
+        "01",
+        "10",
+        "10",
+        "00",
+        "10",
+        "11",
+        "10",
+        "11",
+        "10",
+        "10",
+        "01",
+        "00",
+        "10",
+        "11",
+        "00",
+        "10",
+        "01",
+        "10",
+        "00",
+        "01",
+        "01",
+        "11",
+        "00",
+        "00",
+        "00"
+      ],
+      "prime": 281,
+      "quotient_basis_representatives": [
+        [
+          5,
+          21
+        ],
+        [
+          16,
+          65
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 312,
+      "matrix_rank_after_prime": 10,
+      "point_vectors": [
+        "10",
+        "01",
+        "01",
+        "01",
+        "11",
+        "01",
+        "10",
+        "11",
+        "00",
+        "11",
+        "00",
+        "01",
+        "01",
+        "11",
+        "10",
+        "11",
+        "01",
+        "01",
+        "10",
+        "10",
+        "00",
+        "11",
+        "01",
+        "11",
+        "11",
+        "00",
+        "00",
+        "10",
+        "11",
+        "11",
+        "11"
+      ],
+      "prime": 283,
+      "quotient_basis_representatives": [
+        [
+          2,
+          63
+        ],
+        [
+          7,
+          5
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 344,
+      "matrix_rank_after_prime": 12,
+      "point_vectors": [
+        "11",
+        "11",
+        "10",
+        "00",
+        "00",
+        "00",
+        "11",
+        "10",
+        "10",
+        "00",
+        "01",
+        "10",
+        "10",
+        "10",
+        "01",
+        "11",
+        "01",
+        "01",
+        "10",
+        "10",
+        "10",
+        "00",
+        "11",
+        "01",
+        "11",
+        "11",
+        "10",
+        "00",
+        "01",
+        "10",
+        "01"
+      ],
+      "prime": 337,
+      "quotient_basis_representatives": [
+        [
+          6,
+          101
+        ],
+        [
+          9,
+          72
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 368,
+      "matrix_rank_after_prime": 14,
+      "point_vectors": [
+        "01",
+        "10",
+        "10",
+        "01",
+        "01",
+        "01",
+        "01",
+        "11",
+        "01",
+        "11",
+        "10",
+        "01",
+        "10",
+        "11",
+        "01",
+        "01",
+        "00",
+        "10",
+        "00",
+        "00",
+        "01",
+        "01",
+        "01",
+        "11",
+        "10",
+        "10",
+        "01",
+        "01",
+        "00",
+        "00",
+        "11"
+      ],
+      "prime": 347,
+      "quotient_basis_representatives": [
+        [
+          1,
+          151
+        ],
+        [
+          2,
+          34
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 396,
+      "matrix_rank_after_prime": 16,
+      "point_vectors": [
+        "11",
+        "00",
+        "10",
+        "01",
+        "01",
+        "10",
+        "11",
+        "10",
+        "10",
+        "01",
+        "10",
+        "11",
+        "01",
+        "10",
+        "01",
+        "01",
+        "00",
+        "01",
+        "01",
+        "01",
+        "01",
+        "11",
+        "10",
+        "00",
+        "11",
+        "10",
+        "10",
+        "00",
+        "00",
+        "01",
+        "00"
+      ],
+      "prime": 373,
+      "quotient_basis_representatives": [
+        [
+          1,
+          82
+        ],
+        [
+          2,
+          167
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 424,
+      "matrix_rank_after_prime": 18,
+      "point_vectors": [
+        "10",
+        "10",
+        "00",
+        "01",
+        "01",
+        "10",
+        "01",
+        "01",
+        "01",
+        "01",
+        "00",
+        "10",
+        "01",
+        "11",
+        "01",
+        "01",
+        "11",
+        "01",
+        "11",
+        "11",
+        "01",
+        "01",
+        "01",
+        "01",
+        "10",
+        "10",
+        "11",
+        "01",
+        "11",
+        "01",
+        "11"
+      ],
+      "prime": 389,
+      "quotient_basis_representatives": [
+        [
+          1,
+          152
+        ],
+        [
+          2,
+          70
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 504,
+      "matrix_rank_after_prime": 20,
+      "point_vectors": [
+        "11",
+        "00",
+        "01",
+        "01",
+        "01",
+        "11",
+        "11",
+        "10",
+        "00",
+        "10",
+        "11",
+        "01",
+        "01",
+        "00",
+        "10",
+        "00",
+        "10",
+        "00",
+        "00",
+        "11",
+        "11",
+        "01",
+        "10",
+        "01",
+        "11",
+        "10",
+        "01",
+        "00",
+        "01",
+        "10",
+        "10"
+      ],
+      "prime": 467,
+      "quotient_basis_representatives": [
+        [
+          2,
+          119
+        ],
+        [
+          6,
+          152
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 484,
+      "matrix_rank_after_prime": 22,
+      "point_vectors": [
+        "01",
+        "00",
+        "00",
+        "11",
+        "11",
+        "11",
+        "10",
+        "10",
+        "01",
+        "10",
+        "10",
+        "10",
+        "00",
+        "01",
+        "11",
+        "10",
+        "10",
+        "00",
+        "00",
+        "01",
+        "11",
+        "01",
+        "00",
+        "11",
+        "01",
+        "01",
+        "11",
+        "01",
+        "11",
+        "11",
+        "00"
+      ],
+      "prime": 491,
+      "quotient_basis_representatives": [
+        [
+          1,
+          234
+        ],
+        [
+          3,
+          232
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 540,
+      "matrix_rank_after_prime": 24,
+      "point_vectors": [
+        "00",
+        "10",
+        "00",
+        "10",
+        "11",
+        "00",
+        "01",
+        "10",
+        "11",
+        "01",
+        "01",
+        "01",
+        "11",
+        "11",
+        "01",
+        "00",
+        "01",
+        "00",
+        "01",
+        "10",
+        "11",
+        "00",
+        "00",
+        "10",
+        "11",
+        "00",
+        "01",
+        "10",
+        "10",
+        "10",
+        "11"
+      ],
+      "prime": 541,
+      "quotient_basis_representatives": [
+        [
+          4,
+          199
+        ],
+        [
+          7,
+          77
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 624,
+      "matrix_rank_after_prime": 26,
+      "point_vectors": [
+        "00",
+        "01",
+        "10",
+        "00",
+        "01",
+        "00",
+        "01",
+        "11",
+        "00",
+        "11",
+        "10",
+        "01",
+        "00",
+        "11",
+        "01",
+        "01",
+        "10",
+        "10",
+        "00",
+        "11",
+        "11",
+        "01",
+        "00",
+        "01",
+        "10",
+        "10",
+        "11",
+        "11",
+        "01",
+        "11",
+        "01"
+      ],
+      "prime": 601,
+      "quotient_basis_representatives": [
+        [
+          10,
+          192
+        ],
+        [
+          11,
+          204
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 632,
+      "matrix_rank_after_prime": 28,
+      "point_vectors": [
+        "10",
+        "00",
+        "00",
+        "00",
+        "10",
+        "11",
+        "11",
+        "11",
+        "11",
+        "01",
+        "11",
+        "10",
+        "00",
+        "00",
+        "00",
+        "11",
+        "00",
+        "11",
+        "00",
+        "01",
+        "11",
+        "10",
+        "00",
+        "10",
+        "11",
+        "10",
+        "10",
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "prime": 607,
+      "quotient_basis_representatives": [
+        [
+          0,
+          84
+        ],
+        [
+          1,
+          136
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 636,
+      "matrix_rank_after_prime": 29,
+      "point_vectors": [
+        "01",
+        "11",
+        "01",
+        "10",
+        "01",
+        "11",
+        "10",
+        "11",
+        "10",
+        "10",
+        "01",
+        "01",
+        "11",
+        "01",
+        "01",
+        "11",
+        "00",
+        "00",
+        "10",
+        "00",
+        "11",
+        "11",
+        "11",
+        "11",
+        "11",
+        "01",
+        "11",
+        "01",
+        "01",
+        "00",
+        "00"
+      ],
+      "prime": 617,
+      "quotient_basis_representatives": [
+        [
+          2,
+          47
+        ],
+        [
+          5,
+          180
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 684,
+      "matrix_rank_after_prime": 30,
+      "point_vectors": [
+        "01",
+        "10",
+        "10",
+        "01",
+        "10",
+        "10",
+        "00",
+        "00",
+        "00",
+        "11",
+        "11",
+        "01",
+        "10",
+        "11",
+        "01",
+        "00",
+        "11",
+        "01",
+        "00",
+        "11",
+        "00",
+        "01",
+        "10",
+        "10",
+        "11",
+        "00",
+        "00",
+        "01",
+        "01",
+        "10",
+        "01"
+      ],
+      "prime": 653,
+      "quotient_basis_representatives": [
+        [
+          2,
+          285
+        ],
+        [
+          3,
+          58
+        ]
+      ],
+      "quotient_dimension": 2
+    },
+    {
+      "group_order": 700,
+      "matrix_rank_after_prime": 31,
+      "point_vectors": [
+        "10",
+        "11",
+        "10",
+        "01",
+        "11",
+        "01",
+        "01",
+        "11",
+        "10",
+        "00",
+        "10",
+        "00",
+        "00",
+        "00",
+        "01",
+        "00",
+        "10",
+        "01",
+        "10",
+        "00",
+        "11",
+        "00",
+        "11",
+        "01",
+        "00",
+        "11",
+        "01",
+        "00",
+        "01",
+        "11",
+        "11"
+      ],
+      "prime": 701,
+      "quotient_basis_representatives": [
+        [
+          2,
+          68
+        ],
+        [
+          4,
+          75
+        ]
+      ],
+      "quotient_dimension": 2
+    }
+  ],
+  "point_count": 31,
+  "point_membership": "verified exactly over Q on both the generalized and short models",
+  "proof_type": "exact reduction to a product of E(F_p)/2E(F_p)",
+  "schema_version": 1,
+  "source": {
+    "json_url": "https://elliptic-rank.icarm.cloud/curve/302.json",
+    "submitted_at_utc": "2026-08-23 20:02:58",
+    "submitted_by": "Ava Howell",
+    "url": "https://elliptic-rank.icarm.cloud/curve/302"
+  },
+  "torsion_certificate": {
+    "argument": "At the good primes 17 and 31 the group orders are 26 and 43, with gcd 1. A rational torsion point of prime order ell injects under good reduction away from ell. Orders ell different from both residue characteristics would divide the gcd; the two residue-characteristic cases are excluded by the opposite reduction, as checked explicitly.",
+    "conclusion": "E(Q)_tors is trivial",
+    "cross_characteristic_exclusions_verified": true,
+    "group_order_gcd": 1,
+    "reductions": [
+      {
+        "group_order": 26,
+        "prime": 17
+      },
+      {
+        "group_order": 43,
+        "prime": 31
+      }
+    ],
+    "search": {
+      "last_prime_considered": 31,
+      "maximum_prime": 5000,
+      "order": "primes p >= 5 in increasing order",
+      "primes_considered": 9
+    }
+  }
+}

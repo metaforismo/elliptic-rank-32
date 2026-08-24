@@ -24,9 +24,9 @@ on:
         required: true
         default: "6"
       beam_size:
-        description: States retained per active side and round
+        description: States retained after each side's sequential expansion
         required: true
-        default: "5"
+        default: "8"
       primes:
         description: Comma-separated p-neighbor primes
         required: true
@@ -44,9 +44,9 @@ on:
         required: true
         default: "10000"
       max_isometry_checks:
-        description: Hard bound on exact PARI qfisom comparisons
+        description: Hard bound on PARI qfisom calls; identical Grams are outside it
         required: true
-        default: "250"
+        default: "500"
 
 permissions:
   contents: read
@@ -78,20 +78,30 @@ jobs:
           {
             echo "MODE=${INPUT_MODE:-bidirectional}"
             echo "ROUNDS=${INPUT_ROUNDS:-6}"
-            echo "BEAM_SIZE=${INPUT_BEAM_SIZE:-5}"
+            echo "BEAM_SIZE=${INPUT_BEAM_SIZE:-8}"
             echo "PRIMES=${INPUT_PRIMES:-2,5}"
             echo "LINE_OFFSET=${INPUT_LINE_OFFSET:-0}"
             echo "LINES_PER_PRIME=${INPUT_LINES_PER_PRIME:-32}"
             echo "MAX_SUCCESSFUL_MOVES=${INPUT_MAX_SUCCESSFUL_MOVES:-10000}"
-            echo "MAX_ISOMETRY_CHECKS=${INPUT_MAX_ISOMETRY_CHECKS:-250}"
+            echo "MAX_ISOMETRY_CHECKS=${INPUT_MAX_ISOMETRY_CHECKS:-500}"
           } >> "$GITHUB_ENV"
 
       - name: Search and preserve exact rational p-neighbor embeddings
         shell: bash
+        env:
+          SEARCH_CONTAINER_IMAGE: sagemath/sagemath:10.9
+          SEARCH_CONTAINER_DIGEST: sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/e8-a2-target-neighbor-bridge
-          sage -python research/search_e8_a2_target_neighbor_bridge.py \
+          set -uo pipefail
+          out=/tmp/e8-a2-target-neighbor-bridge
+          log=/tmp/e8-a2-target-neighbor-bridge.run.log
+          if [[ -e "$out" ]]; then
+            echo "refusing pre-existing output path: $out" >&2
+            exit 1
+          fi
+          set +e
+          timeout --foreground --signal=TERM --kill-after=60s 350m \
+            sage -python research/search_e8_a2_target_neighbor_bridge.py \
             --output /tmp/e8-a2-target-neighbor-bridge \
             --mode "$MODE" \
             --rounds "$ROUNDS" \
@@ -101,7 +111,13 @@ jobs:
             --lines-per-prime "$LINES_PER_PRIME" \
             --max-successful-moves "$MAX_SUCCESSFUL_MOVES" \
             --max-isometry-checks "$MAX_ISOMETRY_CHECKS" \
-            | tee /tmp/e8-a2-target-neighbor-bridge/run.log
+            | tee "$log"
+          search_status=$?
+          set -e
+          if [[ -d "$out" ]]; then
+            cp "$log" "$out/run.log"
+          fi
+          exit "$search_status"
 
       - name: Enforce evidence and claim boundaries
         if: always()
@@ -114,16 +130,31 @@ jobs:
 
           out = Path('/tmp/e8-a2-target-neighbor-bridge')
           record = json.loads((out / 'result.json').read_text())
-          assert record['status'] in {'bridge_found', 'bounded_search_completed'}, record
+          assert record['status'] in {
+              'bridge_found',
+              'bounded_search_completed',
+              'inconclusive_isometry_budget_exhausted',
+              'error',
+          }, record
+          assert record['termination_reason'], record
           assert record['claim_boundary']['rank31_curve_found'] is False
-          assert record['claim_boundary']['rational_P3_found'] is False
-          assert (out / 'states.jsonl').is_file()
-          assert (out / 'moves.jsonl').is_file()
+          assert record['claim_boundary']['rank32_curve_found'] is False
+          if record['status'] != 'error':
+              assert record['claim_boundary']['rational_P3_found'] is False
+              assert (out / 'states.jsonl').is_file()
+              assert (out / 'moves.jsonl').is_file()
+          if record['status'] == 'inconclusive_isometry_budget_exhausted':
+              assert record['artifact_importable'] is False
+              assert record['isometry_comparisons']['budget_exhausted'] is True
+              assert record['isometry_comparisons']['skipped_due_to_budget'] >= 1
           if record['status'] == 'bridge_found':
               bridge = json.loads((out / 'exact-bridge.json').read_text())
               assert bridge['all_parent_child_gram_identities_verified'] is True
               assert bridge['all_neighbor_intersection_indices_verified'] is True
-          print(record['status'], record['truth_status'])
+              assert bridge['end_to_end_transport'][
+                  'M_transpose_G_origin_initial_M_equals_G_endpoint_initial'
+              ] is True
+          print(record['status'], record.get('truth_status', record.get('error')))
           PY
 
       - name: Hash the complete bounded-search evidence

@@ -1,4 +1,4 @@
-# Exact lattice bridge from the E8+A2^3 target to X(6,79)
+# Exact discriminant-form bridge from the E8+A2^3 target to X(6,79)
 
 ## Result and boundary
 
@@ -7,9 +7,11 @@ determinant-948 construction.  Its exact finite quadratic form agrees with
 the period lattice and transparent neighbor seed already attached to the
 rank-17 `X(6,79)` K3 programme.
 
-This proves a lattice-theoretic bridge.  It does **not** yet give an explicit
-stable isometry, neighbor transformation, moduli map, rational `P3` section,
-or elliptic curve of rank 31.
+This proves an exact discriminant-form and Clifford identification.  It does
+**not** yet give an integral stable isometry, a target-to-endpoint neighbor
+chain, a moduli map, a rational `P3` section, or an elliptic rank-record curve.
+Curve #302 has since achieved the rank-31 milestone externally; this bridge
+programme has not produced that curve, and its continuation targets rank 32.
 
 The executable certificate is
 
@@ -181,13 +183,54 @@ The final move is the 2-neighbor vector
 `[1,0,1,0,1,1,1,1,0,1,1,0,0,1,1,1,1]` from parent hash
 `74223a999a30ef3ea2102df4f8b32fd6f75cd1afd19bf6f8112bbcbf63ccc5d5`.
 
-This does **not** close the new bridge.  The complete Actions artifact
-`9064805239` expired with ZIP digest
-`30e5f0f73224905589865e02e5fc719f993b4828a31fb55e098511851de5a06e`;
-the six intermediate Gram matrices and move vectors are absent from Git
-history.  Until the Sage replay is rerun or those intermediates are recovered,
-the seven-step public chain cannot be treated as a locally replayed certificate
-from `N_target`.
+The earlier expired artifact is no longer a reproducibility blocker.  Actions
+run
+[`32673843229`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32673843229)
+regenerated all eight Gram matrices, all seven neighbor records, and every
+rational parent-to-child basis map.  Its offline verifier checked the complete
+manifest, all identities `T^t G_parent T=G_child`, and the composed basis
+identity.  The regenerated chain has the same public chain SHA-256
+`f549651c06190e97f53947475ef9ee3149ddb175b2db2a289dd7db02d60b9d4b`
+and terminal hash
+`620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295`.
+
+This closes the public positive-lattice replay from the transparent seed to
+the rootless endpoint.  It does not connect `N_target` to either endpoint and
+does not geometrize any edge as a marked elliptic-K3 neighbor.
+
+## First bounded target-to-endpoint search
+
+The audited Actions run
+[`32674002260`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32674002260)
+searched bidirectionally from `N_target`, the transparent seed, and the
+rootless endpoint with primes `2,5`, six rounds, beam size five, offset zero,
+and 32 projective lines per state and prime.  Its compact audit is
+`certificates/e8_a2_target_neighbor_bridge_run_32674002260.json`.
+
+The run attempted 4,992 lines, constructed 4,990 exact moves, recorded 24
+repeated child Grams and 4,969 Gram presentations, and found no shared
+cross-side theta fingerprint or exact bridge.  Consequently no `qfisom`
+comparison was required.  The closest origin--transparent and
+origin--rootless profile distances were respectively 12 and 32; these are
+only beam-ordering diagnostics.
+
+Two enumerated `p=2` vectors were rejected with Sage's expected
+non-maximal/even error.  Because the determinant is divisible by two, the
+artifact is not evidence for a complete enumeration of all 2-neighbors.  Its
+negative statement is restricted to its successfully constructed recorded
+moves.  Moreover, the historical beam ranked against the union of endpoint
+profiles rather than reserving separate endpoint quotas.  Post-hoc inspection
+found no other recorded construction error, but the broad exception handler
+means this engine is superseded for future bounded-negative evidence.
+
+The replacement engine is fail-closed on unexpected construction errors and
+on an exhausted isometry budget, and it emits an exact end-to-end transport
+certificate for any meeting.  The next bounded run repeats the offset-zero
+experiment with beam size eight: three origin states selected toward the
+transparent endpoint, three toward the rootless endpoint, and two
+deterministic diversity states.  The remaining inputs stay `rounds=6`,
+`primes=2,5`, `lines_per_prime=32`, `max_successful_moves=10000`, and
+`max_isometry_checks=500`.
 
 ## Quaternion datum
 
@@ -216,11 +259,11 @@ search.  It is to construct a stable isometry or explicit neighbor chain from
 rational Shimura point through that chain into the two-split Weierstrass
 coordinates.  Success would produce the missing characteristic-zero `P3`
 section on the geometric rank-17 K3 source.  A later specialization search and
-31-point independence certificate would still be required for the record.
+32-point independence certificate would still be required for the next record.
 
-The executable branch now distinguishes the two stages.  The manual replay
-retains every exact Kneser basis matrix, while the bounded bridge search starts
-from `N_target` and promotes only an integral lattice isometry.  Neither stage
-is yet a geometric K3 switch.  The additional marked Neron--Severi,
+The exact public-chain replay now retains every Kneser basis matrix, while the
+bounded target search records exact successful moves and promotes a meeting
+only after an integral isometry certificate.  Neither computation is a
+geometric K3 switch.  The additional marked Neron--Severi,
 Riemann--Roch, section, and birational-map data required for that promotion are
 listed in `research/kneser_to_weierstrass_transport_requirements.md`.

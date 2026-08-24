@@ -1,0 +1,129 @@
+{
+  "artifact": {
+    "artifact_directory_name": "e8-a2-target-exact-neighbor-bridge-32674002260",
+    "manifest_file_count": 8,
+    "manifest_total_bytes": 38326092,
+    "sha256sums_sha256": "08b57770949f59adb3e958714a88276b6f3c9c13560e7b902ed359cb85fbc2ad"
+  },
+  "audit_conclusion": "Artifact closure, hashes, internal links, finite-search counters, cross-fingerprint comparison coverage, and the conservative claim boundary were verified. Accepted local moves are Sage-asserted but are not all independently replayed by this importer. For a found bridge, every cited matrix identity and the end-to-end composite are also recomputed independently with Fraction. No explicit K3/moduli transport, rational P3, or elliptic rank-record curve is certified by this audit. The legacy log contains 2 exact p=2 Sage boundary failure(s); those attempted lines are not excluded by the bounded negative window.",
+  "certificate_kind": "e8-a2-target-neighbor-bridge-artifact-audit",
+  "claim_boundary": {
+    "exact_lattice_bridge_found": false,
+    "explicit_K3_fibration_switch_completed": false,
+    "explicit_moduli_map_completed": false,
+    "explicit_stable_NS_transport_completed": false,
+    "negative_result_scope": "Only the 4990 successfully constructed moves in the serialized finite window are excluded. The 2 classified p=2 boundary-failure attempt(s) are not excluded. The p-neighbor graph remains open; this artifact does not settle any elliptic-rank record problem.",
+    "rank31_curve_found": false,
+    "rank32_curve_found": false,
+    "rational_P3_found": false
+  },
+  "provenance": {
+    "artifact_digest": "sha256:15bf0b6863197406929c0ea924ad10e76a195ad223d174dd26422b3d52fe835d",
+    "artifact_id": "9502243702",
+    "artifact_name": "e8-a2-target-exact-neighbor-bridge",
+    "commit_sha": "85ff44e230c6a9275a94d7bfda908bef17d2c8a0",
+    "downloaded_archive_sha256": "15bf0b6863197406929c0ea924ad10e76a195ad223d174dd26422b3d52fe835d",
+    "event_name": "push",
+    "extra": {
+      "archive_verified_against_github_digest": "true",
+      "download_method": "gh_api_artifact_zip"
+    },
+    "git_ref": "refs/heads/codex/rank31-research",
+    "repository": "metaforismo/elliptic-rank-31",
+    "run_attempt": 1,
+    "run_id": "32674002260",
+    "run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/32674002260",
+    "workflow": ".github/workflows/probe-e8-a2-target-neighbor-bridge.yml"
+  },
+  "record_sha256": "82e903f3e320cb464b5d452279cb729e85b34f4f3b1216737b25dc1223d254f6",
+  "schema_version": 1,
+  "search": {
+    "artifact_schema_generation": "legacy",
+    "bridge": null,
+    "configuration": {
+      "beam_selection": "three closest states to every dynamically discovered opposing theta fingerprint plus two deterministic diversity states",
+      "beam_size": 5,
+      "enumeration_order": "Sage 10.9 find_primitive_p_divisible_vector__next",
+      "max_isometry_checks": 250,
+      "max_successful_moves": 10000,
+      "mode": "bidirectional",
+      "primes": [
+        2,
+        5
+      ],
+      "projective_line_offset": 0,
+      "projective_lines_per_state_prime": 32,
+      "rounds_completed": 6,
+      "rounds_requested": 6
+    },
+    "counters": {
+      "attempted_lines": 4992,
+      "duplicate_child_grams": 24,
+      "failed_moves": 2,
+      "move_budget_exhausted": false,
+      "successful_moves": 4990,
+      "unique_states_discovered": 4969
+    },
+    "cross_fingerprint_pairs_all_checked_for_bounded_result": true,
+    "cross_fingerprint_pairs_expected": 0,
+    "embedded_runtime_provenance": null,
+    "independent_exact_arithmetic_scope": {
+      "all_logged_search_moves_recomputed": false,
+      "found_bridge_end_to_end_composite_recomputed": false,
+      "found_bridge_moves_recomputed": false,
+      "note": "The Sage run asserts every accepted local move. The standard-library importer recomputes matrices only for the path promoted into an exact bridge."
+    },
+    "initial_state_gram_sha256": {
+      "origin": "dc4108ea4612195c2ba8350b0b1b35067f92ec2d49801cd2cb597cbb61129690",
+      "rootless": "620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295",
+      "transparent": "10270a49860bff642fe34bc3eb0fc213623c7dff8aca08b6df51e2832c600bff"
+    },
+    "isometry_checks": 0,
+    "isometry_comparisons": null,
+    "jsonl": {
+      "attempts.jsonl": {
+        "record_count": 4992,
+        "sha256": "31b84e399390620d15363768a72c287ee130ffc88ad6078a7ded68c91bddf412"
+      },
+      "isometry-checks.jsonl": {
+        "record_count": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "moves.jsonl": {
+        "record_count": 4990,
+        "sha256": "acaafb44bee57c0184a7c9a7796422add200cf16a4fa99442db3317b820fa4e5"
+      },
+      "rounds.jsonl": {
+        "record_count": 6,
+        "sha256": "86d38aa9677e5e5691f53ddce22a2cba5fe85c1efd00b0bc7e23bbe2559a3954"
+      },
+      "states.jsonl": {
+        "record_count": 4969,
+        "sha256": "72f5fa8b840d3bb01f6833807a4f6699ea90a0eaab8c1c509898ed9607caffcb"
+      }
+    },
+    "legacy_exact_p2_boundary_failures": 2,
+    "legacy_unclassified_construction_errors": 0,
+    "result_file_sha256": "e43243262131b653dfa1b24ff375843281b177083ffc8c1ad5981d63a91a3019",
+    "result_payload_sha256": "f34441cd587f52c07fa7ec1e5c94659f41f08df632aaa0ebd4e7e9c3ae43704a",
+    "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+    "source_checkout": {
+      "git_head": "85ff44e230c6a9275a94d7bfda908bef17d2c8a0",
+      "git_head_verified": true,
+      "mode": "explicit_historical_git_checkout"
+    },
+    "source_sha256": {
+      "research/certify_e8_a2_shimura_bridge.py": "56483e066bfa7ff56490566498f7ba3c2935f163817f20b365956b311c38f181",
+      "research/search_e8_a2_target_neighbor_bridge.py": "907b52f9c1886c1d8048c7b2b0ea84a84cce2e717c6596ed79c036b537a33a34"
+    },
+    "status": "bounded_search_completed",
+    "structured_expected_p2_boundary_failures": 0,
+    "total_classified_p2_boundary_failures": 2,
+    "truth_status": "Finite negative result only: no exact bridge was found among the recorded deterministic projective-line windows, beams, rounds, successful moves, and isometry checks."
+  },
+  "verification_implementation": {
+    "path": "research/import_e8_a2_target_neighbor_bridge_artifact.py",
+    "sha256": "ef745b02812c76eb71e87d8faf2fad79c38cc9effc2cff496e2e99be2662c45f"
+  },
+  "verification_status": "verified"
+}

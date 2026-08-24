@@ -1,0 +1,76 @@
+{
+  "artifact": {
+    "artifact_directory_name": "rank17-exact-neighbor-chain-32673843229-1",
+    "artifact_manifest_record_sha256": "e9239485f5cbf86e9c592464b55fd9963cfa148121fdd4ca44b0fb6e4e6b8413",
+    "artifact_manifest_sha256": "52283a2f2df627a8bd7715db07e06618431a59fc4b4e42f2cb93f5a25892942e",
+    "manifest_file_count": 20,
+    "manifest_total_bytes": 500968
+  },
+  "audit_conclusion": "The closed Sage 10.9 artifact was replayed with its standard-library verifier. All seven exact rational parent-child Gram identities, determinants, parent links, hashes, the complete manifest, and the composed basis identity passed. This is a positive-lattice Kneser chain from the transparent seed to the rootless endpoint; it is not a bridge from the E8+A2^3 target and not a geometric K3 transport or rank-31 result.",
+  "certificate_kind": "rank17-exact-neighbor-chain-run-audit",
+  "chain": {
+    "chain_length_including_seed": 8,
+    "chain_sha256": "f549651c06190e97f53947475ef9ee3149ddb175b2db2a289dd7db02d60b9d4b",
+    "composed_basis_identity_verified": true,
+    "exact_parent_child_gram_identities_verified": 7,
+    "neighbor_primes": [
+      5,
+      5,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "neighbor_step_count": 7,
+    "norm4_counts": [
+      5424,
+      2654,
+      2548,
+      2576,
+      2590,
+      2602,
+      2602,
+      2622
+    ],
+    "root_counts": [
+      150,
+      30,
+      10,
+      6,
+      4,
+      2,
+      2,
+      0
+    ],
+    "terminal_gram_sha256": "620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295"
+  },
+  "claim_boundary": {
+    "exact_integral_chain_from_e8_a2_target": false,
+    "exact_positive_lattice_basis_maps": true,
+    "explicit_k3_neighbor_map": false,
+    "geometric_neron_severi_marking": false,
+    "rank31_curve_found": false,
+    "rational_p3_section_found": false
+  },
+  "maps": {
+    "exact_neighbor_maps_sha256": "33a5ea7186da3da27ba1ca459e98946c907083669c952e721321e98fefc22b29",
+    "map_record_sha256": "d7ba3b461934a8594a7c2370acf45140f5ef21bd39bc3da76f5e3d48eeb682be",
+    "transition_count": 7
+  },
+  "provenance": {
+    "artifact_name": "rank17-exact-neighbor-chain",
+    "commit_sha": "ae35f7f6e5f3b71902ca24df9a8646d4ee9d9703",
+    "container_image": "sagemath/sagemath:10.9@sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667",
+    "event_name": "push",
+    "git_ref": "refs/heads/codex/rank31-research",
+    "repository": "metaforismo/elliptic-rank-31",
+    "run_attempt": 1,
+    "run_id": "32673843229",
+    "run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/32673843229",
+    "workflow": ".github/workflows/replay-rank17-neighbor-chain-manual.yml"
+  },
+  "record_sha256": "aa4333e2dd28e6cc9cb88f79b7e48526604bd652ffaccd0e2454aaf24cd6a617",
+  "schema_version": 1,
+  "verification_status": "verified"
+}
