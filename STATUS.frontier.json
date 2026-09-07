@@ -1,7 +1,7 @@
 {
   "active_workstreams": [
     "maintain the independently replayed 31-point certificate for ICARM curve #302 and preserve its GRH+BSD exact-rank boundary",
-    "replace coordinate-biased small lexicographic windows with reproducible full-projective sampling, then seek an exact target-to-endpoint lattice meeting",
+    "run the implemented full-coordinate projective sampler with independently replayed draw logs, then seek an exact target-to-endpoint lattice meeting",
     "construct a marked 2/3-neighbor K3 path with Riemann-Roch pencils and birational maps, then transport Elkies' rational point",
     "compute the saturated P3 Noether-Lefschetz elimination/Fitting equation from the six exact remainder polynomials",
     "search good primes beyond 13 with the corrected total-intersection filter and exhaustive downstream P3 checks",
@@ -14,18 +14,20 @@
   "canonical_branch": "codex/rank31-research",
   "canonical_repository": "metaforismo/elliptic-rank-31",
   "latest_ci_validation": {
-    "actions_run_id": 34162566731,
-    "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34162566731",
-    "commit": "9cd1c51524ed1b32286ffe66d17035934231d565",
-    "status": "failure",
-    "cause": "SymPy is absent from the runner; five pre-existing test modules fail to import.",
-    "tests_loaded": 157,
-    "errors": 5,
-    "skipped": 10,
+    "actions_run_id": 34163550774,
+    "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34163550774",
+    "commit": "19a11eca467f29fcff8e95e90f5707e371e89ea1",
+    "status": "success",
+    "resolved_previous_failure_run": 34162566731,
+    "fix": "Install sympy==1.14.0 and mpmath==1.3.0 before the unchanged full suite.",
+    "tests_loaded": 167,
+    "errors": 0,
+    "skipped": 0,
+    "hosted_suite_seconds": 93.520,
     "new_frontier_tests_passed": 11,
     "local_full_suite_passed": 167,
-    "proposed_fix": "Install version-pinned SymPy before test discovery and rerun the unchanged full suite.",
-    "workflow_fix_applied": false
+    "workflow_fix_applied": true,
+    "scope": "CI dependency fix at the named commit; not evidence for later sampler changes."
   },
   "latest_public_frontier_audit": {
     "date_utc": "2026-09-07",
@@ -152,9 +154,20 @@
       "origin_beam_policy": "three toward transparent, three toward rootless, two deterministic diversity states"
     },
     "next_bounded_search": {
-      "status": "planned_not_implemented_or_run",
+      "status": "implemented_awaiting_sage_run",
       "method": "reproducible full-coordinate projective sampling, exact isotropy, canonical line normalization and deduplication, logged attempt bounds, and complete rational basis maps",
-      "reason": "Both small lexicographic windows concentrate on a few coordinates in each parent Gram basis."
+      "reason": "Both small lexicographic windows concentrate on a few coordinates in each parent Gram basis.",
+      "documentation": "research/hash_projective_neighbor_search_20260907.md",
+      "sampling_seed": "rank32-20260907-v1",
+      "max_raw_draws_per_parent_prime": 4096,
+      "selection": "hash-projective",
+      "lines_per_prime": 32,
+      "rounds": 6,
+      "beam_size": 8,
+      "primes": [2, 5],
+      "max_successful_moves": 10000,
+      "max_isometry_checks": 500,
+      "rank32_curve_found": false
     },
     "endpoint_balanced_offset_zero": {
       "actions_run_id": 32677113429,

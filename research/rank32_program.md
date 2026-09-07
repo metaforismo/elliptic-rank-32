@@ -14,9 +14,11 @@ boundary rejections excluded from its negative scope. The new offset-32 run
 also completed and was imported: 7,872 successful moves, no construction
 errors, and 32 negative exact isometry checks at shared theta profile
 `(40,2570)`. There is still no bridge. The current small lexicographic windows
-are coordinate-biased; reproducible sampling across full projective
-coordinates is the next unimplemented experiment. See the audit for exact
-run IDs, hashes, and the separate hosted-CI dependency failure.
+are coordinate-biased. A reproducible full-coordinate sampler and a
+draw-replaying importer are now implemented; their Sage experiment is the
+next gate, described in [the sampling protocol](hash_projective_neighbor_search_20260907.md).
+The separate hosted-CI dependency failure is resolved: all 167 tests passed
+on `19a11ec` in run `34163550774`, before these sampler changes.
 
 ## New baseline
 

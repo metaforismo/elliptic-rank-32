@@ -182,8 +182,15 @@ five pre-existing symbolic test modules cannot import SymPy in the Python
 on that runner. The existing workflow does not install SymPy; locally the
 167-test pass used SymPy 1.14.0. The proposed correction is to install a
 version-pinned symbolic-test dependency before discovery and rerun the
-complete suite, without deleting or skipping tests. No workflow correction
-has yet been applied, and the hosted suite must not be reported green.
+complete suite, without deleting or skipping tests.
+
+After approval, commit `19a11eca467f29fcff8e95e90f5707e371e89ea1` installed
+`sympy==1.14.0` and `mpmath==1.3.0`. Hosted
+[run 34163550774](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34163550774)
+passed all certificate steps and all 167 tests in 93.520 seconds, with no
+skips. This repairs the CI dependency gap; it is not a pass for subsequent
+sampler changes. The continuation is recorded in
+[the full-coordinate sampling protocol](hash_projective_neighbor_search_20260907.md).
 
 ## Acknowledgement
 

@@ -610,6 +610,110 @@ def verify_fixture(
 
 
 class TargetNeighborArtifactImporterTests(unittest.TestCase):
+    @staticmethod
+    def _sampling_fixture(root: Path):
+        build_fixture(root, False)
+        result = json.loads((root / "result.json").read_text())
+        result["schema_version"] = 2
+        config = result["configuration"]
+        config.update({
+            "line_selection": "hash-projective",
+            "enumeration_order": IMPORTER.projective_sampler.ALGORITHM,
+            "sampling": {
+                "algorithm": IMPORTER.projective_sampler.ALGORITHM,
+                "seed": "rank32-20260907-v1",
+                "max_draws_per_window": 4096,
+                "ordinal_semantics": "accepted unique isotropic projective lines, before offset",
+            },
+        })
+        result["source_files"].update({
+            "projective_sampler_script": IMPORTER.SAMPLER_SCRIPT_PATH,
+            "projective_sampler_script_sha256": IMPORTER.file_sha256(ROOT / IMPORTER.SAMPLER_SCRIPT_PATH),
+        })
+        parent = result["initial_states"][0]
+        window = IMPORTER.projective_sampler.sample_window(
+            parent["gram"], 2, "rank32-20260907-v1", 0, 1, 4096,
+        )
+        record = {"round": 1, "side": "origin", "parent_uid": parent["uid"], "window": window}
+        write_jsonl(root / IMPORTER.SAMPLING_LOG_NAME, [record])
+        attempts = [json.loads(line) for line in (root / "attempts.jsonl").read_text().splitlines()]
+        attempts[0]["projective_isotropic_vector"] = window["selected_lines"][0]["vector"]
+        attempts[0]["sampling_window_sha256"] = window["window_sha256"]
+        write_jsonl(root / "attempts.jsonl", attempts)
+        for name in (IMPORTER.SAMPLING_LOG_NAME, "attempts.jsonl"):
+            result["evidence_sha256"][name] = IMPORTER.file_sha256(root / name)
+        write_rehashed_result(root, result)
+        return result, record, attempts
+
+    def test_v2_sampler_draws_and_attempts_are_replayed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result, record, _ = self._sampling_fixture(root)
+            certificate = IMPORTER.verify_artifact(root, provenance())
+            audit = certificate["search"]["sampling_audit"]
+            self.assertEqual(audit["windows_replayed"], 1)
+            self.assertEqual(audit["lines_attempted"], 1)
+            self.assertEqual(audit["sampling_costs"], record["window"]["counters"])
+            self.assertTrue(audit["all_recorded_draw_streams_replayed"])
+            self.assertEqual(certificate["search"]["artifact_schema_generation"], "explicit-selection-v2")
+
+    def test_v2_rehashed_sampling_tampering_is_rejected(self):
+        for mutation in ("seed", "draw_index", "counter", "vector", "ordinal", "attempt_link", "parent", "downgrade", "missing_log", "sampler_source", "missing_sampling", "missing_window"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                result, record, attempts = self._sampling_fixture(root)
+                window = record["window"]
+                if mutation == "seed":
+                    result["configuration"]["sampling"]["seed"] = "different"
+                elif mutation == "draw_index":
+                    window["selected_lines"][0]["raw_draw_index_one_based"] += 1
+                elif mutation == "counter":
+                    window["counters"]["raw_draws"] += 1
+                elif mutation == "vector":
+                    attempts[0]["projective_isotropic_vector"][0] ^= 1
+                elif mutation == "ordinal":
+                    attempts[0]["projective_line_ordinal_one_based"] = 2
+                elif mutation == "attempt_link":
+                    attempts[0]["sampling_window_sha256"] = "f" * 64
+                elif mutation == "parent":
+                    record["parent_uid"] = result["initial_states"][1]["uid"]
+                elif mutation == "downgrade":
+                    result["schema_version"] = 1
+                elif mutation == "sampler_source":
+                    result["source_files"]["projective_sampler_script_sha256"] = "f" * 64
+                elif mutation == "missing_sampling":
+                    result["configuration"].pop("sampling")
+                window.pop("window_sha256", None)
+                window["window_sha256"] = IMPORTER.payload_sha256(window)
+                write_jsonl(root / IMPORTER.SAMPLING_LOG_NAME, [] if mutation == "missing_window" else [record])
+                write_jsonl(root / "attempts.jsonl", attempts)
+                for name in (IMPORTER.SAMPLING_LOG_NAME, "attempts.jsonl"):
+                    result["evidence_sha256"][name] = IMPORTER.file_sha256(root / name)
+                if mutation == "missing_log":
+                    (root / IMPORTER.SAMPLING_LOG_NAME).unlink()
+                    result["evidence_sha256"].pop(IMPORTER.SAMPLING_LOG_NAME)
+                write_rehashed_result(root, result)
+                with self.assertRaises(IMPORTER.VerificationError):
+                    IMPORTER.verify_artifact(root, provenance())
+
+    def test_v2_partial_final_window_requires_terminal_stop(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result, record, attempts = self._sampling_fixture(root)
+            result["configuration"]["projective_lines_per_state_prime"] = 2
+            record["window"] = IMPORTER.projective_sampler.sample_window(
+                result["initial_states"][0]["gram"], 2, "rank32-20260907-v1", 0, 2, 4096,
+            )
+            attempts[0]["sampling_window_sha256"] = record["window"]["window_sha256"]
+            states = {state["uid"]: state for state in result["initial_states"]}
+            rounds = [json.loads(line) for line in (root / "rounds.jsonl").read_text().splitlines()]
+            with self.assertRaisesRegex(IMPORTER.VerificationError, "truncated window"):
+                IMPORTER.verify_sampling_windows(result, [record], attempts, states, rounds)
+            # This unit check concerns selection accounting only, not a claimed bridge.
+            result["termination_reason"] = "exact_bridge_found"
+            audit = IMPORTER.verify_sampling_windows(result, [record], attempts, states, rounds)
+            self.assertEqual(audit["selected_lines_not_attempted_after_terminal_stop"], 1)
+
     def test_expected_p2_compatibility_flag_is_counted_and_must_be_exact(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "artifact"

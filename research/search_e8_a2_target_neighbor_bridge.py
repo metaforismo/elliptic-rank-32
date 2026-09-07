@@ -48,6 +48,7 @@ from research.certify_e8_a2_shimura_bridge import (  # noqa: E402
     target_essential_lattice,
     transparent_seed_lattice,
 )
+from research import sample_projective_lines as projective_sampler  # noqa: E402
 
 
 try:  # Keep the module importable by the standard-library unit tests.
@@ -60,6 +61,7 @@ try:  # Keep the module importable by the standard-library unit tests.
         QuadraticForm,
         ZZ,
         pari,
+        vector as sage_vector,
         version,
     )
 
@@ -68,7 +70,7 @@ except ModuleNotFoundError:  # pragma: no cover - exercised outside Sage.
     SAGE_AVAILABLE = False
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 EXPECTED_SAGE_PREFIX = "SageMath version 10.9"
 EXPECTED_P2_CONSTRUCTION_ERROR = (
     "either y is not primitive or self is not even, maximal at 2"
@@ -826,6 +828,12 @@ def validate_configuration(args: argparse.Namespace) -> None:
         raise ValueError("max successful moves must be positive")
     if args.max_isometry_checks < 0:
         raise ValueError("max isometry checks must be nonnegative")
+    if args.line_selection == "hash-projective":
+        for prime in args.primes:
+            projective_sampler.validate_parameters(
+                prime, args.sampling_seed, args.line_offset,
+                args.lines_per_prime, args.max_sampling_draws_per_window,
+            )
 
 
 def run_search(args: argparse.Namespace) -> dict[str, Any]:
@@ -834,6 +842,8 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
     ensure_fresh_output_directory(output)
     for filename in ("states.jsonl", "moves.jsonl", "attempts.jsonl", "rounds.jsonl", "isometry-checks.jsonl"):
         (output / filename).write_text("", encoding="utf-8")
+    if args.line_selection == "hash-projective":
+        (output / "sampling-windows.jsonl").write_text("", encoding="utf-8")
 
     sage_version = str(version())
     if not sage_version.startswith(EXPECTED_SAGE_PREFIX):
@@ -930,9 +940,29 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                 side_stats["parents"] += 1
                 parent_form = QuadraticForm(ZZ, parent["gram_object"])
                 for prime in args.primes:
-                    for ordinal, vector in projective_isotropic_lines(
-                        parent_form, prime, args.line_offset, args.lines_per_prime
-                    ):
+                    if counters["successful_moves"] >= args.max_successful_moves:
+                        counters["move_budget_exhausted"] = True
+                        break
+                    sampling_window = None
+                    if args.line_selection == "hash-projective":
+                        sampling_window = projective_sampler.sample_window(
+                            serial_matrix(parent["gram_object"]), prime,
+                            args.sampling_seed, args.line_offset, args.lines_per_prime,
+                            args.max_sampling_draws_per_window,
+                        )
+                        append_jsonl(output / "sampling-windows.jsonl", {
+                            "round": round_index, "side": side,
+                            "parent_uid": parent["uid"], "window": sampling_window,
+                        })
+                        lines = (
+                            (line["ordinal_one_based"], sage_vector(ZZ, line["vector"]))
+                            for line in sampling_window["selected_lines"]
+                        )
+                    else:
+                        lines = projective_isotropic_lines(
+                            parent_form, prime, args.line_offset, args.lines_per_prime
+                        )
+                    for ordinal, vector in lines:
                         if counters["successful_moves"] >= args.max_successful_moves:
                             counters["move_budget_exhausted"] = True
                             break
@@ -947,6 +977,8 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
                             "projective_line_ordinal_one_based": ordinal,
                             "projective_isotropic_vector": [int(entry) for entry in vector],
                         }
+                        if sampling_window is not None:
+                            attempt_base["sampling_window_sha256"] = sampling_window["window_sha256"]
                         built, classification = call_neighbor_builder_fail_closed(
                             prime,
                             lambda: build_neighbor(
@@ -1146,12 +1178,25 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
             "projective_lines_per_state_prime": args.lines_per_prime,
             "max_successful_moves": args.max_successful_moves,
             "max_isometry_checks": args.max_isometry_checks,
-            "enumeration_order": "Sage 10.9 find_primitive_p_divisible_vector__next",
+            "line_selection": args.line_selection,
+            "sampling": (
+                {
+                    "algorithm": projective_sampler.ALGORITHM,
+                    "seed": args.sampling_seed,
+                    "max_draws_per_window": args.max_sampling_draws_per_window,
+                    "ordinal_semantics": "accepted unique isotropic projective lines, before offset",
+                }
+                if args.line_selection == "hash-projective" else None
+            ),
+            "enumeration_order": (
+                projective_sampler.ALGORITHM if args.line_selection == "hash-projective"
+                else "Sage 10.9 find_primitive_p_divisible_vector__next"
+            ),
             "side_expansion_order": list(sides),
             "sequential_order_semantics": (
                 "Rounds increase first; within each round, sides are expanded sequentially in "
                 "side_expansion_order, then parents in current-beam order, primes in the supplied "
-                "order, and projective lines in Sage's one-based ordering.  Each new state enters "
+                "order, and projective lines in the recorded selection algorithm's one-based ordering.  Each new state enters "
                 "the index immediately, so a later side in the same round can see earlier-side states."
             ),
             "beam_selection": (
@@ -1221,6 +1266,10 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
             "target_formula_script_sha256": file_sha256(
                 REPO_ROOT / "research/certify_e8_a2_shimura_bridge.py"
             ),
+            "projective_sampler_script": "research/sample_projective_lines.py",
+            "projective_sampler_script_sha256": file_sha256(
+                REPO_ROOT / "research/sample_projective_lines.py"
+            ),
         },
     }
     evidence_files = [
@@ -1233,6 +1282,8 @@ def run_search(args: argparse.Namespace) -> dict[str, Any]:
     ]
     if bridge is not None:
         evidence_files.append("exact-bridge.json")
+    if args.line_selection == "hash-projective":
+        evidence_files.append("sampling-windows.jsonl")
     result["evidence_sha256"] = {
         filename: file_sha256(output / filename) for filename in evidence_files
     }
@@ -1249,6 +1300,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--beam-size", type=int, default=8)
     parser.add_argument("--primes", type=parse_primes, default=parse_primes("2,5"))
     parser.add_argument("--line-offset", type=int, default=0)
+    parser.add_argument("--line-selection", choices=("lexicographic", "hash-projective"), default="lexicographic")
+    parser.add_argument("--sampling-seed", default="rank32-20260907-v1")
+    parser.add_argument("--max-sampling-draws-per-window", type=int, default=4096)
     parser.add_argument("--lines-per-prime", dest="lines_per_prime", type=int, default=32)
     parser.add_argument("--max-successful-moves", type=int, default=10000)
     parser.add_argument("--max-isometry-checks", type=int, default=500)

@@ -6,8 +6,12 @@ on:
       - codex/rank31-research
     paths:
       - "research/search_e8_a2_target_neighbor_bridge.py"
+      - "research/sample_projective_lines.py"
+      - "research/import_e8_a2_target_neighbor_bridge_artifact.py"
       - "research/certify_e8_a2_shimura_bridge.py"
       - "tests/test_e8_a2_target_neighbor_bridge.py"
+      - "tests/test_projective_line_sampler.py"
+      - "tests/test_import_e8_a2_target_neighbor_bridge_artifact.py"
       - ".github/workflows/probe-e8-a2-target-neighbor-bridge.yml"
   workflow_dispatch:
     inputs:
@@ -32,7 +36,7 @@ on:
         required: true
         default: "2,5"
       line_offset:
-        description: Lines skipped in each deterministic Sage projective ordering
+        description: Accepted lines skipped in the selected deterministic ordering
         required: true
         default: "0"
       lines_per_prime:
@@ -47,6 +51,18 @@ on:
         description: Hard bound on PARI qfisom calls; identical Grams are outside it
         required: true
         default: "500"
+      line_selection:
+        description: Deterministic full-coordinate sample or historical Sage ordering
+        required: true
+        type: choice
+        default: hash-projective
+        options:
+          - hash-projective
+          - lexicographic
+      sampling_seed:
+        description: Portable deterministic seed; at most 4096 raw draws per window
+        required: true
+        default: rank32-20260907-v1
 
 permissions:
   contents: read
@@ -86,11 +102,17 @@ jobs:
             echo "MAX_ISOMETRY_CHECKS=${INPUT_MAX_ISOMETRY_CHECKS:-500}"
           } >> "$GITHUB_ENV"
 
+      - name: Verify sampler and actual Sage neighbor API
+        shell: bash
+        run: sage -python -m unittest discover -s tests -p 'test_projective_line_sampler.py' -v
+
       - name: Search and preserve exact rational p-neighbor embeddings
         shell: bash
         env:
           SEARCH_CONTAINER_IMAGE: sagemath/sagemath:10.9
           SEARCH_CONTAINER_DIGEST: sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
+          LINE_SELECTION: ${{ inputs.line_selection || 'hash-projective' }}
+          SAMPLING_SEED: ${{ inputs.sampling_seed || 'rank32-20260907-v1' }}
         run: |
           set -uo pipefail
           out=/tmp/e8-a2-target-neighbor-bridge
@@ -108,6 +130,9 @@ jobs:
             --beam-size "$BEAM_SIZE" \
             --primes "$PRIMES" \
             --line-offset "$LINE_OFFSET" \
+            --line-selection "$LINE_SELECTION" \
+            --sampling-seed "$SAMPLING_SEED" \
+            --max-sampling-draws-per-window 4096 \
             --lines-per-prime "$LINES_PER_PRIME" \
             --max-successful-moves "$MAX_SUCCESSFUL_MOVES" \
             --max-isometry-checks "$MAX_ISOMETRY_CHECKS" \

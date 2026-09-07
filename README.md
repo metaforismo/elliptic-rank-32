@@ -315,10 +315,17 @@ Exact counts, proofs, and claim boundaries are in
 `certificates/e8_a2_target_neighbor_bridge_run_32677113429.json` and
 `certificates/e8_a2_target_neighbor_bridge_run_34161893470.json`.
 
-The local full suite passed all 167 tests. The separately dispatched hosted
-`exact-verification` run failed because its runner does not install SymPy;
-all 11 new frontier tests passed there. See the dated audit for the exact
-CI run, dependency failure, and proposed fix. Hosted CI is not green.
+The missing hosted-CI dependency is now corrected: installing pinned SymPy
+1.14.0 and mpmath 1.3.0 restored all 167 tests with no skips in
+[run 34163550774](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34163550774)
+at `19a11eca467f29fcff8e95e90f5707e371e89ea1`. That pass is separate from
+the subsequent sampler change.
+
+The next bounded search now has an implemented full-coordinate projective
+sampler, versioned evidence, and raw-draw replay in the importer. Initial
+CPython checks exercise every coordinate on each of the three starting
+lattices. The actual Sage neighbor API and full search still require their
+own run. See [the sampling protocol](research/hash_projective_neighbor_search_20260907.md).
 
 ## Certificate policy
 

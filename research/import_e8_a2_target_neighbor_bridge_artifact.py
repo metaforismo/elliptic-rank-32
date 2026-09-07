@@ -27,12 +27,19 @@ from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import urlparse
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from research import sample_projective_lines as projective_sampler  # noqa: E402
+
 
 SCHEMA_VERSION = 1
 CERTIFICATE_KIND = "e8-a2-target-neighbor-bridge-artifact-audit"
 WORKFLOW_PATH = ".github/workflows/probe-e8-a2-target-neighbor-bridge.yml"
 SEARCH_SCRIPT_PATH = "research/search_e8_a2_target_neighbor_bridge.py"
 TARGET_SCRIPT_PATH = "research/certify_e8_a2_shimura_bridge.py"
+SAMPLER_SCRIPT_PATH = "research/sample_projective_lines.py"
+SAMPLING_LOG_NAME = "sampling-windows.jsonl"
 IMPORTER_SCRIPT_PATH = "research/import_e8_a2_target_neighbor_bridge_artifact.py"
 EXPECTED_P2_ERROR = "either y is not primitive or self is not even, maximal at 2"
 EXPECTED_P2_ERROR_REPR = f"ValueError({EXPECTED_P2_ERROR!r})"
@@ -137,6 +144,138 @@ def is_modern_result(result: dict[str, Any]) -> bool:
     """Treat any modern marker as modern, preventing a partial schema downgrade."""
 
     return any(field in result for field in MODERN_RESULT_FIELDS)
+
+
+def verify_selection_schema(result: dict[str, Any]) -> bool:
+    """Return whether v2 hash sampling is enabled; reject partial downgrades."""
+    config = result.get("configuration")
+    require(isinstance(config, dict), "result: configuration missing")
+    if result["schema_version"] == 1:
+        require(
+            not ({"line_selection", "sampling"} & set(config))
+            and "projective_sampler_script" not in result.get("source_files", {}),
+            "sampling metadata cannot be downgraded to schema 1",
+        )
+        return False
+    require(is_modern_result(result), "schema 2 requires modern evidence")
+    selection = config.get("line_selection")
+    require(selection in {"lexicographic", "hash-projective"}, "unknown line selection")
+    require("sampling" in config, "schema 2 lacks sampling configuration")
+    if selection == "lexicographic":
+        require(config["sampling"] is None, "lexicographic selection contains sampling metadata")
+        require(config.get("enumeration_order") == "Sage 10.9 find_primitive_p_divisible_vector__next", "lexicographic order drift")
+        return False
+    sampling = config["sampling"]
+    require(isinstance(sampling, dict), "hash sampling configuration missing")
+    require(set(sampling) == {"algorithm", "seed", "max_draws_per_window", "ordinal_semantics"}, "sampling configuration schema drift")
+    require(sampling["algorithm"] == projective_sampler.ALGORITHM, "unknown sampling algorithm")
+    require(config.get("enumeration_order") == projective_sampler.ALGORITHM, "sampling enumeration-order drift")
+    require(sampling["ordinal_semantics"] == "accepted unique isotropic projective lines, before offset", "sampling ordinal semantics drift")
+    try:
+        require(isinstance(config.get("primes"), list) and config["primes"], "sampling primes missing")
+        for prime in config["primes"]:
+            projective_sampler.validate_parameters(
+                prime, sampling["seed"], config.get("projective_line_offset"),
+                config.get("projective_lines_per_state_prime"), sampling["max_draws_per_window"],
+            )
+    except ValueError as exc:
+        raise VerificationError(f"invalid sampling parameters: {exc}") from exc
+    return True
+
+
+def verify_sampling_windows(
+    result: dict[str, Any], windows: list[dict[str, Any]],
+    attempts: list[dict[str, Any]], states: dict[str, dict[str, Any]],
+    rounds: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Replay every raw draw and bind each attempted line to its ordered window."""
+    config = result["configuration"]
+    sampling = config["sampling"]
+    terminal_prefix = result["termination_reason"] in {
+        "exact_bridge_found", "successful_move_budget_exhausted",
+    }
+    beams = {
+        side: [state["uid"] for state in result["initial_states"] if state["side"] == side]
+        for side in config["side_expansion_order"]
+    }
+    expanded: set[str] = set()
+    expected_schedule: list[tuple[Any, ...]] = []
+    for round_record in rounds:
+        for side in config["side_expansion_order"]:
+            for uid in beams[side]:
+                require(uid in states and states[uid]["side"] == side, "sampling schedule has unknown/wrong-side parent")
+                require(states[uid]["round_discovered"] < round_record["round"], "sampling parent was not discovered before its expansion")
+                if uid in expanded:
+                    continue
+                expanded.add(uid)
+                expected_schedule.extend(
+                    (round_record["round"], side, uid, prime) for prime in config["primes"]
+                )
+            side_record = round_record["sides"].get(side)
+            require(side_record is not None or (terminal_prefix and round_record is rounds[-1]), "sampling round omits an active side")
+            beams[side] = [state["uid"] for state in side_record["next_beam"]] if side_record else []
+    actual_schedule: list[tuple[Any, ...]] = []
+    attempt_cursor = 0
+    totals: dict[str, int] = {}
+    coordinate_counts = {str(prime): [0] * 17 for prime in config["primes"]}
+    for index, record in enumerate(windows):
+        label = f"sampling-windows.jsonl:{index + 1}"
+        require(set(record) == {"round", "side", "parent_uid", "window"}, f"{label}: record schema drift")
+        window = record["window"]
+        require(isinstance(window, dict), f"{label}: window missing")
+        parent = states.get(record["parent_uid"])
+        require(parent is not None and parent["side"] == record["side"], f"{label}: invalid parent")
+        prime = window.get("prime")
+        require(prime in config["primes"], f"{label}: unconfigured prime")
+        actual_schedule.append((record["round"], record["side"], record["parent_uid"], prime))
+        try:
+            replay = projective_sampler.sample_window(
+                parent["gram"], prime, sampling["seed"], config["projective_line_offset"],
+                config["projective_lines_per_state_prime"], sampling["max_draws_per_window"],
+            )
+        except (ValueError, projective_sampler.SamplingBudgetError) as exc:
+            raise VerificationError(f"{label}: sampler replay failed: {exc}") from exc
+        require(window == replay, f"{label}: deterministic sampler replay mismatch")
+        for key, count in replay["counters"].items():
+            totals[key] = totals.get(key, 0) + count
+        consumed = 0
+        for line in replay["selected_lines"]:
+            if attempt_cursor >= len(attempts):
+                break
+            attempt = attempts[attempt_cursor]
+            if attempt.get("sampling_window_sha256") != replay["window_sha256"]:
+                break
+            for key in ("round", "side", "parent_uid"):
+                require(attempt.get(key) == record[key], f"{label}: attempt {key} mismatch")
+            require(attempt.get("prime") == prime, f"{label}: attempt prime mismatch")
+            require(attempt.get("projective_line_ordinal_one_based") == line["ordinal_one_based"], f"{label}: attempt ordinal mismatch")
+            require(attempt.get("projective_isotropic_vector") == line["vector"], f"{label}: attempt vector mismatch")
+            for column, value in enumerate(line["vector"]):
+                coordinate_counts[str(prime)][column] += int(value != 0)
+            attempt_cursor += 1
+            consumed += 1
+        require(consumed > 0, f"{label}: unused or mislinked sampling window")
+        require(
+            consumed == len(replay["selected_lines"])
+            or (terminal_prefix and index == len(windows) - 1),
+            f"{label}: truncated window without a terminal search budget/bridge",
+        )
+    require(actual_schedule == expected_schedule[:len(actual_schedule)], "sampling windows do not follow the configured parent/prime schedule")
+    require(terminal_prefix or len(actual_schedule) == len(expected_schedule), "sampling schedule ended early without a terminal budget/bridge")
+    require(attempt_cursor == len(attempts), "attempts exist outside the replayed sampling windows")
+    selected_count = len(windows) * config["projective_lines_per_state_prime"]
+    return {
+        "algorithm": projective_sampler.ALGORITHM,
+        "all_recorded_draw_streams_replayed": True,
+        "all_attempted_vectors_match_replayed_windows": True,
+        "windows_replayed": len(windows),
+        "sampling_costs": totals,
+        "selected_lines_prepared": selected_count,
+        "lines_attempted": attempt_cursor,
+        "selected_lines_not_attempted_after_terminal_stop": selected_count - attempt_cursor,
+        "attempted_coordinate_nonzero_counts_by_prime": coordinate_counts,
+        "coverage_claim": "Finite hash-based full-coordinate sample, not an exhaustive graph enumeration.",
+    }
 
 
 def duplicate_key_guard(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -1132,6 +1271,7 @@ def resolve_source_checkout(
             "--",
             SEARCH_SCRIPT_PATH,
             TARGET_SCRIPT_PATH,
+            SAMPLER_SCRIPT_PATH,
         ],
     )
     require(not tracked_status, "source checkout has modified or untracked source evidence")
@@ -1150,16 +1290,22 @@ def verify_source_files(
     require(sources.get("search_script") == SEARCH_SCRIPT_PATH, "result: unexpected search script")
     require(sources.get("target_formula_script") == TARGET_SCRIPT_PATH, "result: unexpected target script")
     verified: dict[str, str] = {}
-    for path_key, hash_key in (
+    pairs = [
         ("search_script", "search_script_sha256"),
         ("target_formula_script", "target_formula_script_sha256"),
-    ):
+    ]
+    if result["schema_version"] == 2:
+        require(sources.get("projective_sampler_script") == SAMPLER_SCRIPT_PATH, "result: unexpected sampler source")
+        pairs.append(("projective_sampler_script", "projective_sampler_script_sha256"))
+    for path_key, hash_key in pairs:
         relative = sources[path_key]
         digest = sources.get(hash_key)
         require(isinstance(digest, str) and HEX64.fullmatch(digest), f"result: invalid {hash_key}")
         local = source_root / relative
         require(local.is_file() and not local.is_symlink(), f"local source missing or unsafe: {relative}")
         require(file_sha256(local) == digest, f"artifact was generated by a different {relative}")
+        if relative == SAMPLER_SCRIPT_PATH:
+            require(file_sha256(REPO_ROOT / SAMPLER_SCRIPT_PATH) == digest, "sampler replay implementation differs from the producer")
         verified[relative] = digest
     return verified
 
@@ -1216,7 +1362,8 @@ def verify_artifact(
     manifest = verify_manifest(root)
     result = load_json(root / "result.json")
     require(isinstance(result, dict), "result.json is not an object")
-    require(result.get("schema_version") == SCHEMA_VERSION, "result schema version drift")
+    require(type(result.get("schema_version")) is int and result["schema_version"] in {1, 2}, "result schema version drift")
+    hash_sampling = verify_selection_schema(result)
     require(result.get("status") in {"bridge_found", "bounded_search_completed"}, "search did not finish with an importable status")
     modern = is_modern_result(result)
     if modern:
@@ -1238,6 +1385,9 @@ def verify_artifact(
 
     required_files = set(BASE_ARTIFACT_FILES)
     evidence_names = set(RESULT_EVIDENCE_FILES)
+    if hash_sampling:
+        required_files.add(SAMPLING_LOG_NAME)
+        evidence_names.add(SAMPLING_LOG_NAME)
     if result["status"] == "bridge_found":
         required_files.add("exact-bridge.json")
         evidence_names.add("exact-bridge.json")
@@ -1248,7 +1398,8 @@ def verify_artifact(
         require(isinstance(digest, str) and HEX64.fullmatch(digest), f"result: invalid evidence hash for {name}")
         require(manifest[name]["sha256"] == digest, f"result evidence hash mismatch: {name}")
 
-    jsonl = {name: load_jsonl(root / name) for name in JSONL_NAMES}
+    jsonl_names = (*JSONL_NAMES, SAMPLING_LOG_NAME) if hash_sampling else JSONL_NAMES
+    jsonl = {name: load_jsonl(root / name) for name in jsonl_names}
     states = jsonl["states.jsonl"]
     moves = jsonl["moves.jsonl"]
     attempts = jsonl["attempts.jsonl"]
@@ -1602,6 +1753,12 @@ def verify_artifact(
             "checkpoint isometry-comparison statistics mismatch",
         )
     verify_modern_configuration_and_termination(result, checkpoint)
+    sampling_audit = (
+        verify_sampling_windows(result, jsonl[SAMPLING_LOG_NAME], attempts, state_by_uid, rounds)
+        if hash_sampling else None
+    )
+    if not hash_sampling:
+        require(not any("sampling_window_sha256" in attempt for attempt in attempts), "sampling attempt metadata without hash sampling")
 
     claims = verify_claim_boundary(result)
     bridge_summary = verify_bridge(root, result, state_by_uid, logged_moves_by_hash)
@@ -1673,7 +1830,8 @@ def verify_artifact(
             "manifest_total_bytes": sum(entry["size_bytes"] for entry in manifest.values()),
         },
         "search": {
-            "artifact_schema_generation": "modern" if modern else "legacy",
+            "artifact_schema_generation": "explicit-selection-v2" if result["schema_version"] == 2 else "modern" if modern else "legacy",
+            "sampling_audit": sampling_audit,
             "status": result["status"],
             "truth_status": result["truth_status"],
             "sage_version": result["sage_version"],
@@ -1699,7 +1857,7 @@ def verify_artifact(
             "embedded_runtime_provenance": embedded_runtime_provenance,
             "jsonl": {
                 name: {"record_count": len(jsonl[name]), "sha256": manifest[name]["sha256"]}
-                for name in JSONL_NAMES
+                for name in jsonl_names
             },
             "initial_state_gram_sha256": copy.deepcopy(INITIAL_HASHES),
             "bridge": bridge_summary,
