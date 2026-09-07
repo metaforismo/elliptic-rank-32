@@ -107,3 +107,10 @@ The complete local regression suite then ran 196 tests in 444.335 seconds:
 That unchanged API test passed separately in Sage run `34164060337`.
 Both workflow definitions also passed `actionlint`; the staged diff passed
 `git diff --check`.
+
+Hosted [run 34166467615](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34166467615)
+then checked exact commit `ec0b61ca117f797c1ac6a50c6ea618d77802ac18`:
+all certificate-recomputation steps passed, and the complete suite ran 196
+tests in 101.008 seconds, with 195 passed and the same one Sage-only skip.
+The follow-up recording this result changes only documentation and status;
+the verified programs, tests, and certificates remain byte-for-byte unchanged.
