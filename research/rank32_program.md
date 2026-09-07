@@ -1,5 +1,22 @@
 # Rank 32 programme after ICARM curve #302
 
+## New constructive checkpoint: seven-edge bridge and integral stabilization
+
+Run `34164507132` found the exact E8+A2^3-to-rootless bridge after 4,595
+moves and 5,439 exact comparisons. Its seven edges, meeting isometry,
+17-dimensional rational composite, and 144 sampling windows were independently
+replayed. A separate construction now extends each edge integrally after
+adjoining U and gives a determinant-one 19-by-19 end-to-end matrix, checked
+both with standard-library arithmetic and SymPy.
+
+The immediate open step is geometric: select effective/nef divisor markings,
+establish period/ample-cone compatibility or explicit surface maps, and
+construct the Riemann-Roch pencils and birational changes of fibration.
+The abstract section classes are not coordinates of rational points.
+See [the construction](stable_hyperbolic_neighbor_transport.md) and
+[the search audit](hash_projective_neighbor_search_20260907.md). Rank 32 is
+still open in this work.
+
 ## 2026-09-07 checkpoint
 
 The [new source audit](frontier_audit_20260907.md) confirms that the 631-entry
@@ -13,10 +30,10 @@ successful moves, no cross-side theta fingerprint or bridge, four `p=2`
 boundary rejections excluded from its negative scope. The new offset-32 run
 also completed and was imported: 7,872 successful moves, no construction
 errors, and 32 negative exact isometry checks at shared theta profile
-`(40,2570)`. There is still no bridge. The current small lexicographic windows
+`(40,2570)`. Neither lexicographic run found a bridge. Those small windows
 are coordinate-biased. A reproducible full-coordinate sampler and a
-draw-replaying importer are now implemented; their Sage experiment is the
-next gate, described in [the sampling protocol](hash_projective_neighbor_search_20260907.md).
+draw-replaying importer were then implemented; the positive follow-up is
+described in [the sampling protocol](hash_projective_neighbor_search_20260907.md).
 The separate hosted-CI dependency failure is resolved: all 167 tests passed
 on `19a11ec` in run `34163550774`, before these sampler changes.
 

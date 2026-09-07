@@ -1,7 +1,7 @@
 {
   "active_workstreams": [
     "maintain the independently replayed 31-point certificate for ICARM curve #302 and preserve its GRH+BSD exact-rank boundary",
-    "run the implemented full-coordinate projective sampler with independently replayed draw logs, then seek an exact target-to-endpoint lattice meeting",
+    "turn the certified seven-edge bridge and explicit integral U-stabilization into effective/nef divisor markings and explicit K3 fibration maps",
     "construct a marked 2/3-neighbor K3 path with Riemann-Roch pencils and birational maps, then transport Elkies' rational point",
     "compute the saturated P3 Noether-Lefschetz elimination/Fitting equation from the six exact remainder polynomials",
     "search good primes beyond 13 with the corrected total-intersection filter and exhaustive downstream P3 checks",
@@ -13,21 +13,33 @@
   "authoritative_lower_bound_certificate": "baseline/rank31_icarm302_mod2_certificate.json",
   "canonical_branch": "codex/rank31-research",
   "canonical_repository": "metaforismo/elliptic-rank-31",
+  "latest_local_validation": {
+    "date_utc": "2026-09-07",
+    "command": "python3.12 -m unittest discover -s tests -v",
+    "tests_loaded": 196,
+    "passed": 195,
+    "errors": 0,
+    "skipped": 1,
+    "seconds": 444.335,
+    "skipped_scope": "Only the pinned-Sage API test; that unchanged test passed in Sage run 34164060337.",
+    "scope": "Complete suite including the seven-edge bridge, orbit audit and integral 19-dimensional transport."
+  },
   "latest_ci_validation": {
-    "actions_run_id": 34163550774,
-    "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34163550774",
-    "commit": "19a11eca467f29fcff8e95e90f5707e371e89ea1",
+    "actions_run_id": 34164091625,
+    "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34164091625",
+    "commit": "9136eef09b53da17445171548fa8cf3882141802",
     "status": "success",
     "resolved_previous_failure_run": 34162566731,
     "fix": "Install sympy==1.14.0 and mpmath==1.3.0 before the unchanged full suite.",
-    "tests_loaded": 167,
+    "tests_loaded": 181,
     "errors": 0,
-    "skipped": 0,
-    "hosted_suite_seconds": 93.520,
+    "skipped": 1,
+    "skipped_scope": "Only the Sage API test; it passed separately in the pinned-Sage run 34164060337.",
+    "hosted_suite_seconds": 74.968,
     "new_frontier_tests_passed": 11,
-    "local_full_suite_passed": 167,
+    "local_full_suite_passed": 180,
     "workflow_fix_applied": true,
-    "scope": "CI dependency fix at the named commit; not evidence for later sampler changes."
+    "scope": "Sampler and importer changes at the named commit; later orbit-audit changes have separate tests."
   },
   "latest_public_frontier_audit": {
     "date_utc": "2026-09-07",
@@ -57,12 +69,12 @@
     "verifier": "baseline/verify_rank31_icarm302.py"
   },
   "newest_result": {
-    "certificate": "certificates/e8_a2_semistable_two_split_total_intersections_aggregate.json",
-    "claim_status": "corrected finite-field incidence, determinant-948 Shimura identification, exact seven-edge public Kneser-chain replay, and three audited bounded target-to-endpoint searches with no exact bridge",
-    "documentation": "research/rank32_program.md",
-    "limitation": "This K3 route has produced no P3, rational lift, characteristic-zero target triple, explicit geometric neighbor/moduli map, or rank-32 curve. The zero-triple result is bounded to GF(5), GF(7), GF(11), GF(13), the certified dense and intrinsic boundary charts, and the Kodaira open; the larger-prime first stage is sampled. The lattice searches are not complete p=2-neighbor enumerations: the earlier run rejected two vectors and the endpoint-balanced run rejected four at Sage's non-maximal/even boundary. Each negative scope is restricted to successfully constructed recorded moves.",
-    "latest_increment": "Recovered and source-audited offset-zero run 32677113429: 7,868 successful moves, four excluded p=2 rejections, no cross-side theta match. New offset-32 run 34161893470 was also source-audited: 7,872 successful moves, zero construction failures, 32 negative exact qfisom comparisons at common profile (40,2570), no bridge.",
-    "name": "two-split E8+A2^3 incidence, exact rank-17 neighbor replay, and bounded X(6,79) endpoint search",
+    "certificate": "certificates/stable_hyperbolic_rootless_bridge_34164507132.json",
+    "claim_status": "seven-edge E8+A2^3-to-rootless lattice bridge independently verified; all seven edges extended to explicit integral hyperbolic-stabilized isometries, with a determinant-one 19-by-19 end-to-end matrix",
+    "documentation": "research/stable_hyperbolic_neighbor_transport.md",
+    "limitation": "This is an abstract lattice transport, not an effective/nef marking, period-compatible K3 map, Riemann-Roch pencil, Weierstrass transformation, rational P3, or rank-32 curve. The p=2 graph is not completely enumerated; earlier finite-field and negative lattice-search results retain their original bounded scopes.",
+    "latest_increment": "Run 34164507132 found the rootless bridge after 4,595 moves and 5,439 exact isometry tests. All seven path moves, the meeting isometry, the rational 17-dimensional composite, and 144 sampling windows were independently replayed. A separate exact construction supplies integral 19-dimensional hyperbolic extensions, additionally checked with SymPy.",
+    "name": "exact target-to-rootless bridge and constructive integral hyperbolic stabilization",
     "supporting_certificates": [
       "certificates/e8_a2_semistable_two_split_pair_incidence_lifts.json",
       "certificates/e8_a2_semistable_two_split_full_incidence.json",
@@ -71,7 +83,11 @@
       "certificates/rank17_exact_neighbor_chain_run_32673843229.json",
       "certificates/e8_a2_target_neighbor_bridge_run_32674002260.json",
       "certificates/e8_a2_target_neighbor_bridge_run_32677113429.json",
-      "certificates/e8_a2_target_neighbor_bridge_run_34161893470.json"
+      "certificates/e8_a2_target_neighbor_bridge_run_34161893470.json",
+      "certificates/e8_a2_target_neighbor_bridge_run_34164507132.json",
+      "certificates/e8_a2_rootless_bridge_34164507132/exact-bridge.json",
+      "certificates/initial_f2_root_reflection_orbits.json",
+      "certificates/stable_hyperbolic_rootless_bridge_34164507132.json"
     ],
     "statement": "The corrected dense and intrinsic-boundary searches contain 30 exact total-intersection-two P1/P2 pairs in 71,302,414 section tests. Exhausting 9,456,854 subsequent P3 candidates found no complete Gram triple. A sampled pair-first extension at p=17,19,23 performed 88,931,043 further section tests and exhaustively checked 5,315,813 P3 candidates after its three eligible pairs, again with zero P3. The full incidence reduces to a 61-by-62 Jacobian and six P3 remainder equations. Independently, the target essential lattice has the same cyclic discriminant form and X(6,79) Clifford fingerprint as the determinant-948 Shimura landscape. Actions run 32673843229 exactly replayed the seven public Kneser steps and all rational parent-child Gram identities, including the composed basis identity. Run 32674002260 serialized 4,990 successful moves among 4,992 attempted lines and found no common cross-side theta fingerprint or exact bridge.",
     "verifiers": [
@@ -84,7 +100,9 @@
       "research/replay_rank17_neighbor_chain_with_maps.py",
       "research/verify_rank17_neighbor_chain_artifact.py",
       "research/search_e8_a2_target_neighbor_bridge.py",
-      "research/import_e8_a2_target_neighbor_bridge_artifact.py"
+      "research/import_e8_a2_target_neighbor_bridge_artifact.py",
+      "research/projective_root_reflection_orbits.py",
+      "research/stable_hyperbolic_neighbor_transport.py"
     ]
   },
   "latest_lattice_runs": {
@@ -153,8 +171,18 @@
       "max_isometry_checks": 500,
       "origin_beam_policy": "three toward transparent, three toward rootless, two deterministic diversity states"
     },
-    "next_bounded_search": {
-      "status": "implemented_awaiting_sage_run",
+    "full_coordinate_rootless_bridge": {
+      "status": "bridge_found_and_independently_verified",
+      "actions_run_id": 34164507132,
+      "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34164507132",
+      "producer_commit": "9136eef09b53da17445171548fa8cf3882141802",
+      "certificate": "certificates/e8_a2_target_neighbor_bridge_run_34164507132.json",
+      "exact_lattice_bridge_found": true,
+      "successful_moves": 4595,
+      "qfisom_checks": 5439,
+      "neighbor_step_count": 7,
+      "path_primes_origin_to_rootless": [5, 2, 5, 5, 2, 5, 2],
+      "archive_sha256": "eb22ad6fd4f5584375122b32686be66ef4b112e25e874e9f3c93bb08dd584e4f",
       "method": "reproducible full-coordinate projective sampling, exact isotropy, canonical line normalization and deduplication, logged attempt bounds, and complete rational basis maps",
       "reason": "Both small lexicographic windows concentrate on a few coordinates in each parent Gram basis.",
       "documentation": "research/hash_projective_neighbor_search_20260907.md",
@@ -166,7 +194,41 @@
       "beam_size": 8,
       "primes": [2, 5],
       "max_successful_moves": 10000,
-      "max_isometry_checks": 500,
+      "max_isometry_checks": 10000,
+      "rank32_curve_found": false
+    },
+    "abstract_stable_transport": {
+      "status": "integral_unimodular_isometry_verified",
+      "certificate": "certificates/stable_hyperbolic_rootless_bridge_34164507132.json",
+      "dimension": 19,
+      "determinant": 1,
+      "matrix_sha256": "ee16d707181177ffab193826dd2ab6612c7eab612c0d65f0befe8bb22a85f1b5",
+      "all_seven_edges_extended": true,
+      "marked_geometric_K3_transport_completed": false,
+      "rank32_curve_found": false
+    },
+    "hash_sampler_control_500_comparisons": {
+      "actions_run_id": 34164060337,
+      "producer_commit": "9136eef09b53da17445171548fa8cf3882141802",
+      "status": "inconclusive_isometry_budget_exhausted",
+      "successful_moves": 2091,
+      "gram_presentations": 2094,
+      "qfisom_checked": 500,
+      "required_comparisons_unchecked_at_stop": 1,
+      "importable_bounded_negative": false,
+      "sampling_windows_separately_replayed": 66,
+      "raw_sampling_draws": 7511,
+      "archive_sha256": "592ccd238653c23f6ccb59c85d65b992884e533911dec1e1104ad2db71f030be"
+    },
+    "initial_f2_root_reflection_orbits": {
+      "certificate": "certificates/initial_f2_root_reflection_orbits.json",
+      "documentation": "research/initial_f2_root_reflection_orbits.md",
+      "isotropic_lines_per_initial_lattice": 65279,
+      "origin_orbits": 95,
+      "transparent_orbits": 34,
+      "rootless_orbits": 65279,
+      "scope": "Exact orbits under listed coordinate-root reflections only; not full automorphism groups or lattice isometry classes.",
+      "neighbors_constructed_from_this_audit": false,
       "rank32_curve_found": false
     },
     "endpoint_balanced_offset_zero": {
@@ -191,6 +253,6 @@
   "rank31_exact_rank_claim_unconditional": false,
   "rank32_record_claim": false,
   "required_final_theorem": "An explicit elliptic curve over Q with 32 rigorously certified independent rational points.",
-  "truth_status": "RANK-31 MILESTONE SOLVED: ICARM #302 supplies 31 independent rational points; rank 32 remains unsolved.",
+  "truth_status": "RANK-31 MILESTONE SOLVED: ICARM #302 supplies 31 independent rational points. An exact seven-edge target-to-rootless bridge and integral 19-dimensional U-stabilization are now verified, but geometric transport is open and rank 32 remains unsolved.",
   "updated": "2026-09-07"
 }

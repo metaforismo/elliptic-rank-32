@@ -96,3 +96,81 @@ sampled lines per initial lattice and prime, then runs the bounded search.
 This Sage-specific test is explicitly skipped on local CPython; no Sage
 success is implied by the local sampler tests. Full search evidence will be
 imported only after successful runtime and archive/source verification.
+
+### Controlled run: comparison budget exhausted
+
+[Run 34164060337](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34164060337)
+at producer `9136eef09b53da17445171548fa8cf3882141802` passed all 11 sampler
+tests under Sage, including the real neighbor API. The research run then
+stopped in its third round at the configured 500-qfisom ceiling:
+
+- 2,091 attempted and successfully constructed moves, with no construction
+  failures or repeated serialized child Grams;
+- 2,094 stored Gram presentations;
+- 500 exact negative comparisons and one required comparison left unchecked;
+- status `inconclusive_isometry_budget_exhausted`, explicitly non-importable.
+
+This is **not** an imported finite-negative search certificate. The existing
+importer correctly rejects this status. The download's archive hash matches
+GitHub's digest:
+`592ccd238653c23f6ccb59c85d65b992884e533911dec1e1104ad2db71f030be`
+(artifact `10033632129`). The closed manifest and source hashes passed;
+all 66 prepared sampling windows were separately replayed exactly. They
+account for 7,511 raw draws, 5,399 non-isotropic rejections, 344 rejected
+field bytes, and 2,112 prepared unique lines, of which the final 21 were not
+attempted after the stop. No zero vectors or duplicate isotropic lines
+occurred in those windows.
+
+The origin side has 776 theta profiles among 940 states, versus the earlier
+small lexicographic windows' much narrower profile sets. This is an observed
+change in exploration, not evidence of elliptic-rank progress or an
+isometry. A strict follow-up uses the same producer, seed, six rounds,
+beam and move limits, but raises only the exact-comparison ceiling to
+10,000: [run 34164507132](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34164507132).
+It found and independently verified an exact bridge, as detailed below.
+
+Hosted standard-Python validation at the same producer also passed:
+[run 34164091625](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34164091625)
+completed 181 tests in 74.968 seconds, with only the Sage-specific test
+skipped there; that test passed in the separate Sage job above.
+
+### Structural follow-up
+
+The [exact root-reflection orbit audit](initial_f2_root_reflection_orbits.md)
+reduces the initial 65,279 isotropic F2 lines to 95 and 34 subgroup orbits
+on the two rootful endpoints. This exposes remaining redundancy and rare
+orbits in the hash sample. The orbit representatives are certified, but
+their complete even-neighbor coverage and any geometric transport remain
+unproved.
+
+### Positive follow-up: seven-edge rootless bridge
+
+Run `34164507132` completed successfully in its fourth round, with 4,595
+successful moves, 4,598 Gram presentations, no construction errors, and
+5,439 exact isometry comparisons (5,438 negative, then one positive).
+The origin path has primes `5,2,5`; the rootless-to-meeting path has primes
+`2,5,2,5`. Thus traversal from origin to the frozen rootless endpoint uses
+`5,2,5,5,2,5,2`. The meeting lattices have theta profile `(14,2508)`;
+their actual integral isometry, not this fingerprint, establishes the meeting.
+
+Artifact `10033864952` has verified ZIP SHA-256
+`eb22ad6fd4f5584375122b32686be66ef4b112e25e874e9f3c93bb08dd584e4f`.
+The source-locked importer recomputed all seven path moves, all intersection
+indices, the meeting isometry, and the full rational basis composite.
+The resulting compact certificate is
+`certificates/e8_a2_target_neighbor_bridge_run_34164507132.json`, record hash
+`4db1da644af9a647f1264463ab8f809cdac826563a78e8aaf47931bd5beadd13`.
+The original `exact-bridge.json` is retained byte-for-byte in
+`certificates/e8_a2_rootless_bridge_34164507132/` for local replay.
+
+All 144 prepared sampling windows were replayed: 15,976 raw draws,
+11,368 non-isotropic rejections, 721 field-byte rejections, no zero or
+duplicate vectors, 4,608 prepared unique lines and 4,595 attempted lines.
+The final 13 lines were not attempted after the bridge. The first 2,091
+moves and attempts, 2,094 states, 66 windows, and first 500 completed
+isometry comparisons match the earlier stopped run exactly. This verifies
+the claimed continuation with only the comparison limit changed.
+
+The [separate integral hyperbolic-extension certificate](stable_hyperbolic_neighbor_transport.md)
+goes one algebraic step further. Neither certificate proves a geometric
+K3 transport or an elliptic curve with 32 independent rational points.

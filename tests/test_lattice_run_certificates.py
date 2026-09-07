@@ -12,6 +12,7 @@ CERTIFICATES = (
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_32674002260.json",
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_32677113429.json",
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_34161893470.json",
+    ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_34164507132.json",
 )
 
 
@@ -66,7 +67,20 @@ class LatticeRunCertificateTests(unittest.TestCase):
             self.assertFalse(record["claim_boundary"]["rank32_curve_found"])
             self.assertFalse(record["claim_boundary"]["exact_lattice_bridge_found"])
 
-    def test_frontier_points_to_both_audits_and_remains_unsolved(self) -> None:
+    def test_positive_bridge_is_lattice_only_and_sampling_is_replayed(self) -> None:
+        record = json.loads(CERTIFICATES[4].read_text())
+        self.assertEqual(record["search"]["status"], "bridge_found")
+        self.assertEqual(record["search"]["counters"]["successful_moves"], 4595)
+        self.assertEqual(record["search"]["isometry_comparisons"]["qfisom_checked"], 5439)
+        self.assertTrue(record["claim_boundary"]["exact_lattice_bridge_found"])
+        self.assertFalse(record["claim_boundary"]["rank32_curve_found"])
+        self.assertEqual(record["search"]["bridge"]["neighbor_step_count"], 7)
+        self.assertTrue(record["search"]["bridge"]["complete_bridge_composite_verified"])
+        self.assertTrue(record["search"]["sampling_audit"]["all_recorded_draw_streams_replayed"])
+        self.assertEqual(record["search"]["sampling_audit"]["windows_replayed"], 144)
+        self.assertEqual(record["search"]["sampling_audit"]["sampling_costs"]["raw_draws"], 15976)
+
+    def test_frontier_points_to_all_audits_and_remains_unsolved(self) -> None:
         frontier = json.loads((ROOT / "STATUS.frontier.json").read_text(encoding="utf-8"))
         supporting = set(frontier["newest_result"]["supporting_certificates"])
         for path in CERTIFICATES:

@@ -1,5 +1,19 @@
 # From Kneser neighbors to explicit elliptic-K3 transformations
 
+## 2026-09-07 update
+
+The earlier missing basis-data stage is now resolved for a new seven-edge
+E8+A2^3-to-rootless chain: its rational edge maps and exact meeting isometry
+are archived and independently replayed. We have also constructed explicit
+integral 19-by-19 isometries after adjoining U, for every edge and for the
+composite. See [the stable transport certificate](stable_hyperbolic_neighbor_transport.md).
+
+This does **not** resolve the geometric requirements below. The new fiber
+and section vectors are abstract lattice classes, with no effective/nef
+representatives, compatible K3 periods, local expansions, or Riemann-Roch
+pencils certified. The subsequent discussion of absent matrices describes
+the original discovery workflow, not the new archived chain.
+
 ## Conclusion
 
 The present positive-definite Kneser neighbor chain is **not enough** to

@@ -30,6 +30,13 @@ The separate statement that its rank is exactly 31 uses GRH+BSD.  This project
 did not discover #302 and has not found a curve with 32 certified independent
 rational points.
 
+The latest constructive milestone is an independently verified **seven-edge
+bridge from the E8+A2^3 target lattice to the frozen rootless lattice**.
+All seven moves now also have explicit integral hyperbolic extensions;
+their composition is a determinant-one 19-by-19 matrix. This closes the
+abstract lattice-transport step, not the geometric K3-map or rank-32 problem.
+See [the exact construction and remaining boundary](research/stable_hyperbolic_neighbor_transport.md).
+
 ## Rank-31 record baseline
 
 For
@@ -321,11 +328,18 @@ The missing hosted-CI dependency is now corrected: installing pinned SymPy
 at `19a11eca467f29fcff8e95e90f5707e371e89ea1`. That pass is separate from
 the subsequent sampler change.
 
-The next bounded search now has an implemented full-coordinate projective
-sampler, versioned evidence, and raw-draw replay in the importer. Initial
-CPython checks exercise every coordinate on each of the three starting
-lattices. The actual Sage neighbor API and full search still require their
-own run. See [the sampling protocol](research/hash_projective_neighbor_search_20260907.md).
+The full-coordinate sampler passed its real Sage API tests. Its first run
+hit the 500-comparison ceiling and was correctly treated as inconclusive.
+The otherwise identical run with a 10,000-comparison ceiling found the
+seven-edge rootless bridge after 4,595 moves and 5,439 comparisons. All path
+matrices and 144 sampling windows were independently replayed. The sampler
+commit passed hosted validation with 180 tests and one Sage-only test
+executed separately. See [the complete run protocol](research/hash_projective_neighbor_search_20260907.md).
+
+A separate certificate supplies integral 19-by-19 extensions of every
+bridge move and their determinant-one composite, with additional SymPy
+checks. Effective/nef markings, period compatibility, and explicit
+Riemann-Roch/birational maps remain open; no new rank-32 curve is claimed.
 
 ## Certificate policy
 
