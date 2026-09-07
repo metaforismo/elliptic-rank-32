@@ -37,6 +37,9 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Install pinned exact-symbolic test dependencies
+        run: python3 -m pip install --disable-pip-version-check "sympy==1.14.0" "mpmath==1.3.0"
+
       - name: Recompute the unconditional rank-29 certificate
         run: python3 verify_exact.py
 
