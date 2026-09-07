@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CERTIFICATES = (
     ROOT / "certificates" / "rank17_exact_neighbor_chain_run_32673843229.json",
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_32674002260.json",
+    ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_32677113429.json",
+    ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_34161893470.json",
 )
 
 
@@ -52,10 +54,23 @@ class LatticeRunCertificateTests(unittest.TestCase):
             "Only the 4990 successfully constructed moves",
             search["claim_boundary"]["negative_result_scope"],
         )
+        for path, moves, rejections, isometry_checks in (
+            (CERTIFICATES[2], 7868, 4, 0),
+            (CERTIFICATES[3], 7872, 0, 32),
+        ):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(record["search"]["counters"]["successful_moves"], moves)
+            self.assertEqual(record["search"]["total_classified_p2_boundary_failures"], rejections)
+            self.assertEqual(record["search"]["isometry_comparisons"]["qfisom_checked"], isometry_checks)
+            self.assertTrue(record["search"]["source_checkout"]["git_head_verified"])
+            self.assertFalse(record["claim_boundary"]["rank32_curve_found"])
+            self.assertFalse(record["claim_boundary"]["exact_lattice_bridge_found"])
 
     def test_frontier_points_to_both_audits_and_remains_unsolved(self) -> None:
         frontier = json.loads((ROOT / "STATUS.frontier.json").read_text(encoding="utf-8"))
         supporting = set(frontier["newest_result"]["supporting_certificates"])
+        for path in CERTIFICATES:
+            self.assertIn(str(path.relative_to(ROOT)), supporting)
         self.assertIn(
             "certificates/rank17_exact_neighbor_chain_run_32673843229.json",
             supporting,

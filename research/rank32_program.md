@@ -10,9 +10,13 @@ family for #302 has been reproduced.
 
 The previously pending endpoint-balanced lattice run is now imported: 7,868
 successful moves, no cross-side theta fingerprint or bridge, four `p=2`
-boundary rejections excluded from its negative scope. A new bounded run uses
-line offset 32 with the same producer, primes, rounds and beam. See the audit
-for exact run IDs, hashes, and the pending-result boundary.
+boundary rejections excluded from its negative scope. The new offset-32 run
+also completed and was imported: 7,872 successful moves, no construction
+errors, and 32 negative exact isometry checks at shared theta profile
+`(40,2570)`. There is still no bridge. The current small lexicographic windows
+are coordinate-biased; reproducible sampling across full projective
+coordinates is the next unimplemented experiment. See the audit for exact
+run IDs, hashes, and the separate hosted-CI dependency failure.
 
 ## New baseline
 

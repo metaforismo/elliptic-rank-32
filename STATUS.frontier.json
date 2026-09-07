@@ -1,7 +1,7 @@
 {
   "active_workstreams": [
     "maintain the independently replayed 31-point certificate for ICARM curve #302 and preserve its GRH+BSD exact-rank boundary",
-    "audit the new offset-32 endpoint-balanced E8+A2^3-to-endpoint run, then seek an exact target-to-endpoint lattice meeting",
+    "replace coordinate-biased small lexicographic windows with reproducible full-projective sampling, then seek an exact target-to-endpoint lattice meeting",
     "construct a marked 2/3-neighbor K3 path with Riemann-Roch pencils and birational maps, then transport Elkies' rational point",
     "compute the saturated P3 Noether-Lefschetz elimination/Fitting equation from the six exact remainder polynomials",
     "search good primes beyond 13 with the corrected total-intersection filter and exhaustive downstream P3 checks",
@@ -13,6 +13,20 @@
   "authoritative_lower_bound_certificate": "baseline/rank31_icarm302_mod2_certificate.json",
   "canonical_branch": "codex/rank31-research",
   "canonical_repository": "metaforismo/elliptic-rank-31",
+  "latest_ci_validation": {
+    "actions_run_id": 34162566731,
+    "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34162566731",
+    "commit": "9cd1c51524ed1b32286ffe66d17035934231d565",
+    "status": "failure",
+    "cause": "SymPy is absent from the runner; five pre-existing test modules fail to import.",
+    "tests_loaded": 157,
+    "errors": 5,
+    "skipped": 10,
+    "new_frontier_tests_passed": 11,
+    "local_full_suite_passed": 167,
+    "proposed_fix": "Install version-pinned SymPy before test discovery and rerun the unchanged full suite.",
+    "workflow_fix_applied": false
+  },
   "latest_public_frontier_audit": {
     "date_utc": "2026-09-07",
     "documentation": "research/frontier_audit_20260907.md",
@@ -42,10 +56,10 @@
   },
   "newest_result": {
     "certificate": "certificates/e8_a2_semistable_two_split_total_intersections_aggregate.json",
-    "claim_status": "corrected finite-field incidence, determinant-948 Shimura identification, exact seven-edge public Kneser-chain replay, and two audited bounded target-to-endpoint searches with no exact bridge",
+    "claim_status": "corrected finite-field incidence, determinant-948 Shimura identification, exact seven-edge public Kneser-chain replay, and three audited bounded target-to-endpoint searches with no exact bridge",
     "documentation": "research/rank32_program.md",
     "limitation": "This K3 route has produced no P3, rational lift, characteristic-zero target triple, explicit geometric neighbor/moduli map, or rank-32 curve. The zero-triple result is bounded to GF(5), GF(7), GF(11), GF(13), the certified dense and intrinsic boundary charts, and the Kodaira open; the larger-prime first stage is sampled. The lattice searches are not complete p=2-neighbor enumerations: the earlier run rejected two vectors and the endpoint-balanced run rejected four at Sage's non-maximal/even boundary. Each negative scope is restricted to successfully constructed recorded moves.",
-    "latest_increment": "Recovered and source-audited the endpoint-balanced offset-zero run 32677113429: 7,872 attempted lines, 7,868 successful moves, four excluded p=2 rejections, no cross-side theta match or bridge. New offset-32 run 34161893470 is in progress and has not yet been imported.",
+    "latest_increment": "Recovered and source-audited offset-zero run 32677113429: 7,868 successful moves, four excluded p=2 rejections, no cross-side theta match. New offset-32 run 34161893470 was also source-audited: 7,872 successful moves, zero construction failures, 32 negative exact qfisom comparisons at common profile (40,2570), no bridge.",
     "name": "two-split E8+A2^3 incidence, exact rank-17 neighbor replay, and bounded X(6,79) endpoint search",
     "supporting_certificates": [
       "certificates/e8_a2_semistable_two_split_pair_incidence_lifts.json",
@@ -54,7 +68,8 @@
       "certificates/e8_a2_shimura_bridge.json",
       "certificates/rank17_exact_neighbor_chain_run_32673843229.json",
       "certificates/e8_a2_target_neighbor_bridge_run_32674002260.json",
-      "certificates/e8_a2_target_neighbor_bridge_run_32677113429.json"
+      "certificates/e8_a2_target_neighbor_bridge_run_32677113429.json",
+      "certificates/e8_a2_target_neighbor_bridge_run_34161893470.json"
     ],
     "statement": "The corrected dense and intrinsic-boundary searches contain 30 exact total-intersection-two P1/P2 pairs in 71,302,414 section tests. Exhausting 9,456,854 subsequent P3 candidates found no complete Gram triple. A sampled pair-first extension at p=17,19,23 performed 88,931,043 further section tests and exhaustively checked 5,315,813 P3 candidates after its three eligible pairs, again with zero P3. The full incidence reduces to a 61-by-62 Jacobian and six P3 remainder equations. Independently, the target essential lattice has the same cyclic discriminant form and X(6,79) Clifford fingerprint as the determinant-948 Shimura landscape. Actions run 32673843229 exactly replayed the seven public Kneser steps and all rational parent-child Gram identities, including the composed basis identity. Run 32674002260 serialized 4,990 successful moves among 4,992 attempted lines and found no common cross-side theta fingerprint or exact bridge.",
     "verifiers": [
@@ -107,11 +122,22 @@
       "exact_lattice_bridge_found": false,
       "claim_boundary": "Only the successfully constructed moves in the recorded finite beams are excluded."
     },
-    "next_bounded_search": {
-      "status": "in_progress_unverified",
+    "endpoint_balanced_offset_32": {
+      "status": "bounded_search_completed",
       "actions_run_id": 34161893470,
       "actions_run_url": "https://github.com/metaforismo/elliptic-rank-31/actions/runs/34161893470",
+      "certificate": "certificates/e8_a2_target_neighbor_bridge_run_34161893470.json",
       "producer_commit": "02d06d68168fed0b586c4cfa1337a9545f3e3092",
+      "attempted_lines": 7872,
+      "successful_moves": 7872,
+      "expected_p2_construction_rejections": 0,
+      "p2_neighbor_enumeration_complete": false,
+      "duplicate_child_grams": 24,
+      "gram_presentations": 7851,
+      "common_cross_side_theta_fingerprints": 1,
+      "common_theta_fingerprint": [40, 2570],
+      "qfisom_checks": 32,
+      "exact_lattice_bridge_found": false,
       "mode": "bidirectional",
       "rounds": 6,
       "beam_size": 8,
@@ -124,6 +150,11 @@
       "max_successful_moves": 10000,
       "max_isometry_checks": 500,
       "origin_beam_policy": "three toward transparent, three toward rootless, two deterministic diversity states"
+    },
+    "next_bounded_search": {
+      "status": "planned_not_implemented_or_run",
+      "method": "reproducible full-coordinate projective sampling, exact isotropy, canonical line normalization and deduplication, logged attempt bounds, and complete rational basis maps",
+      "reason": "Both small lexicographic windows concentrate on a few coordinates in each parent Gram basis."
     },
     "endpoint_balanced_offset_zero": {
       "actions_run_id": 32677113429,

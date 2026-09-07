@@ -289,7 +289,10 @@ On 2026-09-07, the same bounded configuration was dispatched with
 `line_offset=32`, visiting line ordinals 33--64 per retained Gram and prime:
 [`34161893470`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34161893470).
 This is a new deterministic window, not a disjoint set of lattice isometry
-classes. Its result remains pending until the artifact has been audited.
+classes. Its source-bound artifact audit now verifies 7,872 successful moves,
+24 repeated child Grams, and 7,851 presentations, with no construction
+failures. The origin and rootless searches share theta profile `(40,2570)`,
+but all 32 corresponding `qfisom` comparisons are negative: no bridge.
 These computations are exact positive-lattice evidence; they do not provide
 a marked K3 fibration switch, rational `P3`, or rank-32 curve.
 
@@ -309,7 +312,13 @@ Exact counts, proofs, and claim boundaries are in
 `research/e8_a2_shimura_bridge.md`.  Compact run audits are in
 `certificates/rank17_exact_neighbor_chain_run_32673843229.json` and
 `certificates/e8_a2_target_neighbor_bridge_run_32674002260.json`, together with
-`certificates/e8_a2_target_neighbor_bridge_run_32677113429.json`.
+`certificates/e8_a2_target_neighbor_bridge_run_32677113429.json` and
+`certificates/e8_a2_target_neighbor_bridge_run_34161893470.json`.
+
+The local full suite passed all 167 tests. The separately dispatched hosted
+`exact-verification` run failed because its runner does not install SymPy;
+all 11 new frontier tests passed there. See the dated audit for the exact
+CI run, dependency failure, and proposed fix. Hosted CI is not green.
 
 ## Certificate policy
 

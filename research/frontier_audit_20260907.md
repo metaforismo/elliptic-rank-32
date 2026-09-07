@@ -133,7 +133,27 @@ The same producer commit was dispatched as
 with `line_offset=32` and otherwise identical bounds. Its deterministic
 line ordinals are 33--64 rather than 1--32 for each retained Gram and prime.
 The line windows differ; discovered lattices may overlap or be isometric.
-The new run's status is pending artifact verification at this checkpoint.
+This run completed successfully at 21:18 UTC and its artifact was imported
+against the same clean producer checkout. Artifact 10033092263 has ZIP
+SHA-256 `300930964746109f45c7e0e5892bc53ea96eab49f25e1dbcf4f0f10e12d96806`,
+matching the GitHub digest. The compact audit is
+`certificates/e8_a2_target_neighbor_bridge_run_34161893470.json`.
+
+It attempted and successfully constructed **7,872** moves, with zero
+construction failures, 24 repeated child Grams, and 7,851 presentations.
+It found 36 origin theta profiles, 40 transparent profiles, and 268 rootless
+profiles. The only shared origin/endpoint profile is `(40,2570)` on the
+rootless side. All 32 corresponding pairs were checked with exact PARI
+`qfisom` and returned non-isometric; no comparison was skipped or exhausted
+the budget. **No bridge was found in this bounded experiment.** These 32
+negative decisions are supplied by the pinned Sage/PARI run, not independently
+re-executed by the standard-library artifact importer.
+
+The sampling limitation persists: the 3,936 successful `p=5` vectors still
+have coordinates 5--16 zero in their parent bases. For `p=2`, coordinates
+9--16 are zero. The next proposed experiment is therefore full-coordinate
+deterministic projective sampling, not another adjacent small window. No
+implementation or run of that new sampler is claimed here.
 
 Even a positive lattice bridge would leave the marked K3 transport,
 Riemann--Roch pencil, rational section, and rank-32 specialization unproved.
@@ -147,6 +167,23 @@ All 167 regression tests passed on Python 3.12 in 227.372 seconds, including
 certificate also replays independently. Python compilation, JSON parsing,
 and `git diff --check` passed. These are local results, separate from the
 Sage Actions experiment and any hosted CI run.
+
+After adding the final run certificate, the focused lattice-certificate
+tests rechecked all four committed run audits and the unchanged rank-31 and
+frontier verifiers were replayed again. No mathematical producer code changed
+after the full-suite run.
+
+The separately dispatched
+[exact-verification run 34162566731](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34162566731),
+on commit `9cd1c51524ed1b32286ffe66d17035934231d565`, **failed**:
+five pre-existing symbolic test modules cannot import SymPy in the Python
+3.13 runner. The log reports `ModuleNotFoundError: No module named 'sympy'`,
+157 loaded tests, five errors, and ten skips. All 11 new frontier tests pass
+on that runner. The existing workflow does not install SymPy; locally the
+167-test pass used SymPy 1.14.0. The proposed correction is to install a
+version-pinned symbolic-test dependency before discovery and rerun the
+complete suite, without deleting or skipping tests. No workflow correction
+has yet been applied, and the hosted suite must not be reported green.
 
 ## Acknowledgement
 
