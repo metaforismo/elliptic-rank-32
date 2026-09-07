@@ -1,5 +1,19 @@
 # Rank 32 programme after ICARM curve #302
 
+## 2026-09-07 checkpoint
+
+The [new source audit](frontier_audit_20260907.md) confirms that the 631-entry
+ICARM snapshot still has maximum lower bound 31, only at #302. We independently
+certified the two newly posted rank-30 entries #398 and #582 as well; all four
+rank-at-least-30 entries have distinct exact j-invariants. No new construction
+family for #302 has been reproduced.
+
+The previously pending endpoint-balanced lattice run is now imported: 7,868
+successful moves, no cross-side theta fingerprint or bridge, four `p=2`
+boundary rejections excluded from its negative scope. A new bounded run uses
+line offset 32 with the same producer, primes, rounds and beam. See the audit
+for exact run IDs, hashes, and the pending-result boundary.
+
 ## New baseline
 
 On 2026-08-23, [ICARM curve #302](https://elliptic-rank.icarm.cloud/curve/302)

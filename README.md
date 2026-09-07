@@ -16,6 +16,12 @@ by optimizing for a final proof certificate, not for a large analytic-rank score
 
 **rank-31 baseline certified; rank 32 unsolved**
 
+Latest public-source audit: **2026-09-07**. The complete ICARM download contains
+631 entries, with maximum certified lower bound 31 (curve #302) and no entry
+of lower bound 32. Dujella's record table and Epoch's solution update agree
+on the rank-31 milestone. This is a dated observation, not a nonexistence
+proof. See [the audit and resumed experiment](research/frontier_audit_20260907.md).
+
 ICARM curve #302, submitted by Ava Howell on 2026-08-23 and credited to
 Claude, Levent Alpöge, and Ava Howell, supplies 31 explicitly certified
 independent rational points.  This repository independently replays that
@@ -48,9 +54,9 @@ this certificate.
 
 ## Historical rank-30 baseline
 
-ICARM curve #273, submitted publicly by `ranksunbounded` on 2026-08-20, was
-the first public curve with 30 explicitly certified independent rational
-points.  The repository retains its independent exact certificate for
+ICARM curve #273, submitted publicly by `ranksunbounded` on 2026-08-20, has
+30 explicitly certified independent rational points. The repository retains
+its independent exact certificate for
 
 ```text
 y^2 + x*y = x^3 + A*x + B
@@ -60,6 +66,14 @@ B = 1151107939141058565733479426024323225135665982951300586808823640527729578307
 
 The 30-point lower bound is unconditional; the separate exact-rank-30
 statement uses GRH+BSD.
+
+The September audit also independently certifies the 30-point lower bounds
+of ICARM #398 (Elkies--Klagsbrun, dated September 2025 by its authors;
+submitted 2026-08-28) and #582 (submitted by `wgxli` on 2026-09-04).
+Exact rank is not claimed for either by our verifier. All four rank-at-least-30
+entries have pairwise distinct exact j-invariants; this does not exclude a
+shared parameter family. The frozen source projection and exact finite-group
+certificates are reproducible without Sage.
 
 ## Historical rank-29 baseline
 
@@ -108,6 +122,7 @@ verify_exact.py            dependency-free historical verifier
 python3 verify_exact.py
 python3 baseline/verify_rank30_icarm273.py
 python3 baseline/verify_rank31_icarm302.py
+python3 baseline/verify_icarm_frontier_20260907.py
 python3 -m unittest discover -s tests -v
 ```
 
@@ -261,11 +276,22 @@ all 2-neighbors.  The historical engine was audited post hoc and is
 superseded for future bounded-negative runs by fail-closed error and
 isometry-budget handling.
 
-The next controlled experiment repeats the offset-zero window with an
-endpoint-balanced beam of size eight: three origin states directed toward the
-transparent endpoint, three toward the rootless endpoint, and two diversity
-states.  These computations are exact positive-lattice evidence; they do not
-provide a marked K3 fibration switch, rational `P3`, or rank-32 curve.
+The endpoint-balanced offset-zero run
+[`32677113429`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/32677113429)
+has now also been recovered and audited against its producing commit and
+GitHub archive digest. With three origin states directed toward each endpoint
+and two diversity states, it attempted 7,872 lines and constructed 7,868
+successful moves, with 21 repeated child Grams and 7,850 Gram presentations.
+It found no cross-side theta fingerprint and no exact bridge. The four
+classified `p=2` construction rejections are outside the negative scope.
+
+On 2026-09-07, the same bounded configuration was dispatched with
+`line_offset=32`, visiting line ordinals 33--64 per retained Gram and prime:
+[`34161893470`](https://github.com/metaforismo/elliptic-rank-31/actions/runs/34161893470).
+This is a new deterministic window, not a disjoint set of lattice isometry
+classes. Its result remains pending until the artifact has been audited.
+These computations are exact positive-lattice evidence; they do not provide
+a marked K3 fibration switch, rational `P3`, or rank-32 curve.
 
 A primary-source audit also sharpens the missing geometric layer.  A Kneser
 `p`-neighbor between positive lattices is not automatically an elliptic
@@ -282,7 +308,8 @@ Exact counts, proofs, and claim boundaries are in
 `research/e8_a2_semistable_two_split_full_incidence.md`, and
 `research/e8_a2_shimura_bridge.md`.  Compact run audits are in
 `certificates/rank17_exact_neighbor_chain_run_32673843229.json` and
-`certificates/e8_a2_target_neighbor_bridge_run_32674002260.json`.
+`certificates/e8_a2_target_neighbor_bridge_run_32674002260.json`, together with
+`certificates/e8_a2_target_neighbor_bridge_run_32677113429.json`.
 
 ## Certificate policy
 
