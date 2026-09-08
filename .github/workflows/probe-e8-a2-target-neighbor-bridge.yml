@@ -3,7 +3,7 @@ name: probe-e8-a2-target-neighbor-bridge
 on:
   push:
     branches:
-      - codex/rank31-research
+      - codex/rank32-research
     paths:
       - "research/search_e8_a2_target_neighbor_bridge.py"
       - "research/sample_projective_lines.py"
@@ -26,7 +26,7 @@ on:
       rounds:
         description: Exact bounded beam rounds
         required: true
-        default: "6"
+        default: "8"
       beam_size:
         description: States retained after each side's sequential expansion
         required: true
@@ -34,7 +34,7 @@ on:
       primes:
         description: Comma-separated p-neighbor primes
         required: true
-        default: "2,5"
+        default: "2"
       line_offset:
         description: Accepted lines skipped in the selected deterministic ordering
         required: true
@@ -50,7 +50,7 @@ on:
       max_isometry_checks:
         description: Hard bound on PARI qfisom calls; identical Grams are outside it
         required: true
-        default: "500"
+        default: "20000"
       line_selection:
         description: Deterministic full-coordinate sample or historical Sage ordering
         required: true
@@ -62,7 +62,7 @@ on:
       sampling_seed:
         description: Portable deterministic seed; at most 4096 raw draws per window
         required: true
-        default: rank32-20260907-v1
+        default: rank32-20260908-p2-v1
 
 permissions:
   contents: read
@@ -93,13 +93,13 @@ jobs:
           set -euo pipefail
           {
             echo "MODE=${INPUT_MODE:-bidirectional}"
-            echo "ROUNDS=${INPUT_ROUNDS:-6}"
+            echo "ROUNDS=${INPUT_ROUNDS:-8}"
             echo "BEAM_SIZE=${INPUT_BEAM_SIZE:-8}"
-            echo "PRIMES=${INPUT_PRIMES:-2,5}"
+            echo "PRIMES=${INPUT_PRIMES:-2}"
             echo "LINE_OFFSET=${INPUT_LINE_OFFSET:-0}"
             echo "LINES_PER_PRIME=${INPUT_LINES_PER_PRIME:-32}"
             echo "MAX_SUCCESSFUL_MOVES=${INPUT_MAX_SUCCESSFUL_MOVES:-10000}"
-            echo "MAX_ISOMETRY_CHECKS=${INPUT_MAX_ISOMETRY_CHECKS:-500}"
+            echo "MAX_ISOMETRY_CHECKS=${INPUT_MAX_ISOMETRY_CHECKS:-20000}"
           } >> "$GITHUB_ENV"
 
       - name: Verify sampler and actual Sage neighbor API
@@ -112,7 +112,7 @@ jobs:
           SEARCH_CONTAINER_IMAGE: sagemath/sagemath:10.9
           SEARCH_CONTAINER_DIGEST: sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
           LINE_SELECTION: ${{ inputs.line_selection || 'hash-projective' }}
-          SAMPLING_SEED: ${{ inputs.sampling_seed || 'rank32-20260907-v1' }}
+          SAMPLING_SEED: ${{ inputs.sampling_seed || 'rank32-20260908-p2-v1' }}
         run: |
           set -uo pipefail
           out=/tmp/e8-a2-target-neighbor-bridge

@@ -23,18 +23,18 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD > HEAD.txt
-          git archive --format=tar.gz --output=elliptic-rank-31-main.tar.gz HEAD
-          git bundle create elliptic-rank-31-main.bundle --all
-          sha256sum HEAD.txt elliptic-rank-31-main.tar.gz elliptic-rank-31-main.bundle > SHA256SUMS
+          git archive --format=tar.gz --output=elliptic-rank-32-main.tar.gz HEAD
+          git bundle create elliptic-rank-32-main.bundle --all
+          sha256sum HEAD.txt elliptic-rank-32-main.tar.gz elliptic-rank-32-main.bundle > SHA256SUMS
           sha256sum -c SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
-          name: elliptic-rank-31-main-research-export
+          name: elliptic-rank-32-main-research-export
           path: |
             HEAD.txt
             SHA256SUMS
-            elliptic-rank-31-main.tar.gz
-            elliptic-rank-31-main.bundle
+            elliptic-rank-32-main.tar.gz
+            elliptic-rank-32-main.bundle
           if-no-files-found: error
           compression-level: 0
           retention-days: 7

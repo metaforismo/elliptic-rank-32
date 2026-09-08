@@ -28,7 +28,7 @@ jobs:
           rm -rf /tmp/n18 evidence/rank17/formal-arc-n18
           mkdir -p /tmp/n18 evidence/rank17/formal-arc-n18
           gh run download 31598170389 \
-            --repo metaforismo/elliptic-rank-31 \
+            --repo metaforismo/elliptic-rank-32 \
             --dir /tmp/n18
           find /tmp/n18 -type f -print
           cp -a /tmp/n18/. evidence/rank17/formal-arc-n18/

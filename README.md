@@ -1,8 +1,10 @@
-# Elliptic-rank frontier: rank 31 certified, rank 32 open
+# Elliptic-rank-32: constructive search beyond certified rank 31
 
-Canonical repository: [`metaforismo/elliptic-rank-31`](https://github.com/metaforismo/elliptic-rank-31).
-The repository name records the milestone it was created to pursue; the next
-open record target is now rank 32.
+Canonical repository: [`metaforismo/elliptic-rank-32`](https://github.com/metaforismo/elliptic-rank-32).
+Active research branch: [`codex/rank32-research`](https://github.com/metaforismo/elliptic-rank-32/tree/codex/rank32-research).
+The name states the current research target, not an achieved rank-32 record.
+Historical rank-31 certificates, source identities and experiment provenance
+are preserved unchanged.
 
 This repository now studies the open constructive target
 
@@ -36,6 +38,12 @@ All seven moves now also have explicit integral hyperbolic extensions;
 their composition is a determinant-one 19-by-19 matrix. This closes the
 abstract lattice-transport step, not the geometric K3-map or rank-32 problem.
 See [the exact construction and remaining boundary](research/stable_hyperbolic_neighbor_transport.md).
+
+The next bounded experiment restricts the neighbor primes to `2`, seeking a
+route compatible with the documented degree-two geometric algorithms.
+Separately, we are investigating smaller integral hyperbolic markings.
+Neither operation alone proves nefness or constructs a surface map.
+See [the rank-32 continuation protocol](research/rank32_two_neighbor_search_20260908.md).
 
 ## Rank-31 record baseline
 

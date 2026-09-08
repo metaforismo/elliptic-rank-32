@@ -28,7 +28,7 @@ jobs:
           rm -rf /tmp/hensel-runs /tmp/hensel-evidence evidence/rank17/hensel
           mkdir -p /tmp/hensel-runs /tmp/hensel-evidence evidence/rank17/hensel
           gh api --paginate \
-            'repos/metaforismo/elliptic-rank-31/actions/runs?per_page=100' \
+            'repos/metaforismo/elliptic-rank-32/actions/runs?per_page=100' \
             > /tmp/hensel-runs/pages.json
           python3 - <<'PY'
           import json
@@ -89,9 +89,9 @@ jobs:
             [ -n "$run_id" ] || continue
             mkdir -p "/tmp/hensel-evidence/run-$run_id"
             gh run download "$run_id" \
-              --repo metaforismo/elliptic-rank-31 \
+              --repo metaforismo/elliptic-rank-32 \
               --dir "/tmp/hensel-evidence/run-$run_id" || true
-            gh api "repos/metaforismo/elliptic-rank-31/actions/runs/$run_id/jobs?per_page=100" \
+            gh api "repos/metaforismo/elliptic-rank-32/actions/runs/$run_id/jobs?per_page=100" \
               > "/tmp/hensel-evidence/run-$run_id/jobs.json"
           done < /tmp/hensel-runs/ids.txt
           cp /tmp/hensel-runs/selected.json /tmp/hensel-evidence/selected-runs.json

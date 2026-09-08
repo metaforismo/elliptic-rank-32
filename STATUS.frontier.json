@@ -11,8 +11,10 @@
   ],
   "authoritative_lower_bound": 31,
   "authoritative_lower_bound_certificate": "baseline/rank31_icarm302_mod2_certificate.json",
-  "canonical_branch": "codex/rank31-research",
-  "canonical_repository": "metaforismo/elliptic-rank-31",
+  "canonical_branch": "codex/rank32-research",
+  "canonical_repository": "metaforismo/elliptic-rank-32",
+  "repository_name_is_research_target_not_rank_claim": true,
+  "current_research_protocol": "research/rank32_two_neighbor_search_20260908.md",
   "latest_local_validation": {
     "date_utc": "2026-09-07",
     "command": "python3.12 -m unittest discover -s tests -v",
