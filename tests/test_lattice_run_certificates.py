@@ -13,6 +13,7 @@ CERTIFICATES = (
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_32677113429.json",
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_34161893470.json",
     ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_34164507132.json",
+    ROOT / "certificates" / "e8_a2_target_neighbor_bridge_run_34174072896.json",
 )
 
 
@@ -98,6 +99,27 @@ class LatticeRunCertificateTests(unittest.TestCase):
         self.assertIs(frontier["rank31_exact_rank_claim_unconditional"], False)
         self.assertIs(frontier["rank32_record_claim"], False)
         self.assertIn("rank 32 remains unsolved", frontier["truth_status"])
+
+    def test_all_p2_bridge_is_transparent_not_rootless_and_sampling_is_replayed(self) -> None:
+        record = json.loads(CERTIFICATES[5].read_text())
+        self.assertEqual(record["search"]["status"], "bridge_found")
+        self.assertEqual(record["search"]["counters"]["successful_moves"], 4986)
+        self.assertEqual(record["search"]["counters"]["failed_moves"], 0)
+        self.assertEqual(record["search"]["isometry_comparisons"]["qfisom_checked"], 6509)
+        self.assertEqual(record["search"]["bridge"]["endpoint"], "transparent")
+        self.assertEqual(record["search"]["bridge"]["neighbor_step_count"], 15)
+        self.assertTrue(record["search"]["bridge"]["complete_bridge_composite_verified"])
+        sampling = record["search"]["sampling_audit"]
+        self.assertTrue(sampling["all_recorded_draw_streams_replayed"])
+        self.assertEqual(sampling["windows_replayed"], 156)
+        self.assertEqual(sampling["sampling_costs"]["raw_draws"], 10175)
+        self.assertEqual(sampling["selected_lines_not_attempted_after_terminal_stop"], 6)
+        bridge = json.loads((ROOT / "certificates/e8_a2_transparent_p2_bridge_34174072896/exact-bridge.json").read_text())
+        moves = bridge["origin_forward_moves"] + bridge["endpoint_forward_moves_to_invert"]
+        self.assertEqual(len(moves), 15)
+        self.assertTrue(all(move["prime"] == 2 for move in moves))
+        self.assertFalse(record["claim_boundary"]["rank32_curve_found"])
+        self.assertFalse(record["claim_boundary"]["explicit_K3_fibration_switch_completed"])
 
 
 if __name__ == "__main__":

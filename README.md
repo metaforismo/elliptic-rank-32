@@ -32,18 +32,22 @@ The separate statement that its rank is exactly 31 uses GRH+BSD.  This project
 did not discover #302 and has not found a curve with 32 certified independent
 rational points.
 
-The latest constructive milestone is an independently verified **seven-edge
-bridge from the E8+A2^3 target lattice to the frozen rootless lattice**.
-All seven moves now also have explicit integral hyperbolic extensions;
-their composition is a determinant-one 19-by-19 matrix. This closes the
-abstract lattice-transport step, not the geometric K3-map or rank-32 problem.
-See [the exact construction and remaining boundary](research/stable_hyperbolic_neighbor_transport.md).
+The 2026-09-08 constructive milestone has two distinct parts:
 
-The next bounded experiment restricts the neighbor primes to `2`, seeking a
-route compatible with the documented degree-two geometric algorithms.
-Separately, we are investigating smaller integral hyperbolic markings.
-Neither operation alone proves nefness or constructs a surface map.
-See [the rank-32 continuation protocol](research/rank32_two_neighbor_search_20260908.md).
+- a **15-edge, all-prime-two bridge** from the E8+A2^3 target to the
+  transparent lattice `A11 + K6`, with every edge extended integrally after
+  adjoining U; this is not the rootless endpoint;
+- a much smaller integral marking for the **previous seven-edge rootless
+  bridge**: its largest matrix entry falls from 15,171,339,103,561,459,844
+  to 1,320,133, and its old/new fiber intersection to 710,298.
+
+Both end-to-end 19-by-19 matrices have determinant one. Exact rational/integer
+replay and independent SymPy checks agree. These are abstract lattice results;
+the adjacent intersection two is not an end-to-end degree-two geometric map.
+Neither result proves nefness, constructs a K3 equation, or supplies a
+rational P3. See [the frozen experiment, reductions and remaining
+boundary](research/rank32_two_neighbor_search_20260908.md), and the
+[original stabilization proof](research/stable_hyperbolic_neighbor_transport.md).
 
 ## Rank-31 record baseline
 

@@ -1,5 +1,27 @@
 # Rank 32 programme after ICARM curve #302
 
+## 2026-09-08: all-two route and smaller rootless marking
+
+The renamed repository is `metaforismo/elliptic-rank-32`, active branch
+`codex/rank32-research`. Its name states the open target, not a rank claim.
+
+Run `34174072896` found a 15-edge bridge using only prime two, after 4,986
+successful moves and 6,509 exact comparisons. Its endpoint is the transparent
+`A11 + K6` lattice, not the frozen rootless lattice. The complete path and
+156 sampling windows were independently replayed, and all 15 edges now
+have integral U-extensions with adjacent abstract fiber intersection two.
+The determinant-one end-to-end marking has intersection 1,798,927,074,466,
+not two. No geometric degree-two maps are claimed.
+
+For the older seven-edge rootless bridge, a separate deterministic sequence
+of shorter lifts, Eichler shifts and 22 square-minus-two reflections reduces
+the maximum matrix entry from 15,171,339,103,561,459,844 to 1,320,133.
+The resulting fiber intersection is 710,298. Every matrix identity, integral
+inverse and recorded action is checked exactly; independent SymPy tests
+cover all 22 edge extensions and the four new final matrices. No global
+minimum, nefness or new rational point follows from the bounded reduction.
+See [the full protocol and formulae](rank32_two_neighbor_search_20260908.md).
+
 ## New constructive checkpoint: seven-edge bridge and integral stabilization
 
 Run `34164507132` found the exact E8+A2^3-to-rootless bridge after 4,595

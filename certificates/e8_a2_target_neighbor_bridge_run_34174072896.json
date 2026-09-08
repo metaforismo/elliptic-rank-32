@@ -1,0 +1,227 @@
+{
+  "artifact": {
+    "artifact_directory_name": "p2-bridge-34174072896",
+    "manifest_file_count": 10,
+    "manifest_total_bytes": 44322080,
+    "sha256sums_sha256": "8fd1d55c90943e466c357612a5efbe703519e6e94b05aff56a521da9ab527948"
+  },
+  "audit_conclusion": "Artifact closure, hashes, internal links, finite-search counters, cross-fingerprint comparison coverage, and the conservative claim boundary were verified. Accepted local moves are Sage-asserted but are not all independently replayed by this importer. For a found bridge, every cited matrix identity and the end-to-end composite are also recomputed independently with Fraction. No explicit K3/moduli transport, rational P3, or elliptic rank-record curve is certified by this audit.",
+  "certificate_kind": "e8-a2-target-neighbor-bridge-artifact-audit",
+  "claim_boundary": {
+    "bounded_negative_result_importable": true,
+    "exact_lattice_bridge_found": true,
+    "explicit_K3_fibration_switch_completed": false,
+    "explicit_moduli_map_completed": false,
+    "explicit_stable_NS_transport_completed": false,
+    "negative_result_scope": "Only successfully constructed neighbors in the serialized finite window were excluded.  Classified p=2 boundary-failure lines were attempted but are not excluded; the p-neighbor graph remains open, and this artifact does not settle any elliptic-rank record problem.",
+    "p2_neighbor_enumeration_boundary": "The determinant is 948, so 2 divides the determinant.  Sage's projective-line construction can reject the expected non-maximal/even 2-neighbor case; therefore the recorded p=2 window is not a complete enumeration of all 2-neighbors.  Any projective line with this classified boundary failure is recorded as attempted but is not excluded by the bounded negative result.",
+    "p2_neighbor_enumeration_complete": false,
+    "rank31_curve_found": false,
+    "rank32_curve_found": false,
+    "rational_P3_found": false
+  },
+  "provenance": {
+    "artifact_digest": "sha256:f398e90268d9a667e2c0c60ac24c978568940feb9c43b93576bbb323352647f6",
+    "artifact_id": "10036827063",
+    "artifact_name": "e8-a2-target-exact-neighbor-bridge",
+    "commit_sha": "f9ab37d1ecf9d570167f9006a798060251cc4437",
+    "downloaded_archive_sha256": "f398e90268d9a667e2c0c60ac24c978568940feb9c43b93576bbb323352647f6",
+    "event_name": "push",
+    "extra": {
+      "archive_verified_against_github_digest": "true",
+      "download_method": "github_connector_artifact_zip"
+    },
+    "git_ref": "refs/heads/codex/rank32-research",
+    "repository": "metaforismo/elliptic-rank-32",
+    "run_attempt": 1,
+    "run_id": "34174072896",
+    "run_url": "https://github.com/metaforismo/elliptic-rank-32/actions/runs/34174072896",
+    "workflow": ".github/workflows/probe-e8-a2-target-neighbor-bridge.yml"
+  },
+  "record_sha256": "a86913fd19e4ffb170c2bc4ab59011eecbbbfb65b380ba9aa794f256bb6e1537",
+  "schema_version": 1,
+  "search": {
+    "artifact_schema_generation": "explicit-selection-v2",
+    "bridge": {
+      "all_bridge_move_matrix_identities_recomputed_with_fraction": true,
+      "bridge_sha256": "0e7b3e93aca33def9d077b42a34c40024422e39736fd78f213ec2d96fa09d00e",
+      "complete_bridge_composite_sha256": "693ed8a846ec76a1a3c693a94d75355a35b360190357999ccf756ab51116d477",
+      "complete_bridge_composite_verified": true,
+      "endpoint": "transparent",
+      "meeting_isometry_verified": true,
+      "neighbor_step_count": 15
+    },
+    "configuration": {
+      "beam_selection": "Split max(1, beam_size - 2) exploitation slots deterministically and as evenly as possible among named opposing endpoints in side_expansion_order; within each quota retain states closest to that endpoint's dynamically discovered theta profiles without duplicate states, preferring distinct theta fingerprints before additional states with an already selected fingerprint.  Transfer quota collisions to the joint closest ordering with the same distinct-fingerprint preference, then retain up to two deterministic diversity positions and fill any remaining slots in that same exact ordering.  Thus at beam_size 8, origin receives 3 transparent-directed plus 3 rootless-directed exploitation slots plus 2 diversity slots; each endpoint receives 6 origin-directed exploitation slots plus 2 diversity slots.",
+      "beam_size": 8,
+      "enumeration_order": "sha256-shake256-full-coordinate-projective-v1",
+      "line_selection": "hash-projective",
+      "max_isometry_checks": 20000,
+      "max_successful_moves": 10000,
+      "mode": "bidirectional",
+      "prime_enumeration_boundaries": [
+        {
+          "complete": false,
+          "prime": 2,
+          "reason": "The determinant is 948, so 2 divides the determinant.  Sage's projective-line construction can reject the expected non-maximal/even 2-neighbor case; therefore the recorded p=2 window is not a complete enumeration of all 2-neighbors.  Any projective line with this classified boundary failure is recorded as attempted but is not excluded by the bounded negative result."
+        }
+      ],
+      "primes": [
+        2
+      ],
+      "projective_line_offset": 0,
+      "projective_lines_per_state_prime": 32,
+      "rounds_completed": 8,
+      "rounds_requested": 8,
+      "sampling": {
+        "algorithm": "sha256-shake256-full-coordinate-projective-v1",
+        "max_draws_per_window": 4096,
+        "ordinal_semantics": "accepted unique isotropic projective lines, before offset",
+        "seed": "rank32-20260908-p2-v1"
+      },
+      "sequential_order_semantics": "Rounds increase first; within each round, sides are expanded sequentially in side_expansion_order, then parents in current-beam order, primes in the supplied order, and projective lines in the recorded selection algorithm's one-based ordering.  Each new state enters the index immediately, so a later side in the same round can see earlier-side states.",
+      "side_expansion_order": [
+        "origin",
+        "transparent",
+        "rootless"
+      ]
+    },
+    "counters": {
+      "attempted_lines": 4986,
+      "duplicate_child_grams": 0,
+      "expected_p2_construction_boundary_failures": 0,
+      "failed_moves": 0,
+      "move_budget_exhausted": false,
+      "successful_moves": 4986,
+      "unique_states_discovered": 4989
+    },
+    "cross_fingerprint_pairs_all_checked_for_bounded_result": true,
+    "cross_fingerprint_pairs_expected": 6512,
+    "embedded_runtime_provenance": {
+      "github_actions": "true",
+      "github_job": "exact-neighbor-search",
+      "github_ref": "refs/heads/codex/rank32-research",
+      "github_ref_name": "codex/rank32-research",
+      "github_repository": "metaforismo/elliptic-rank-32",
+      "github_run_attempt": "1",
+      "github_run_id": "34174072896",
+      "github_run_url": "https://github.com/metaforismo/elliptic-rank-32/actions/runs/34174072896",
+      "github_server_url": "https://github.com",
+      "github_sha": "f9ab37d1ecf9d570167f9006a798060251cc4437",
+      "github_workflow": "probe-e8-a2-target-neighbor-bridge",
+      "github_workflow_ref": "metaforismo/elliptic-rank-32/.github/workflows/probe-e8-a2-target-neighbor-bridge.yml@refs/heads/codex/rank32-research",
+      "runner_arch": "X64",
+      "runner_os": "Linux",
+      "search_container_digest": "sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667",
+      "search_container_image": "sagemath/sagemath:10.9"
+    },
+    "independent_exact_arithmetic_scope": {
+      "all_logged_search_moves_recomputed": false,
+      "found_bridge_end_to_end_composite_recomputed": true,
+      "found_bridge_moves_recomputed": true,
+      "note": "The Sage run asserts every accepted local move. The standard-library importer recomputes matrices only for the path promoted into an exact bridge."
+    },
+    "initial_state_gram_sha256": {
+      "origin": "dc4108ea4612195c2ba8350b0b1b35067f92ec2d49801cd2cb597cbb61129690",
+      "rootless": "620a5e06473684d3e8015c0172f63c09c901e742ec02e77ba0aa35a923aa0295",
+      "transparent": "10270a49860bff642fe34bc3eb0fc213623c7dff8aca08b6df51e2832c600bff"
+    },
+    "isometry_checks": 6509,
+    "isometry_comparisons": {
+      "budget_exhausted": false,
+      "identical_hash_matches": 0,
+      "pairs_seen": 6509,
+      "qfisom_checked": 6509,
+      "skipped_due_to_budget": 0
+    },
+    "jsonl": {
+      "attempts.jsonl": {
+        "record_count": 4986,
+        "sha256": "a44ab5ee12cc3502b7cb2629e2315375c963f0d4b1de2b28caf06f7d007fd4b5"
+      },
+      "isometry-checks.jsonl": {
+        "record_count": 6509,
+        "sha256": "d40dbbb338ceb5fdf664bae83ee911bb33992a94188864bb5517f09ec1204b27"
+      },
+      "moves.jsonl": {
+        "record_count": 4986,
+        "sha256": "67439e3b1f325b6688ef52721936bb4bd7aa9296293e7e8ce829b5bec124ebe7"
+      },
+      "rounds.jsonl": {
+        "record_count": 8,
+        "sha256": "37736ddabbce35e8b0dfbf56a2b16ebffc6f6bdb4dc0a77aaef0e132a6e084c3"
+      },
+      "sampling-windows.jsonl": {
+        "record_count": 156,
+        "sha256": "0bdaf8e73f771c43ed2c843968823bdb45807c90209cd8a79d343b5fd42fe042"
+      },
+      "states.jsonl": {
+        "record_count": 4989,
+        "sha256": "661abf3b59ef42bfa4480eb5a8fea7e64ec0096236b01a48edc8b217804dd637"
+      }
+    },
+    "legacy_exact_p2_boundary_failures": 0,
+    "legacy_unclassified_construction_errors": 0,
+    "result_file_sha256": "98bdc85c28bf9fdfc3b5c91d426c9df74fd0be444a90f2e2f3505db02418014f",
+    "result_payload_sha256": "fc9b03ede19aac49391aac48a30c68dc58f7a7c12968119ab5aa2e490ba3201e",
+    "sage_version": "SageMath version 10.9, Release Date: 2026-05-04",
+    "sampling_audit": {
+      "algorithm": "sha256-shake256-full-coordinate-projective-v1",
+      "all_attempted_vectors_match_replayed_windows": true,
+      "all_recorded_draw_streams_replayed": true,
+      "attempted_coordinate_nonzero_counts_by_prime": {
+        "2": [
+          2506,
+          2458,
+          2484,
+          2509,
+          2517,
+          2532,
+          2509,
+          2456,
+          2438,
+          2487,
+          2495,
+          2554,
+          2435,
+          2543,
+          2474,
+          2455,
+          2468
+        ]
+      },
+      "coverage_claim": "Finite hash-based full-coordinate sample, not an exhaustive graph enumeration.",
+      "lines_attempted": 4986,
+      "sampling_costs": {
+        "accepted_unique_isotropic_lines": 4992,
+        "duplicate_isotropic_lines": 0,
+        "nonisotropic_vectors": 5183,
+        "raw_draws": 10175,
+        "rejected_field_bytes": 0,
+        "zero_vectors": 0
+      },
+      "selected_lines_not_attempted_after_terminal_stop": 6,
+      "selected_lines_prepared": 4992,
+      "windows_replayed": 156
+    },
+    "source_checkout": {
+      "git_head": "f9ab37d1ecf9d570167f9006a798060251cc4437",
+      "git_head_verified": true,
+      "mode": "explicit_historical_git_checkout"
+    },
+    "source_sha256": {
+      "research/certify_e8_a2_shimura_bridge.py": "56483e066bfa7ff56490566498f7ba3c2935f163817f20b365956b311c38f181",
+      "research/sample_projective_lines.py": "fd2daaafc2c675a5d63766fab7fda80c2923f6ce286d4d08771414c8941071ee",
+      "research/search_e8_a2_target_neighbor_bridge.py": "66ac5e0c75386843321e9e6798f4e9efb2253b0b90219226724dc431173afc91"
+    },
+    "status": "bridge_found",
+    "structured_expected_p2_boundary_failures": 0,
+    "total_classified_p2_boundary_failures": 0,
+    "truth_status": "An exact p-neighbor bridge with every rational parent-to-child basis transform and an integral meeting isometry was independently verified."
+  },
+  "verification_implementation": {
+    "path": "research/import_e8_a2_target_neighbor_bridge_artifact.py",
+    "sha256": "1c94fa90b302cede9ae32c23c717da2da6c6a079135aa487d89f39780110eb29"
+  },
+  "verification_status": "verified"
+}
