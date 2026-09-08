@@ -1,6 +1,37 @@
-# Elliptic rank 30: certificate-first research pipeline
+# Elliptic-rank-32: constructive search beyond certified rank 31
 
-This repository studies the open constructive target
+Canonical repository: [`metaforismo/elliptic-rank-32`](https://github.com/metaforismo/elliptic-rank-32).
+The name describes the research target, **not an achieved rank-32 record**.
+
+## Current research — 2026-09-08
+
+The active work is on
+[`codex/rank32-research`](https://github.com/metaforismo/elliptic-rank-32/tree/codex/rank32-research),
+which contains the current source, exact certificates, and research notes.
+This default branch retains the historical rank-29 package described below;
+the research programs have not been merged into it.
+
+- **Verified baseline:** 31 independent rational points on the public
+  [ICARM curve #302](https://elliptic-rank.icarm.cloud/curve/302), credited to
+  Claude, Levent Alpöge, and Ava Howell. This project independently replays
+  that unconditional lower bound; it did not discover the curve. Exact rank
+  31 is a separate GRH+BSD-conditional statement.
+- **Constructive progress:** an exact seven-edge target-to-rootless lattice
+  bridge and an explicit integral 19-dimensional hyperbolic stabilization.
+  These are algebraic lattice certificates, not geometric K3 maps or new
+  rational points.
+- **Open goal:** an explicit elliptic curve over Q with 32 rigorously
+  certified independent rational points. No such curve has been found here.
+
+Start with the
+[current research README](https://github.com/metaforismo/elliptic-rank-32/blob/codex/rank32-research/README.md),
+[machine-readable frontier status](https://github.com/metaforismo/elliptic-rank-32/blob/codex/rank32-research/STATUS.frontier.json),
+and [constructive program](https://github.com/metaforismo/elliptic-rank-32/blob/codex/rank32-research/research/rank32_program.md).
+Historical rank-31 source identities and certificate hashes are preserved.
+
+## Historical rank-29 package on main
+
+The historical package below was assembled while pursuing the then-open target
 
 \[
 \operatorname{rank} E(\mathbb Q) \ge 30
@@ -8,13 +39,14 @@ This repository studies the open constructive target
 
 by optimizing for a final proof certificate, not for a large analytic-rank score.
 
-## Current truth status
+## Historical package scope
 
 **new search method**
 
-No curve with 30 certified independent rational points has been found here.
-The package does independently close the baseline reproduction gate for the
-current public rank-29 record and preserves all evidence needed to audit that claim.
+This package independently closes the baseline reproduction gate for the
+then-public rank-29 record and preserves the evidence needed to audit that
+claim. Its original search did not produce a rank-30 curve; the current
+rank-31 baseline and rank-32 work are linked above.
 
 ## Baseline result
 
@@ -128,7 +160,7 @@ No blind coefficient search is substituted.
 
 ## Certificate policy
 
-A future rank-30 promotion requires a specified Weierstrass equation, 30 full
+A future rank-32 promotion requires a specified Weierstrass equation, 32 full
 rational points, exact substitutions, torsion, a canonical-height matrix,
 positive determinant, an independent exact independence certificate, saturation,
 software versions, provenance, hashes, and verification in a second system.
