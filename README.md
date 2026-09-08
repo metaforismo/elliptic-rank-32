@@ -16,10 +16,13 @@ the research programs have not been merged into it.
   Claude, Levent Alpöge, and Ava Howell. This project independently replays
   that unconditional lower bound; it did not discover the curve. Exact rank
   31 is a separate GRH+BSD-conditional statement.
-- **Constructive progress:** an exact seven-edge target-to-rootless lattice
-  bridge and an explicit integral 19-dimensional hyperbolic stabilization.
-  These are algebraic lattice certificates, not geometric K3 maps or new
-  rational points.
+- **Constructive progress:** a new 15-edge, all-prime-two bridge to the
+  transparent `A11 + K6` lattice, plus a smaller marking for the earlier
+  seven-edge rootless bridge. All edges have integral 19-dimensional
+  hyperbolic extensions. The rootless marking's maximum matrix entry is
+  now 1,320,133. These are exact lattice certificates, not geometric K3 maps
+  or new rational points; adjacent intersection two is not an end-to-end
+  degree-two surface map.
 - **Open goal:** an explicit elliptic curve over Q with 32 rigorously
   certified independent rational points. No such curve has been found here.
 
