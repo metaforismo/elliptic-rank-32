@@ -167,6 +167,14 @@ The full local suite loaded 214 tests: 213 passed, zero errors, and one
 Sage-only test skipped (606.623 seconds). That unchanged API test passed
 in the separately pinned Sage run above: 11/11 tests, no skips (1.328 seconds).
 
+[CI run 34176384463](https://github.com/metaforismo/elliptic-rank-32/actions/runs/34176384463)
+then passed on exact source `740cddffa5fd23940c974e75bd8de5ad03ee931d`:
+all preliminary certificate steps succeeded, followed by 214 loaded tests,
+213 passes, zero errors and the same sole Sage skip (158.987 seconds).
+All 17 new marking tests and the all-p=2 importer regression passed there.
+The follow-up commit adds only this validation documentation and status;
+no proof source, test or certificate changes after that CI run.
+
 The 17 new reduction/transport tests recompute all four new certificates.
 SymPy independently verifies all 22 new edge matrices, the four final
 Gram identities and integral inverses, all 22 reflection involutions, and
