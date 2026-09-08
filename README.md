@@ -102,9 +102,7 @@ etc. Historical states belong in Git history.
 
 ```bash
 python3 verify_exact.py
-python3 rank_packet_obstruction_tests.py
 python3 -m unittest discover -s tests -v
-sha256sum -c MANIFEST.sha256
 ```
 
 ## Reproduce in SageMath
